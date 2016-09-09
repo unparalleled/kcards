@@ -6,5 +6,8 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="word_input_hint">Enter a Word in Hangeul</string>
+    <string name="deck_name_input_title">Deck Name</string>
+    <string name="deck_name_input_hint">Give this deck a name</string>
+    <string name="deck_description_input_title">Deck Description</string>
+    <string name="deck_description_input_hint">Give this deck a description</string>
 </resources>

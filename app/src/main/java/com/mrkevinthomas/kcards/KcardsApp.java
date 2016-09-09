@@ -4,10 +4,9 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
-/**
- * Created by kt on 9/5/16.
- */
 public class KcardsApp extends Application {
 
     private static KcardsApp kcardsApp;
@@ -19,6 +18,8 @@ public class KcardsApp extends Application {
         kcardsApp = this;
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        FlowManager.init(new FlowConfig.Builder(this).build());
     }
 
     public static void logAnalyticsEvent(String name, Bundle params) {

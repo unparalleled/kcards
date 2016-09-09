@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,10 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-public class DeckViewActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.mrkevinthomas.kcards.models.Deck;
+import com.raizlabs.android.dbflow.sql.language.CursorResult;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
+
+import java.util.List;
+
+public class DeckCreationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private WordListAdapter wordListAdapter;
+    private DeckListAdapter deckListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,7 @@ public class DeckViewActivity extends AppCompatActivity implements NavigationVie
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showNewWordDialog();
+                showDeckDialog();
             }
         });
 
@@ -48,27 +56,47 @@ public class DeckViewActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        wordListAdapter = new WordListAdapter();
-        recyclerView.setAdapter(wordListAdapter);
+        deckListAdapter = new DeckListAdapter();
+        recyclerView.setAdapter(deckListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        loadDecks();
     }
 
-    private void showNewWordDialog() {
-        View diaogView = getLayoutInflater().inflate(R.layout.word_input_dialog, null);
-        final EditText input = (EditText) diaogView.findViewById(R.id.input_text);
+    private void loadDecks() {
+        SQLite.select()
+                .from(Deck.class)
+                .async()
+                .queryResultCallback(new QueryTransaction.QueryResultCallback<Deck>() {
+                    @Override
+                    public void onQueryResult(QueryTransaction transaction, @NonNull CursorResult<Deck> tResult) {
+                        // called when query returns on UI thread
+                        List<Deck> decks = tResult.toListClose();
+                        deckListAdapter.setDeckList(decks);
+                    }
+                }).execute();
+    }
+
+    private void showDeckDialog() {
+        View diaogView = getLayoutInflater().inflate(R.layout.deck_edit_dialog, null);
+        final EditText nameInput = (EditText) diaogView.findViewById(R.id.deck_name_input);
+        final EditText descriptionInput = (EditText) diaogView.findViewById(R.id.deck_description_input);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("New Word");
+        builder.setTitle("Deck of Cards");
         builder.setView(diaogView);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String text = input.getText().toString();
-                if (!TextUtils.isEmpty(text)) {
-                    wordListAdapter.addWord(text);
+                String name = nameInput.getText().toString();
+                String description = descriptionInput.getText().toString();
+                if (!TextUtils.isEmpty(name)) {
+                    Deck deck = new Deck(name, description);
+                    deckListAdapter.addDeck(deck);
+                    deck.save();
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("word", text);
+                    bundle.putString("word", name);
                     KcardsApp.logAnalyticsEvent("add_word", bundle);
                 }
             }
