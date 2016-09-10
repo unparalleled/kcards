@@ -6,8 +6,22 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <string name="deck">Deck</string>
+    <string name="card">Card</string>
+
+    <string name="deck_of_cards">Deck of Cards</string>
+
     <string name="deck_name_input_title">Deck Name</string>
     <string name="deck_name_input_hint">Give this deck a name</string>
     <string name="deck_description_input_title">Deck Description</string>
     <string name="deck_description_input_hint">Give this deck a description</string>
+
+    <string name="card_front_input_title">Front</string>
+    <string name="card_front_input_hint">Front of the card</string>
+    <string name="card_back_input_title">Back</string>
+    <string name="card_back_input_hint">Back of the card</string>
 </resources>

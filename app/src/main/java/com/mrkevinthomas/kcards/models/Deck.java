@@ -1,24 +1,47 @@
 package com.mrkevinthomas.kcards.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.util.List;
+
 @Table(database = AppDatabase.class)
-public class Deck extends BaseModel {
-
-    @PrimaryKey
-    private long id;
+public class Deck extends BaseModel implements Parcelable {
 
     @Column
-    private String name;
+    @PrimaryKey(autoincrement = true)
+    long id;
 
     @Column
-    private String description;
+    String name;
+
+    @Column
+    String description;
+
+    List<Card> cards;
+
+    @OneToMany(methods = {OneToMany.Method.ALL}, variableName = "cards")
+    public List<Card> getCards() {
+        if (cards == null || cards.isEmpty()) {
+            cards = SQLite.select()
+                    .from(Card.class)
+                    .where(Card_Table.deckId_id.eq(id))
+                    .queryList();
+        }
+        return cards;
+    }
+
+    public Deck() {
+    }
 
     public Deck(String name, String description) {
-        this.id = System.currentTimeMillis();
         this.name = name;
         this.description = description;
     }
@@ -35,21 +58,38 @@ public class Deck extends BaseModel {
         return description;
     }
 
-    // DBFlow requirements
+    // parcelable
 
-    public Deck() {
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeTypedList(this.cards);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    protected Deck(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.cards = in.createTypedArrayList(Card.CREATOR);
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public static final Parcelable.Creator<Deck> CREATOR = new Parcelable.Creator<Deck>() {
+        @Override
+        public Deck createFromParcel(Parcel source) {
+            return new Deck(source);
+        }
+
+        @Override
+        public Deck[] newArray(int size) {
+            return new Deck[size];
+        }
+    };
 
 }
