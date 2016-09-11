@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.models.Card;
@@ -40,9 +42,14 @@ public class CardViewAdapter extends PagerAdapter {
 
         TextView frontText = (TextView) itemView.findViewById(R.id.card_front_text);
         TextView backText = (TextView) itemView.findViewById(R.id.card_back_text);
+        WebView webView = (WebView) itemView.findViewById(R.id.web_view);
 
         frontText.setText(card.getFrontText());
         backText.setText(card.getBackText());
+
+        webView.setWebViewClient(new WebViewClient());
+        final String URL = "https://www.google.com/search?tbm=isch&q=" + card.getFrontText();
+        webView.loadUrl(URL);
 
         container.addView(itemView, 0);
         return itemView;

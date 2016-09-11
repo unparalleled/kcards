@@ -2,12 +2,15 @@ package com.mrkevinthomas.kcards;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
@@ -60,10 +63,20 @@ public class CardManagementActivity extends BaseActivity {
                     cardListAdapter.addCard(card);
                     card.save();
 
+                    // show another dialog for continuing card creation
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            showCardDialog(null);
+                        }
+                    }, 100);
+
                     Bundle bundle = new Bundle();
                     bundle.putString("front_text", frontText);
                     bundle.putString("back_text", frontText);
                     KcardsApp.logAnalyticsEvent("add_card", bundle);
+                } else {
+                    Toast.makeText(CardManagementActivity.this, getString(R.string.card_must_have_front), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -80,7 +93,11 @@ public class CardManagementActivity extends BaseActivity {
         }
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.setCancelable(true);
-        builder.show();
+
+        // show keyboard by default
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        alertDialog.show();
     }
 
 }

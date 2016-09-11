@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.models.Deck;
 import com.raizlabs.android.dbflow.sql.language.CursorResult;
@@ -92,6 +93,8 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         bundle.putString("deck_description", description);
                         KcardsApp.logAnalyticsEvent("edit_deck", bundle);
                     }
+                } else {
+                    Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_must_have_name), Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -31,4 +31,7 @@
         <item quantity="other">You will lose the %s cards in this deck.</item>
     </plurals>
 
+    <string name="deck_must_have_name">Deck must have a name</string>
+    <string name="card_must_have_front">Card must have a front</string>
+
 </resources>

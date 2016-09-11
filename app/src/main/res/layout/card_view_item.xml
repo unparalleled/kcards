@@ -14,7 +14,8 @@
         android:id="@+id/card_front_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:gravity="center"
+        android:textSize="32sp"
         tools:text="Card Front"/>
 
     <TextView
@@ -23,7 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp"
-        android:textSize="16sp"
+        android:gravity="center"
+        android:textSize="32sp"
         tools:text="Card Back"/>
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
