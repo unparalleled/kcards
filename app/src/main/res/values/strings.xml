@@ -37,4 +37,9 @@
     <string name="deck_saved">Deck Saved</string>
     <string name="card_saved">Card Saved</string>
 
+    <plurals name="card_count">
+        <item quantity="one">1 Card</item>
+        <item quantity="other">%s Cards</item>
+    </plurals>
+
 </resources>

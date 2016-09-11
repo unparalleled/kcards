@@ -58,6 +58,10 @@ public class Deck extends BaseModel implements Parcelable {
         return description;
     }
 
+    public int size() {
+        return cards.size();
+    }
+
     public void setName(String name) {
         this.name = name;
     }

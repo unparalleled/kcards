@@ -11,21 +11,43 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/deck_name"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        tools:text="Deck Name"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/deck_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="12dp"
-        android:textSize="16sp"
-        tools:text="Deck Description"/>
+        <TextView
+            android:id="@+id/deck_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/deck_count"
+            android:textSize="20sp"
+            tools:text="Deck Name"/>
+
+        <TextView
+            android:id="@+id/deck_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/deck_name"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_toLeftOf="@+id/deck_count"
+            android:textSize="16sp"
+            tools:text="Deck Description"/>
+
+        <TextView
+            android:id="@+id/deck_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/deck_description"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/deck_name"
+            android:gravity="center"
+            android:textSize="12sp"
+            tools:text="10 cards"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

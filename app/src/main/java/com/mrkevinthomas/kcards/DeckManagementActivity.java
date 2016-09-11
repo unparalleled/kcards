@@ -117,8 +117,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
     private void showDeleteDialog(@NonNull final Deck deck) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.are_you_sure);
-        int numCards = deck.getCards().size();
-        builder.setMessage(getResources().getQuantityString(R.plurals.you_have_x_many_cards, numCards, numCards));
+        builder.setMessage(getResources().getQuantityString(R.plurals.you_have_x_many_cards, deck.size(), deck.size()));
         builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

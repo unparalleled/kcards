@@ -48,6 +48,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
         final Deck deck = deckList.get(position);
         holder.deckName.setText(deck.getName());
         holder.deckDescription.setText(deck.getDescription());
+        holder.deckCount.setText(deckManagementActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,11 +74,13 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
     public static class DeckHolder extends RecyclerView.ViewHolder {
         public final TextView deckName;
         public final TextView deckDescription;
+        public final TextView deckCount;
 
         public DeckHolder(View itemView) {
             super(itemView);
             deckName = (TextView) itemView.findViewById(R.id.deck_name);
             deckDescription = (TextView) itemView.findViewById(R.id.deck_description);
+            deckCount = (TextView) itemView.findViewById(R.id.deck_count);
         }
     }
 
