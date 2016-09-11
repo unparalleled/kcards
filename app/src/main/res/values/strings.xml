@@ -34,4 +34,7 @@
     <string name="deck_must_have_name">Deck must have a name</string>
     <string name="card_must_have_front">Card must have a front</string>
 
+    <string name="deck_saved">Deck Saved</string>
+    <string name="card_saved">Card Saved</string>
+
 </resources>

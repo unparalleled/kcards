@@ -93,6 +93,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         bundle.putString("deck_description", description);
                         KcardsApp.logAnalyticsEvent("edit_deck", bundle);
                     }
+                    Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_must_have_name), Toast.LENGTH_LONG).show();
                 }

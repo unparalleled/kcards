@@ -59,22 +59,35 @@ public class CardManagementActivity extends BaseActivity {
                 String frontText = frontInput.getText().toString();
                 String backText = backInput.getText().toString();
                 if (!TextUtils.isEmpty(frontText)) {
-                    Card card = new Card(deck.getId(), frontText, backText);
-                    cardListAdapter.addCard(card);
-                    card.save();
+                    if (card == null) {
+                        Card newCard = new Card(deck.getId(), frontText, backText);
+                        cardListAdapter.addCard(newCard);
+                        newCard.save();
 
-                    // show another dialog for continuing card creation
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            showCardDialog(null);
-                        }
-                    }, 100);
+                        // show another dialog for continuing card creation
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showCardDialog(null);
+                            }
+                        }, 100);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("front_text", frontText);
-                    bundle.putString("back_text", frontText);
-                    KcardsApp.logAnalyticsEvent("add_card", bundle);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("front_text", frontText);
+                        bundle.putString("back_text", frontText);
+                        KcardsApp.logAnalyticsEvent("add_card", bundle);
+                    } else {
+                        card.setFrontText(frontText);
+                        card.setBackText(backText);
+                        card.save();
+                        cardListAdapter.notifyDataSetChanged();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("front_text", frontText);
+                        bundle.putString("back_text", frontText);
+                        KcardsApp.logAnalyticsEvent("edit_card", bundle);
+                    }
+                    Toast.makeText(CardManagementActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CardManagementActivity.this, getString(R.string.card_must_have_front), Toast.LENGTH_LONG).show();
                 }
