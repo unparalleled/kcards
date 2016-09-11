@@ -25,6 +25,12 @@
             android:parentActivityName=".DeckManagementActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity
+            android:name=".CardViewActivity"
+            android:parentActivityName=".CardManagementActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

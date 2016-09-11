@@ -1,5 +1,7 @@
 package com.mrkevinthomas.kcards;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.models.Card;
+import com.mrkevinthomas.kcards.models.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +18,23 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
 
     private CardManagementActivity cardManagementActivity;
     private List<Card> cardList = new ArrayList<>();
+    private Deck deck;
 
-    public CardListAdapter(CardManagementActivity cardManagementActivity, List<Card> cardList) {
+    public CardListAdapter(@NonNull CardManagementActivity cardManagementActivity, @NonNull Deck deck) {
         this.cardManagementActivity = cardManagementActivity;
-        this.cardList = cardList;
+        this.cardList = deck.getCards();
+        this.deck = deck;
     }
 
     public void addCard(Card card) {
         cardList.add(card);
         notifyItemInserted(cardList.size() - 1);
+    }
+
+    public void removeCard(Card card) {
+        int position = cardList.indexOf(card);
+        cardList.remove(card);
+        notifyItemRemoved(position);
     }
 
     @Override
@@ -32,10 +43,26 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
     }
 
     @Override
-    public void onBindViewHolder(CardHolder holder, int position) {
+    public void onBindViewHolder(final CardHolder holder, int position) {
         final Card card = cardList.get(position);
         holder.frontText.setText(card.getFrontText());
         holder.backText.setText(card.getBackText());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
+                intent.putExtra(BaseActivity.ARG_DECK, deck);
+                intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
+                cardManagementActivity.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                cardManagementActivity.showCardDialog(card);
+                return true;
+            }
+        });
     }
 
     @Override

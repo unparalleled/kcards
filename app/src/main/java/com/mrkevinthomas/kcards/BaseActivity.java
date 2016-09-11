@@ -11,8 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String ARG_DECK = "deck";
+    public static final String ARG_POSITION = "position";
 
     protected Toolbar toolbar;
     protected FloatingActionButton fab;
@@ -21,6 +25,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected NavigationView navigationView;
 
     protected RecyclerView recyclerView;
+
+    protected boolean shouldShowUpButton() {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,21 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        if (shouldShowUpButton()) {
+            toggle.setDrawerIndicatorEnabled(false);
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            // must be set after configuring the toggle
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            // disable nav drawer too
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
     }
 
     @Override

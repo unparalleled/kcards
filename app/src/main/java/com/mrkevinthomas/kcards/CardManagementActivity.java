@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -13,26 +14,18 @@ import com.mrkevinthomas.kcards.models.Deck;
 
 public class CardManagementActivity extends BaseActivity {
 
-    public static final String ARG_DECK = "deck";
-
     private CardListAdapter cardListAdapter;
-
     private Deck deck;
+
+    @Override
+    protected boolean shouldShowUpButton() {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
-
-        toggle.setDrawerIndicatorEnabled(false);
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        // must be set after configuring the toggle
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -40,16 +33,16 @@ public class CardManagementActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCardDialog();
+                showCardDialog(null);
             }
         });
 
-        cardListAdapter = new CardListAdapter(this, deck.getCards());
+        cardListAdapter = new CardListAdapter(this, deck);
         recyclerView.setAdapter(cardListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    protected void showCardDialog() {
+    protected void showCardDialog(@Nullable final Card card) {
         View dialogView = getLayoutInflater().inflate(R.layout.card_edit_dialog, null);
         final EditText frontInput = (EditText) dialogView.findViewById(R.id.card_front_input);
         final EditText backInput = (EditText) dialogView.findViewById(R.id.card_back_input);
@@ -74,6 +67,17 @@ public class CardManagementActivity extends BaseActivity {
                 }
             }
         });
+        if (card != null) {
+            builder.setNeutralButton(R.string.delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    cardListAdapter.removeCard(card);
+                    card.delete();
+                }
+            });
+            frontInput.setText(card.getFrontText());
+            backInput.setText(card.getBackText());
+        }
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.setCancelable(true);
         builder.show();

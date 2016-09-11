@@ -1,6 +1,7 @@
 package com.mrkevinthomas.kcards;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,11 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
     private DeckManagementActivity deckManagementActivity;
     private List<Deck> deckList = new ArrayList<>();
 
-    public DeckListAdapter(DeckManagementActivity deckManagementActivity) {
+    public DeckListAdapter(@NonNull DeckManagementActivity deckManagementActivity) {
         this.deckManagementActivity = deckManagementActivity;
     }
 
-    public void setDeckList(List<Deck> deckList) {
+    public void setDeckList(@NonNull List<Deck> deckList) {
         this.deckList = deckList;
         notifyDataSetChanged();
     }
@@ -51,7 +52,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(deckManagementActivity, CardManagementActivity.class);
-                intent.putExtra(CardManagementActivity.ARG_DECK, deck);
+                intent.putExtra(BaseActivity.ARG_DECK, deck);
                 deckManagementActivity.startActivity(intent);
             }
         });
