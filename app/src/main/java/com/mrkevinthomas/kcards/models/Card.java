@@ -42,6 +42,37 @@ public class Card extends BaseModel implements Parcelable {
         return backText;
     }
 
+    public void setFrontText(String frontText) {
+        this.frontText = frontText;
+    }
+
+    public void setBackText(String backText) {
+        this.backText = backText;
+    }
+
+    // equals and hashcode
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Card card = (Card) o;
+
+        return id == card.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
+
     // parcelable
 
     @Override

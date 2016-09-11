@@ -24,4 +24,11 @@
     <string name="card_front_input_hint">Front of the card</string>
     <string name="card_back_input_title">Back</string>
     <string name="card_back_input_hint">Back of the card</string>
+
+    <string name="are_you_sure">Are You Sure?</string>
+    <plurals name="you_have_x_many_cards">
+        <item quantity="one">You will lose the %s card in this deck.</item>
+        <item quantity="other">You will lose the %s cards in this deck.</item>
+    </plurals>
+
 </resources>

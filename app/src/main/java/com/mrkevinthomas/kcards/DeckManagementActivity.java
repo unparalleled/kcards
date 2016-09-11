@@ -3,6 +3,7 @@ package com.mrkevinthomas.kcards;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,14 +29,18 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDeckDialog();
+                showDeckDialog(null);
             }
         });
 
         deckListAdapter = new DeckListAdapter(this);
         recyclerView.setAdapter(deckListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         loadDecks();
     }
 
@@ -53,7 +58,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                 }).execute();
     }
 
-    private void showDeckDialog() {
+    protected void showDeckDialog(@Nullable final Deck deck) {
         View dialogView = getLayoutInflater().inflate(R.layout.deck_edit_dialog, null);
         final EditText nameInput = (EditText) dialogView.findViewById(R.id.deck_name_input);
         final EditText descriptionInput = (EditText) dialogView.findViewById(R.id.deck_description_input);
@@ -67,15 +72,54 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                 String name = nameInput.getText().toString();
                 String description = descriptionInput.getText().toString();
                 if (!TextUtils.isEmpty(name)) {
-                    Deck deck = new Deck(name, description);
-                    deckListAdapter.addDeck(deck);
-                    deck.save();
+                    if (deck == null) {
+                        Deck newDeck = new Deck(name, description);
+                        deckListAdapter.addDeck(newDeck);
+                        newDeck.save();
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("deck_name", name);
-                    bundle.putString("deck_description", description);
-                    KcardsApp.logAnalyticsEvent("add_deck", bundle);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("deck_name", name);
+                        bundle.putString("deck_description", description);
+                        KcardsApp.logAnalyticsEvent("add_deck", bundle);
+                    } else {
+                        deck.setName(name);
+                        deck.setDescription(description);
+                        deck.save();
+                        deckListAdapter.notifyDataSetChanged();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("deck_name", name);
+                        bundle.putString("deck_description", description);
+                        KcardsApp.logAnalyticsEvent("edit_deck", bundle);
+                    }
                 }
+            }
+        });
+        if (deck != null) {
+            builder.setNeutralButton(R.string.delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    showDeleteDialog(deck);
+                }
+            });
+            nameInput.setText(deck.getName());
+            descriptionInput.setText(deck.getDescription());
+        }
+        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.setCancelable(true);
+        builder.show();
+    }
+
+    private void showDeleteDialog(@NonNull final Deck deck) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.are_you_sure);
+        int numCards = deck.getCards().size();
+        builder.setMessage(getResources().getQuantityString(R.plurals.you_have_x_many_cards, numCards, numCards));
+        builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deckListAdapter.removeDeck(deck);
+                deck.delete();
             }
         });
         builder.setNegativeButton(getString(R.string.cancel), null);

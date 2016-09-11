@@ -49,7 +49,7 @@ public class CardManagementActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void showCardDialog() {
+    protected void showCardDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.card_edit_dialog, null);
         final EditText frontInput = (EditText) dialogView.findViewById(R.id.card_front_input);
         final EditText backInput = (EditText) dialogView.findViewById(R.id.card_back_input);

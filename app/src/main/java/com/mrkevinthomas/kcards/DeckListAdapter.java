@@ -31,6 +31,12 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
         notifyItemInserted(deckList.size() - 1);
     }
 
+    public void removeDeck(Deck deck) {
+        int position = deckList.indexOf(deck);
+        deckList.remove(deck);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public DeckHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new DeckHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list_item, parent, false));
@@ -47,6 +53,13 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
                 Intent intent = new Intent(deckManagementActivity, CardManagementActivity.class);
                 intent.putExtra(CardManagementActivity.ARG_DECK, deck);
                 deckManagementActivity.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                deckManagementActivity.showDeckDialog(deck);
+                return true;
             }
         });
     }
