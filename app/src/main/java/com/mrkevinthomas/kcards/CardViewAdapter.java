@@ -46,10 +46,7 @@ public class CardViewAdapter extends PagerAdapter {
 
         frontText.setText(card.getFrontText());
         backText.setText(card.getBackText());
-
-        webView.setWebViewClient(new WebViewClient());
-        final String URL = "https://www.google.com/search?tbm=isch&q=" + card.getFrontText();
-        webView.loadUrl(URL);
+        setupWebView(webView, card);
 
         container.addView(itemView, 0);
         return itemView;
@@ -58,6 +55,21 @@ public class CardViewAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
+    }
+
+    private void setupWebView(WebView webView, Card card) {
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // hide page headers
+                view.loadUrl("javascript: document.getElementById('main').scrollIntoView();");
+                //view.loadUrl("javascript: document.getElementById('sfcnt').style.display = 'none';");
+                //view.loadUrl("javascript: document.getElementById('taw').style.display = 'none';");
+            }
+        });
+        final String URL = "https://www.google.com/search?tbm=isch&q=" + card.getFrontText();
+        webView.loadUrl(URL);
     }
 
 }
