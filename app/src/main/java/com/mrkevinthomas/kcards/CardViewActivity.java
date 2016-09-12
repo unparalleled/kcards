@@ -11,6 +11,8 @@ import java.util.Locale;
 
 public class CardViewActivity extends BaseActivity {
 
+    private static final int OFFSCREEN_PAGE_LIMIT = 2;
+
     private Deck deck;
     private int position;
 
@@ -38,6 +40,7 @@ public class CardViewActivity extends BaseActivity {
         cardViewAdapter = new CardViewAdapter(deck, this);
         viewPager.setAdapter(cardViewAdapter);
         viewPager.setCurrentItem(position);
+        viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
