@@ -6,6 +6,8 @@ def dbflow_version = "3.1.1"
 // or dbflow_version = "develop-SNAPSHOT" for grabbing latest dependency in your project on the develop branch
 // or 10-digit short-hash of a specific commit. (Useful for bugs fixed in develop, but not in a release yet)
 
+def support_library_version = "24.2.0"
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -28,8 +30,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile "com.android.support:appcompat-v7:${support_library_version}"
+    compile "com.android.support:cardview-v7:${support_library_version}"
+    compile "com.android.support:design:${support_library_version}"
 
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-crash:9.4.0'
