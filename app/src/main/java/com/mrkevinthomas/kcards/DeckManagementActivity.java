@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -107,11 +108,17 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                 }
             });
             nameInput.setText(deck.getName());
+            // move cursor to the end of the input text
+            nameInput.setSelection(deck.getName() != null ? deck.getName().length() : 0);
             descriptionInput.setText(deck.getDescription());
         }
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.setCancelable(true);
-        builder.show();
+
+        // show keyboard by default
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        alertDialog.show();
     }
 
     private void showDeleteDialog(@NonNull final Deck deck) {

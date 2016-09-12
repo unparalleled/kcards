@@ -102,6 +102,8 @@ public class CardManagementActivity extends BaseActivity {
                 }
             });
             frontInput.setText(card.getFrontText());
+            // move cursor to the end of the input text
+            frontInput.setSelection(card.getFrontText() != null ? card.getFrontText().length() : 0);
             backInput.setText(card.getBackText());
         }
         builder.setNegativeButton(getString(R.string.cancel), null);
