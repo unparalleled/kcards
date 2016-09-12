@@ -10,25 +10,52 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/card_front_text"
+    <LinearLayout
+        android:id="@+id/card_front_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="24dp"
-        android:textSize="32sp"
-        tools:text="Card Front"/>
+        android:orientation="horizontal"
+        android:padding="24dp">
 
-    <TextView
-        android:id="@+id/card_back_text"
+        <TextView
+            android:id="@+id/card_front_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="40sp"
+            tools:text="Card Front"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/speaker"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/card_back_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:padding="24dp"
-        android:textSize="32sp"
-        tools:text="Card Back"/>
+        android:orientation="horizontal"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/card_back_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="40sp"
+            tools:text="Card Back"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/speaker"/>
+    </LinearLayout>
 
     <WebView
         android:id="@+id/web_view"
