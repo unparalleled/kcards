@@ -24,7 +24,8 @@ public class SettingsActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.settings);
 
         appVersionTextView = (TextView) findViewById(R.id.app_version_text);
-        appVersionTextView.setText(getString(R.string.app_version_text, ThisApp.get().getAppVersionName(), ThisApp.get().getAppVersionCode()));
+        appVersionTextView.setText(
+                getString(R.string.app_version_text, ThisApp.get().getAppVersionName(), ThisApp.get().getAppVersionCode()));
     }
 
     @Override
