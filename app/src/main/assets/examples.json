@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Examples",
+    "description": "English + 한국어",
+    "cards": [
+      {
+        "deckId": 1,
+        "frontText": "Apple",
+        "backText": "사과"
+      },
+      {
+        "deckId": 1,
+        "frontText": "Potato",
+        "backText": "감자"
+      },
+      {
+        "deckId": 1,
+        "frontText": "Beer",
+        "backText": "맥주"
+      },
+      {
+        "deckId": 1,
+        "frontText": "Bathroom",
+        "backText": "화장실"
+      }
+    ]
+  }
+]

@@ -8,19 +8,27 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.raizlabs.android.dbflow.sql.language.CursorResult;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DeckManagementActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private String TAG = "DeckManagementActivity";
 
     private DeckListAdapter deckListAdapter;
 
@@ -55,7 +63,17 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                     public void onQueryResult(QueryTransaction transaction, @NonNull CursorResult<Deck> tResult) {
                         // called when query returns on UI thread
                         List<Deck> decks = tResult.toListClose();
-                        deckListAdapter.setDeckList(decks);
+                        if (decks != null && !decks.isEmpty()) {
+                            deckListAdapter.setDeckList(decks);
+                        } else {
+                            try {
+                                Reader reader = new InputStreamReader(getAssets().open("examples.json"), "UTF-8");
+                                Deck[] exampleDecks = new Gson().fromJson(reader, Deck[].class);
+                                deckListAdapter.setDeckList(new ArrayList<>(Arrays.asList(exampleDecks)));
+                            } catch (IOException e) {
+                                Log.e(TAG, "failed to load examples json file");
+                            }
+                        }
                     }
                 }).execute();
     }
