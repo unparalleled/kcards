@@ -37,6 +37,9 @@ public class CardViewActivity extends BaseActivity {
         deck = getIntent().getParcelableExtra(ARG_DECK);
         position = getIntent().getIntExtra(ARG_POSITION, 0);
 
+        getSupportActionBar().setTitle(deck.getName());
+        getSupportActionBar().setSubtitle(deck.getDescription());
+
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setVisibility(View.VISIBLE);
         fab.setVisibility(View.GONE);
