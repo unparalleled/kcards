@@ -100,7 +100,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         Bundle bundle = new Bundle();
                         bundle.putString("deck_name", name);
                         bundle.putString("deck_description", description);
-                        KcardsApp.logAnalyticsEvent("add_deck", bundle);
+                        ThisApp.get().logAnalyticsEvent("add_deck", bundle);
                     } else {
                         deck.setName(name);
                         deck.setDescription(description);
@@ -110,7 +110,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         Bundle bundle = new Bundle();
                         bundle.putString("deck_name", name);
                         bundle.putString("deck_description", description);
-                        KcardsApp.logAnalyticsEvent("edit_deck", bundle);
+                        ThisApp.get().logAnalyticsEvent("edit_deck", bundle);
                     }
                     Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
                 } else {

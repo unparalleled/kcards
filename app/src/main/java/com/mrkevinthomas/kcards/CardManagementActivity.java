@@ -75,7 +75,7 @@ public class CardManagementActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("front_text", frontText);
                         bundle.putString("back_text", frontText);
-                        KcardsApp.logAnalyticsEvent("add_card", bundle);
+                        ThisApp.get().logAnalyticsEvent("add_card", bundle);
                     } else {
                         card.setFrontText(frontText);
                         card.setBackText(backText);
@@ -85,7 +85,7 @@ public class CardManagementActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("front_text", frontText);
                         bundle.putString("back_text", frontText);
-                        KcardsApp.logAnalyticsEvent("edit_card", bundle);
+                        ThisApp.get().logAnalyticsEvent("edit_card", bundle);
                     }
                     Toast.makeText(CardManagementActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                 } else {
