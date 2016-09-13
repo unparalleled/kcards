@@ -9,9 +9,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,12 +32,20 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    protected int getViewId() {
+        return R.layout.recycler_view;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // set the main content view in a frame layout
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
+        LayoutInflater.from(this).inflate(getViewId(), frameLayout, true);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 

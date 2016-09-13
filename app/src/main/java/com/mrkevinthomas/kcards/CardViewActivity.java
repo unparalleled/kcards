@@ -27,6 +27,11 @@ public class CardViewActivity extends BaseActivity {
     }
 
     @Override
+    protected int getViewId() {
+        return R.layout.view_pager;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
@@ -34,7 +39,6 @@ public class CardViewActivity extends BaseActivity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
         fab.setVisibility(View.GONE);
 
         cardViewAdapter = new CardViewAdapter(deck, this);
