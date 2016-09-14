@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -30,7 +32,7 @@ public class ThisApp extends Application {
         return thisApp;
     }
 
-    public void logAnalyticsEvent(String name, Bundle params) {
+    public void logAnalyticsEvent(@NonNull String name, @Nullable Bundle params) {
         firebaseAnalytics.logEvent(name, params);
     }
 

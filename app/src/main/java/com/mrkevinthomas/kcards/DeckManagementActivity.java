@@ -69,16 +69,27 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         if (decks != null && !decks.isEmpty()) {
                             deckListAdapter.setDeckList(decks);
                         } else {
-                            try {
-                                Reader reader = new InputStreamReader(getAssets().open("examples.json"), "UTF-8");
-                                Deck[] exampleDecks = new Gson().fromJson(reader, Deck[].class);
-                                deckListAdapter.setDeckList(new ArrayList<>(Arrays.asList(exampleDecks)));
-                            } catch (IOException e) {
-                                Log.e(TAG, "failed to load examples json file");
-                            }
+                            loadExampleDecksFromFile();
                         }
                     }
                 }).execute();
+    }
+
+    private void loadExampleDecksFromFile() {
+        try {
+            Reader reader = new InputStreamReader(getAssets().open("examples.json"), "UTF-8");
+            Deck[] exampleDecks = new Gson().fromJson(reader, Deck[].class);
+            if (exampleDecks != null && exampleDecks.length > 0) {
+                for (Deck deck : exampleDecks) {
+                    deck.save();
+                }
+                deckListAdapter.setDeckList(new ArrayList<>(Arrays.asList(exampleDecks)));
+            }
+        } catch (IOException e) {
+            // this should be extremely rare, but not the end of the world if it happens
+            Log.e(TAG, "failed to load examples json file");
+            ThisApp.get().logAnalyticsEvent("load_example_failed", null);
+        }
     }
 
     protected void showDeckDialog(@Nullable final Deck deck) {
