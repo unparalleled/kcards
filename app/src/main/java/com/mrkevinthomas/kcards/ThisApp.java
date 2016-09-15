@@ -3,26 +3,20 @@ package com.mrkevinthomas.kcards;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 public class ThisApp extends Application {
 
     private static ThisApp thisApp;
-    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onCreate() {
         super.onCreate();
         thisApp = this;
 
-        // Obtain the FirebaseAnalytics instance.
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Analytics.init(this);
 
         // initialize db flow
         FlowManager.init(new FlowConfig.Builder(this).build());
@@ -30,10 +24,6 @@ public class ThisApp extends Application {
 
     public static ThisApp get() {
         return thisApp;
-    }
-
-    public void logAnalyticsEvent(@NonNull String name, @Nullable Bundle params) {
-        firebaseAnalytics.logEvent(name, params);
     }
 
     /**

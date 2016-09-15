@@ -88,7 +88,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
         } catch (IOException e) {
             // this should be extremely rare, but not the end of the world if it happens
             Log.e(TAG, "failed to load examples json file");
-            ThisApp.get().logAnalyticsEvent("load_example_failed", null);
+            Analytics.logExampleLoadFailed();
         }
     }
 
@@ -111,20 +111,14 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                         deckListAdapter.addDeck(newDeck);
                         newDeck.save();
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("deck_name", name);
-                        bundle.putString("deck_description", description);
-                        ThisApp.get().logAnalyticsEvent("add_deck", bundle);
+                        Analytics.logAddDeckEvent(newDeck);
                     } else {
                         deck.setName(name);
                         deck.setDescription(description);
                         deck.save();
                         deckListAdapter.notifyDataSetChanged();
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("deck_name", name);
-                        bundle.putString("deck_description", description);
-                        ThisApp.get().logAnalyticsEvent("edit_deck", bundle);
+                        Analytics.logEditDeckEvent(deck);
                     }
                     Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
                 } else {

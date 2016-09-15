@@ -75,20 +75,14 @@ public class CardManagementActivity extends BaseActivity {
                             }
                         }, 100);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("front_text", frontText);
-                        bundle.putString("back_text", frontText);
-                        ThisApp.get().logAnalyticsEvent("add_card", bundle);
+                        Analytics.logAddCardEvent(newCard);
                     } else {
                         card.setFrontText(frontText);
                         card.setBackText(backText);
                         card.save();
                         cardListAdapter.notifyDataSetChanged();
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("front_text", frontText);
-                        bundle.putString("back_text", frontText);
-                        ThisApp.get().logAnalyticsEvent("edit_card", bundle);
+                        Analytics.logEditCardEvent(card);
                     }
                     Toast.makeText(CardManagementActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                 } else {
