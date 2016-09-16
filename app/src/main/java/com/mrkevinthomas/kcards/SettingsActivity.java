@@ -62,7 +62,11 @@ public class SettingsActivity extends BaseActivity {
 
         appVersionTextView.setText(
                 getString(R.string.app_version_text, ThisApp.get().getAppVersionName(), ThisApp.get().getAppVersionCode()));
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         loadLanguages();
     }
 

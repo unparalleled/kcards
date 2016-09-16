@@ -15,6 +15,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.raizlabs.android.dbflow.sql.language.CursorResult;
@@ -51,6 +56,46 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(deckListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        setupFirebaseAuth();
+    }
+
+    /**
+     * This should always be done in the main activity.
+     * If it's done in Application then it can conflict with Firebase crash reporting.
+     */
+    private void setupFirebaseAuth() {
+        FirebaseAuth firebaseAuth;
+        FirebaseAuth.AuthStateListener authStateListener;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+        firebaseAuth.addAuthStateListener(authStateListener);
+        firebaseAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
+
+                // If sign in fails, display a message to the user. If sign in succeeds
+                // the auth state listener will be notified and logic to handle the
+                // signed in user can be handled in the listener.
+                if (!task.isSuccessful()) {
+                    Log.w(TAG, "signInAnonymously", task.getException());
+                }
+            }
+        });
     }
 
     @Override

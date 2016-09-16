@@ -8,6 +8,7 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 public class ThisApp extends Application {
+    private static final String TAG = "kcards";
 
     private static ThisApp thisApp;
 
@@ -16,6 +17,7 @@ public class ThisApp extends Application {
         super.onCreate();
         thisApp = this;
 
+        // initialize firebase analytics
         Analytics.init(this);
 
         // initialize db flow
