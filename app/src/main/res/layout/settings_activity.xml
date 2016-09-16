@@ -18,14 +18,13 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="@string/main_language"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
 
         <android.support.v7.widget.AppCompatSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_main_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:prompt="@string/main_language"
             android:spinnerMode="dialog"/>
     </LinearLayout>
@@ -41,14 +40,13 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="@string/secondary_language"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
 
         <android.support.v7.widget.AppCompatSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_secondary_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:prompt="@string/secondary_language"
             android:spinnerMode="dialog"/>
     </LinearLayout>
@@ -60,7 +58,7 @@
         android:layout_marginTop="18dp"
         android:gravity="center"
         android:padding="16dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         tools:text="App Version: 1.0 (1)"/>
 
 </LinearLayout>
