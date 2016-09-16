@@ -45,4 +45,7 @@
         <item quantity="other">%s Cards</item>
     </plurals>
 
+    <string name="main_language">Main Language</string>
+    <string name="secondary_language">Secondary Language</string>
+
 </resources>

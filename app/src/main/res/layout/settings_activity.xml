@@ -4,15 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/app_version_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/main_language"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/settings_main_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:prompt="@string/main_language"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/secondary_language"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/settings_secondary_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:prompt="@string/secondary_language"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/settings_app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:gravity="center"
         android:padding="16dp"
-        android:textSize="24sp"
+        android:textSize="18sp"
         tools:text="App Version: 1.0 (1)"/>
 
 </LinearLayout>

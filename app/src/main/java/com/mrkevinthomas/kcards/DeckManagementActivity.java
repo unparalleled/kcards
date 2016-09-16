@@ -29,7 +29,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DeckManagementActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private String TAG = "DeckManagementActivity";
+    private static final String TAG = "DeckManagementActivity";
+
+    private static final String EXAMPLES_FILE = "examples.json";
 
     private DeckListAdapter deckListAdapter;
 
@@ -77,7 +79,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
 
     private void loadExampleDecksFromFile() {
         try {
-            Reader reader = new InputStreamReader(getAssets().open("examples.json"), "UTF-8");
+            Reader reader = new InputStreamReader(getAssets().open(EXAMPLES_FILE), "UTF-8");
             Deck[] exampleDecks = new Gson().fromJson(reader, Deck[].class);
             if (exampleDecks != null && exampleDecks.length > 0) {
                 for (Deck deck : exampleDecks) {
@@ -87,8 +89,8 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
             }
         } catch (IOException e) {
             // this should be extremely rare, but not the end of the world if it happens
-            Log.e(TAG, "failed to load examples json file");
-            Analytics.logExampleLoadFailed();
+            Log.e(TAG, "failed to load examples json file", e);
+            Analytics.logLoadFileFailed(EXAMPLES_FILE);
         }
     }
 

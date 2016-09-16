@@ -11,7 +11,8 @@ public class Analytics {
 
     private static FirebaseAnalytics firebaseAnalytics;
 
-    private static final String EVENT_LOAD_EXAMPLE_FAILED = "load_example_failed";
+    private static final String EVENT_LOAD_FILE_FAILED = "load_file_failed";
+    private static final String ARG_FILE_NAME = "file_name";
 
     private static final String EVENT_ADD_DECK = "add_deck";
     private static final String EVENT_EDIT_DECK = "edit_deck";
@@ -28,22 +29,24 @@ public class Analytics {
         firebaseAnalytics = FirebaseAnalytics.getInstance(context);
     }
 
-    public static void logExampleLoadFailed() {
-        firebaseAnalytics.logEvent(EVENT_LOAD_EXAMPLE_FAILED, null);
+    public static void logLoadFileFailed(String fileName) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_FILE_NAME, fileName);
+        firebaseAnalytics.logEvent(EVENT_LOAD_FILE_FAILED, bundle);
     }
 
     public static void logAddDeckEvent(Deck deck) {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_DECK_NAME, deck.getName());
         bundle.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        firebaseAnalytics.logEvent(EVENT_ADD_DECK, null);
+        firebaseAnalytics.logEvent(EVENT_ADD_DECK, bundle);
     }
 
     public static void logEditDeckEvent(Deck deck) {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_DECK_NAME, deck.getName());
         bundle.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        firebaseAnalytics.logEvent(EVENT_EDIT_DECK, null);
+        firebaseAnalytics.logEvent(EVENT_EDIT_DECK, bundle);
     }
 
     public static void logAddCardEvent(Card card) {
