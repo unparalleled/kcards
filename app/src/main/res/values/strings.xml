@@ -13,6 +13,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
 
     <string name="deck">Deck</string>
     <string name="card">Card</string>
@@ -48,5 +49,10 @@
 
     <string name="main_language">Main Language</string>
     <string name="secondary_language">Secondary Language</string>
+
+    <string name="deck_shared">Deck Shared!</string>
+    <string name="deck_unshared">Deck Unshared!</string>
+
+    <string name="deck_unshare_message">This will remove the deck from the shared deck list.</string>
 
 </resources>

@@ -57,6 +57,10 @@ public class Deck extends BaseModel implements Parcelable {
         return firebaseKey;
     }
 
+    public boolean isSyncedWithFirebase() {
+        return firebaseKey != null && !firebaseKey.isEmpty();
+    }
+
     public String getName() {
         return name;
     }

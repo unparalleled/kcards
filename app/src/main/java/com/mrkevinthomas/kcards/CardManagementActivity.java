@@ -72,6 +72,7 @@ public class CardManagementActivity extends BaseActivity {
                         Card newCard = new Card(deck.getId(), frontText, backText);
                         cardListAdapter.addCard(newCard);
                         newCard.save();
+                        updateObjectInSharedFirebaseDb();
 
                         // show another dialog for continuing card creation
                         new Handler().postDelayed(new Runnable() {
@@ -87,6 +88,7 @@ public class CardManagementActivity extends BaseActivity {
                         card.setBackText(backText);
                         card.save();
                         cardListAdapter.notifyDataSetChanged();
+                        updateObjectInSharedFirebaseDb();
 
                         Analytics.logEditCardEvent(card);
                     }
@@ -102,6 +104,7 @@ public class CardManagementActivity extends BaseActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     cardListAdapter.removeCard(card);
                     card.delete();
+                    updateObjectInSharedFirebaseDb();
                 }
             });
             frontInput.setText(card.getFrontText());
@@ -122,7 +125,7 @@ public class CardManagementActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
         uploadMenuItem = menu.findItem(R.id.action_upload);
-        if (!TextUtils.isEmpty(deck.getFirebaseKey())) {
+        if (deck.isSyncedWithFirebase()) {
             uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
         }
         return super.onCreateOptionsMenu(menu);
@@ -131,27 +134,66 @@ public class CardManagementActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_upload) {
-            writeToSharedFirebaseDb();
+            handleUploadActionClicked();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void writeToSharedFirebaseDb() {
-        if (TextUtils.isEmpty(deck.getFirebaseKey())) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = database.getReference("decks");
-            databaseReference.push().setValue(deck);
-
-            deck.setFirebaseKey(databaseReference.getKey());
-            deck.save();
-
-            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
-            Toast.makeText(this, "Deck saved to shared set!", Toast.LENGTH_LONG).show();
+    private void handleUploadActionClicked() {
+        if (!deck.isSyncedWithFirebase()) {
+            createNewObjectInSharedFirebaseDb();
+            Toast.makeText(this, getString(R.string.deck_shared), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Deck already saved!", Toast.LENGTH_LONG).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.are_you_sure);
+            builder.setMessage(getString(R.string.deck_unshare_message));
+            builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unshared), Toast.LENGTH_LONG).show();
+                    deleteObjectInSharedFirebaseDb();
+                }
+            });
+            builder.setNegativeButton(getString(R.string.cancel), null);
+            builder.setCancelable(true);
+            builder.show();
         }
+    }
+
+    private void updateObjectInSharedFirebaseDb() {
+        if (deck.isSyncedWithFirebase()) {
+            // update previous deck object using firebase key
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = database.getReference("decks/" + deck.getFirebaseKey());
+            databaseReference.setValue(deck);
+        }
+    }
+
+    private void createNewObjectInSharedFirebaseDb() {
+        // push new deck object
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("decks").push();
+        databaseReference.setValue(deck);
+
+        String firebaseKey = databaseReference.getKey();
+        deck.setFirebaseKey(firebaseKey);
+        deck.save();
+
+        uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+    }
+
+    private void deleteObjectInSharedFirebaseDb() {
+        // remove deck object using firebase key
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("decks/" + deck.getFirebaseKey());
+        databaseReference.removeValue();
+
+        deck.setFirebaseKey(null);
+        deck.save();
+
+        uploadMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
     }
 
 }
