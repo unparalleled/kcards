@@ -20,6 +20,9 @@ public class Deck extends BaseModel implements Parcelable {
     long id;
 
     @Column
+    String firebaseKey;
+
+    @Column
     String name;
 
     @Column
@@ -50,6 +53,10 @@ public class Deck extends BaseModel implements Parcelable {
         return id;
     }
 
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,6 +67,10 @@ public class Deck extends BaseModel implements Parcelable {
 
     public int size() {
         return cards.size();
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
     }
 
     public void setName(String name) {
@@ -102,6 +113,7 @@ public class Deck extends BaseModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
+        dest.writeString(this.firebaseKey);
         dest.writeString(this.name);
         dest.writeString(this.description);
         dest.writeTypedList(this.cards);
@@ -109,12 +121,13 @@ public class Deck extends BaseModel implements Parcelable {
 
     protected Deck(Parcel in) {
         this.id = in.readLong();
+        this.firebaseKey = in.readString();
         this.name = in.readString();
         this.description = in.readString();
         this.cards = in.createTypedArrayList(Card.CREATOR);
     }
 
-    public static final Parcelable.Creator<Deck> CREATOR = new Parcelable.Creator<Deck>() {
+    public static final Creator<Deck> CREATOR = new Creator<Deck>() {
         @Override
         public Deck createFromParcel(Parcel source) {
             return new Deck(source);

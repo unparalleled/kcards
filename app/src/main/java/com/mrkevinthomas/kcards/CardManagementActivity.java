@@ -8,11 +8,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 
@@ -20,6 +24,8 @@ public class CardManagementActivity extends BaseActivity {
 
     private CardListAdapter cardListAdapter;
     private Deck deck;
+
+    private MenuItem uploadMenuItem;
 
     @Override
     protected boolean shouldShowUpButton() {
@@ -110,6 +116,42 @@ public class CardManagementActivity extends BaseActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.card_management, menu);
+        uploadMenuItem = menu.findItem(R.id.action_upload);
+        if (!TextUtils.isEmpty(deck.getFirebaseKey())) {
+            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_upload) {
+            writeToSharedFirebaseDb();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void writeToSharedFirebaseDb() {
+        if (TextUtils.isEmpty(deck.getFirebaseKey())) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = database.getReference("decks");
+            databaseReference.push().setValue(deck);
+
+            deck.setFirebaseKey(databaseReference.getKey());
+            deck.save();
+
+            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+            Toast.makeText(this, "Deck saved to shared set!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Deck already saved!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
