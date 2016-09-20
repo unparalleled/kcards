@@ -45,30 +45,36 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
 
     @Override
     public void onBindViewHolder(DeckHolder holder, int position) {
-        final Deck deck = deckList.get(position);
-        holder.deckName.setText(deck.getName());
-        holder.deckDescription.setText(deck.getDescription());
-        holder.deckCount.setText(deckManagementActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(deckManagementActivity, CardManagementActivity.class);
-                intent.putExtra(BaseActivity.ARG_DECK, deck);
-                deckManagementActivity.startActivity(intent);
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                deckManagementActivity.showDeckDialog(deck);
-                return true;
-            }
-        });
+        if (position < deckList.size()) {
+            final Deck deck = deckList.get(position);
+            holder.deckName.setText(deck.getName());
+            holder.deckDescription.setText(deck.getDescription());
+            holder.deckCount.setText(
+                    deckManagementActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(deckManagementActivity, CardManagementActivity.class);
+                    intent.putExtra(BaseActivity.ARG_DECK, deck);
+                    deckManagementActivity.startActivity(intent);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    deckManagementActivity.showDeckDialog(deck);
+                    return true;
+                }
+            });
+            holder.itemView.setVisibility(View.VISIBLE);
+        } else {
+            holder.itemView.setVisibility(View.INVISIBLE); // dummy footer
+        }
     }
 
     @Override
     public int getItemCount() {
-        return deckList.size();
+        return deckList.size() + 1;
     }
 
     public static class DeckHolder extends RecyclerView.ViewHolder {

@@ -44,30 +44,35 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
 
     @Override
     public void onBindViewHolder(final CardHolder holder, int position) {
-        final Card card = cardList.get(position);
-        holder.frontText.setText(card.getFrontText());
-        holder.backText.setText(card.getBackText());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
-                intent.putExtra(BaseActivity.ARG_DECK, deck);
-                intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
-                cardManagementActivity.startActivity(intent);
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                cardManagementActivity.showCardDialog(card);
-                return true;
-            }
-        });
+        if (position < cardList.size()) {
+            final Card card = cardList.get(position);
+            holder.frontText.setText(card.getFrontText());
+            holder.backText.setText(card.getBackText());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
+                    intent.putExtra(BaseActivity.ARG_DECK, deck);
+                    intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
+                    cardManagementActivity.startActivity(intent);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    cardManagementActivity.showCardDialog(card);
+                    return true;
+                }
+            });
+            holder.itemView.setVisibility(View.VISIBLE);
+        } else {
+            holder.itemView.setVisibility(View.INVISIBLE); // dummy footer
+        }
     }
 
     @Override
     public int getItemCount() {
-        return cardList.size();
+        return cardList.size() + 1;
     }
 
     public static class CardHolder extends RecyclerView.ViewHolder {
