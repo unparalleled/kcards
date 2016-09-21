@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_upload"
+        android:id="@+id/action_publish_unpublish"
         android:icon="@drawable/ic_cloud_upload_white_48dp"
         android:orderInCategory="100"
-        android:title="@string/upload"
+        android:title="@string/publish"
         app:showAsAction="always"/>
 </menu>

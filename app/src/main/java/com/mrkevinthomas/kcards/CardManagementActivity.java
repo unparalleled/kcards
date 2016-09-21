@@ -25,7 +25,7 @@ public class CardManagementActivity extends BaseActivity {
     private CardListAdapter cardListAdapter;
     private Deck deck;
 
-    private MenuItem uploadMenuItem;
+    private MenuItem publishUnpublishMenuItem;
 
     @Override
     protected boolean shouldShowUpButton() {
@@ -124,38 +124,41 @@ public class CardManagementActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
-        uploadMenuItem = menu.findItem(R.id.action_upload);
+        publishUnpublishMenuItem = menu.findItem(R.id.action_publish_unpublish);
         if (deck.isSyncedWithFirebase()) {
-            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+            publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+            publishUnpublishMenuItem.setTitle(R.string.unpublish);
         }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_upload) {
-            handleUploadActionClicked();
+        if (item.getItemId() == R.id.action_publish_unpublish) {
+            handlePublishUnpublishActionClicked();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void handleUploadActionClicked() {
+    private void handlePublishUnpublishActionClicked() {
         if (!deck.isSyncedWithFirebase()) {
             createNewObjectInSharedFirebaseDb();
-            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
-            Toast.makeText(this, getString(R.string.deck_shared), Toast.LENGTH_LONG).show();
+            publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+            publishUnpublishMenuItem.setTitle(R.string.unpublish);
+            Toast.makeText(this, getString(R.string.deck_published), Toast.LENGTH_LONG).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.are_you_sure);
-            builder.setMessage(getString(R.string.deck_unshare_message));
-            builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
+            builder.setMessage(getString(R.string.deck_unpublish_message));
+            builder.setPositiveButton(getString(R.string.unpublish), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     deleteObjectInSharedFirebaseDb();
-                    uploadMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
-                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unshared), Toast.LENGTH_LONG).show();
+                    publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
+                    publishUnpublishMenuItem.setTitle(R.string.publish);
+                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unpublished), Toast.LENGTH_LONG).show();
                 }
             });
             builder.setNegativeButton(getString(R.string.cancel), null);

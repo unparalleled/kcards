@@ -21,8 +21,8 @@ public class CardViewActivity extends BaseActivity {
     private ViewPager viewPager;
     private CardViewAdapter cardViewAdapter;
 
-    private MenuItem hideMenuItem;
-    private boolean isHidden = true;
+    private MenuItem showHideMenuItem;
+    private boolean isHidden = true; // start with answers hidden
 
     private TextToSpeech textToSpeech;
 
@@ -71,26 +71,29 @@ public class CardViewActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_viewer, menu);
-        hideMenuItem = menu.findItem(R.id.action_hide);
+        showHideMenuItem = menu.findItem(R.id.action_show_hide);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_hide) {
-            handleUploadActionClicked();
+        if (item.getItemId() == R.id.action_show_hide) {
+            handleShowHideActionClicked();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void handleUploadActionClicked() {
+    private void handleShowHideActionClicked() {
         isHidden = !isHidden;
         cardViewAdapter.setHidden(isHidden);
-        hideMenuItem.setIcon(isHidden ?
+        showHideMenuItem.setIcon(isHidden ?
                 R.drawable.ic_visibility_white_48dp :
                 R.drawable.ic_visibility_off_white_48dp);
+        showHideMenuItem.setTitle(isHidden ?
+                R.string.show :
+                R.string.hide);
     }
 
     public TextToSpeech getTextToSpeech() {
