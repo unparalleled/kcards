@@ -1,208 +1,167 @@
 [
   {
-    "id": 1,
     "name": "Examples: Things",
     "description": "한국어 <-> English",
     "cards": [
       {
-        "deckId": 1,
         "frontText": "사과",
         "backText": "Apple"
       },
       {
-        "deckId": 1,
         "frontText": "감자",
         "backText": "Potato"
       },
       {
-        "deckId": 1,
         "frontText": "맥주",
         "backText": "Beer"
       },
       {
-        "deckId": 1,
         "frontText": "책",
         "backText": "Book"
       }
     ]
   },
   {
-    "id": 2,
     "name": "Examples: Places",
     "description": "한국어 <-> English",
     "cards": [
       {
-        "deckId": 2,
         "frontText": "집",
         "backText": "House"
       },
       {
-        "deckId": 2,
         "frontText": "극장",
         "backText": "Theater"
       },
       {
-        "deckId": 2,
         "frontText": "화장실",
         "backText": "Bathroom"
       },
       {
-        "deckId": 2,
         "frontText": "학교",
         "backText": "School"
       },
       {
-        "deckId": 2,
         "frontText": "교실",
         "backText": "Classroom"
       },
       {
-        "deckId": 2,
         "frontText": "미용실",
         "backText": "Salon"
       },
       {
-        "deckId": 2,
         "frontText": "병원",
         "backText": "Hospital"
       },
       {
-        "deckId": 2,
         "frontText": "은행",
         "backText": "Bank"
       },
       {
-        "deckId": 2,
         "frontText": "슈퍼마켓",
         "backText": "Supermarket"
       },
       {
-        "deckId": 2,
         "frontText": "편의점",
         "backText": "Convenience Store"
       },
       {
-        "deckId": 2,
         "frontText": "노래방",
         "backText": "Karaoke Room"
       },
       {
-        "deckId": 2,
-        "frontText": "공한",
+        "frontText": "공항",
         "backText": "Airport"
       },
       {
-        "deckId": 2,
         "frontText": "우체국",
         "backText": "Post Office"
       },
       {
-        "deckId": 2,
         "frontText": "주차장",
         "backText": "Parking Lot"
       },
       {
-        "deckId": 2,
         "frontText": "주유소",
         "backText": "Gas Station"
       },
       {
-        "deckId": 2,
         "frontText": "헬스장",
         "backText": "Gym"
       },
       {
-        "deckId": 2,
         "frontText": "식당",
         "backText": "Restaurant"
       },
       {
-        "deckId": 2,
         "frontText": "도서관",
         "backText": "Library"
       },
       {
-        "deckId": 2,
         "frontText": "서점",
         "backText": "Bookstore"
       },
       {
-        "deckId": 2,
         "frontText": "백화점",
         "backText": "Department Store"
       },
       {
-        "deckId": 2,
         "frontText": "시장",
         "backText": "Market"
       },
       {
-        "deckId": 2,
         "frontText": "목욕탕",
         "backText": "Bathhouse"
       },
       {
-        "deckId": 2,
         "frontText": "약국",
         "backText": "Pharmacy"
       },
       {
-        "deckId": 2,
         "frontText": "술집",
         "backText": "Bar"
       },
       {
-        "deckId": 2,
         "frontText": "공원",
         "backText": "Park"
       },
       {
-        "deckId": 2,
         "frontText": "지하철역",
         "backText": "Subway Station"
       },
       {
-        "deckId": 2,
         "frontText": "버스정류장",
         "backText": "Bus Stop"
       },
       {
-        "deckId": 2,
         "frontText": "박물관",
         "backText": "Museum"
       },
       {
-        "deckId": 2,
         "frontText": "피씨방",
         "backText": "Internet Cafe"
       },
       {
-        "deckId": 2,
         "frontText": "아파트",
         "backText": "Apartment"
       },
       {
-        "deckId": 2,
         "frontText": "소방서",
         "backText": "Fire Station"
       },
       {
-        "deckId": 2,
         "frontText": "경찰서",
         "backText": "Police Station"
       },
       {
-        "deckId": 2,
         "frontText": "기차역",
         "backText": "Train Station"
       },
       {
-        "deckId": 2,
         "frontText": "수영장",
         "backText": "Swimming Pool"
       },
       {
-        "deckId": 2,
         "frontText": "커피숍",
         "backText": "Coffee Shop"
       }

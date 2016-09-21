@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
+import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.raizlabs.android.dbflow.sql.language.CursorResult;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -128,7 +129,11 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
             Deck[] exampleDecks = new Gson().fromJson(reader, Deck[].class);
             if (exampleDecks != null && exampleDecks.length > 0) {
                 for (Deck deck : exampleDecks) {
-                    deck.save();
+                    deck.save(); // auto generate deck id
+                    for (Card card : deck.getCards()) {
+                        card.setDeckId(deck.getId());
+                        card.save();
+                    }
                 }
                 deckListAdapter.setDeckList(new ArrayList<>(Arrays.asList(exampleDecks)));
             }

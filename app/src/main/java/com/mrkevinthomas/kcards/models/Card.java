@@ -50,6 +50,10 @@ public class Card extends BaseModel implements Parcelable {
         this.backText = backText;
     }
 
+    public void setDeckId(long deckId) {
+        this.deckId = deckId;
+    }
+
     // equals and hashcode
 
     @Override
