@@ -14,15 +14,28 @@ import android.widget.TextView;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 
+import java.util.ArrayList;
+
 public class CardViewAdapter extends PagerAdapter {
 
     private Deck deck;
 
     private CardViewActivity cardViewActivity;
+    private boolean isHidden;
 
-    public CardViewAdapter(@NonNull Deck deck, @NonNull CardViewActivity cardViewActivity) {
+    private ArrayList<View> activeViews = new ArrayList<>();
+
+    public CardViewAdapter(@NonNull Deck deck, @NonNull CardViewActivity cardViewActivity, boolean isHidden) {
         this.deck = deck;
         this.cardViewActivity = cardViewActivity;
+        this.isHidden = isHidden;
+    }
+
+    public void setHidden(boolean isHidden) {
+        this.isHidden = isHidden;
+        for (View itemView : activeViews) {
+            setupCardAnswerCover(itemView);
+        }
     }
 
     @Override
@@ -59,15 +72,34 @@ public class CardViewAdapter extends PagerAdapter {
             }
         });
 
+        setupCardAnswerCover(itemView);
         setupWebView(itemView, card);
 
         container.addView(itemView, 0);
+        activeViews.add(itemView);
         return itemView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
+        activeViews.remove(object);
+    }
+
+    private void setupCardAnswerCover(View itemView) {
+        final View cardAnswerCover = itemView.findViewById(R.id.card_answer_cover);
+
+        if (isHidden) {
+            cardAnswerCover.setVisibility(View.VISIBLE);
+            cardAnswerCover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cardAnswerCover.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            cardAnswerCover.setVisibility(View.GONE);
+        }
     }
 
     private void setupWebView(View itemView, Card card) {

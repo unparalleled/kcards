@@ -48,52 +48,66 @@
                     -->
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/card_back_holder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="24dp">
-
-                <TextView
-                    android:id="@+id/card_back_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    tools:text="Card Back"/>
-
-                <!--
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/speaker"/>
-                    -->
-            </LinearLayout>
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true">
 
-                <WebView
-                    android:id="@+id/web_view"
+                <LinearLayout
+                    android:id="@+id/card_back_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/card_back_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="40sp"
+                        tools:text="Card Back"/>
+
+                    <!--
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/speaker"/>
+                        -->
+                </LinearLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="none"
-                    android:visibility="invisible"/>
+                    android:layout_below="@id/card_back_holder">
 
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_centerInParent="true"/>
+                    <WebView
+                        android:id="@+id/web_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none"
+                        android:visibility="invisible"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_answer_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    card_view:cardBackgroundColor="@color/colorPrimary"
+                    card_view:cardElevation="4dp"/>
+
             </RelativeLayout>
 
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 </FrameLayout>

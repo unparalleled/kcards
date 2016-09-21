@@ -3,6 +3,8 @@ package com.mrkevinthomas.kcards;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.mrkevinthomas.kcards.models.Deck;
@@ -18,6 +20,9 @@ public class CardViewActivity extends BaseActivity {
 
     private ViewPager viewPager;
     private CardViewAdapter cardViewAdapter;
+
+    private MenuItem hideMenuItem;
+    private boolean isHidden = true;
 
     private TextToSpeech textToSpeech;
 
@@ -44,7 +49,7 @@ public class CardViewActivity extends BaseActivity {
         viewPager.setVisibility(View.VISIBLE);
         fab.setVisibility(View.GONE);
 
-        cardViewAdapter = new CardViewAdapter(deck, this);
+        cardViewAdapter = new CardViewAdapter(deck, this, isHidden);
         viewPager.setAdapter(cardViewAdapter);
         viewPager.setCurrentItem(position);
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
@@ -61,6 +66,31 @@ public class CardViewActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         textToSpeech.shutdown();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.card_viewer, menu);
+        hideMenuItem = menu.findItem(R.id.action_hide);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_hide) {
+            handleUploadActionClicked();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void handleUploadActionClicked() {
+        isHidden = !isHidden;
+        cardViewAdapter.setHidden(isHidden);
+        hideMenuItem.setIcon(isHidden ?
+                R.drawable.ic_visibility_off_white_48dp :
+                R.drawable.ic_visibility_white_48dp);
     }
 
     public TextToSpeech getTextToSpeech() {
