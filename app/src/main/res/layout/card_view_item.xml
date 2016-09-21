@@ -40,10 +40,12 @@
                     android:textSize="40sp"
                     tools:text="Card Front"/>
 
+                <!--
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/speaker"/>
+                    -->
             </LinearLayout>
 
             <LinearLayout
@@ -65,10 +67,12 @@
                     android:textSize="40sp"
                     tools:text="Card Back"/>
 
+                <!--
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/speaker"/>
+                    -->
             </LinearLayout>
 
             <RelativeLayout
