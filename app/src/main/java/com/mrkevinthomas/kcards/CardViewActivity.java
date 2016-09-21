@@ -89,8 +89,8 @@ public class CardViewActivity extends BaseActivity {
         isHidden = !isHidden;
         cardViewAdapter.setHidden(isHidden);
         hideMenuItem.setIcon(isHidden ?
-                R.drawable.ic_visibility_off_white_48dp :
-                R.drawable.ic_visibility_white_48dp);
+                R.drawable.ic_visibility_white_48dp :
+                R.drawable.ic_visibility_off_white_48dp);
     }
 
     public TextToSpeech getTextToSpeech() {
