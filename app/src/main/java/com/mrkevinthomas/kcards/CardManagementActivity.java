@@ -144,6 +144,7 @@ public class CardManagementActivity extends BaseActivity {
     private void handleUploadActionClicked() {
         if (!deck.isSyncedWithFirebase()) {
             createNewObjectInSharedFirebaseDb();
+            uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             Toast.makeText(this, getString(R.string.deck_shared), Toast.LENGTH_LONG).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -152,8 +153,9 @@ public class CardManagementActivity extends BaseActivity {
             builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unshared), Toast.LENGTH_LONG).show();
                     deleteObjectInSharedFirebaseDb();
+                    uploadMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
+                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unshared), Toast.LENGTH_LONG).show();
                 }
             });
             builder.setNegativeButton(getString(R.string.cancel), null);
@@ -180,8 +182,6 @@ public class CardManagementActivity extends BaseActivity {
         String firebaseKey = databaseReference.getKey();
         deck.setFirebaseKey(firebaseKey);
         deck.save();
-
-        uploadMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
     }
 
     private void deleteObjectInSharedFirebaseDb() {
@@ -192,8 +192,6 @@ public class CardManagementActivity extends BaseActivity {
 
         deck.setFirebaseKey(null);
         deck.save();
-
-        uploadMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
     }
 
 }
