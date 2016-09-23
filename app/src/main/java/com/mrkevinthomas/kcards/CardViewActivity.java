@@ -80,6 +80,9 @@ public class CardViewActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_show_hide) {
             handleShowHideActionClicked();
             return true;
+        } else if (item.getItemId() == R.id.action_show_swap) {
+            cardViewAdapter.swap();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -87,7 +90,7 @@ public class CardViewActivity extends BaseActivity {
 
     private void handleShowHideActionClicked() {
         isHidden = !isHidden;
-        cardViewAdapter.setHidden(isHidden);
+        cardViewAdapter.setIsHidden(isHidden);
         showHideMenuItem.setIcon(isHidden ?
                 R.drawable.ic_visibility_white_48dp :
                 R.drawable.ic_visibility_off_white_48dp);

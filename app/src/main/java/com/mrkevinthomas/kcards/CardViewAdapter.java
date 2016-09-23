@@ -22,6 +22,7 @@ public class CardViewAdapter extends PagerAdapter {
 
     private CardViewActivity cardViewActivity;
     private boolean isHidden;
+    private boolean isSwapped;
 
     private ArrayList<View> activeViews = new ArrayList<>();
 
@@ -31,10 +32,17 @@ public class CardViewAdapter extends PagerAdapter {
         this.isHidden = isHidden;
     }
 
-    public void setHidden(boolean isHidden) {
+    public void setIsHidden(boolean isHidden) {
         this.isHidden = isHidden;
         for (View itemView : activeViews) {
             setupCardAnswerCover(itemView);
+        }
+    }
+
+    public void swap() {
+        isSwapped = !isSwapped;
+        for (View itemView : activeViews) {
+            setupCardText(itemView, (Card) itemView.getTag());
         }
     }
 
@@ -52,26 +60,9 @@ public class CardViewAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = LayoutInflater.from(container.getContext()).inflate(R.layout.card_view_item, container, false);
         final Card card = deck.getCards().get(position);
+        itemView.setTag(card);
 
-        TextView frontText = (TextView) itemView.findViewById(R.id.card_front_text);
-        TextView backText = (TextView) itemView.findViewById(R.id.card_back_text);
-
-        frontText.setText(card.getFrontText());
-        itemView.findViewById(R.id.card_front_holder).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardViewActivity.getTextToSpeech().speak(card.getFrontText(), TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
-
-        backText.setText(card.getBackText());
-        itemView.findViewById(R.id.card_back_holder).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardViewActivity.getTextToSpeech().speak(card.getBackText(), TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
-
+        setupCardText(itemView, card);
         setupCardAnswerCover(itemView);
         setupWebView(itemView, card);
 
@@ -84,6 +75,31 @@ public class CardViewAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
         activeViews.remove(object);
+    }
+
+    private void setupCardText(View itemView, final Card card) {
+        ViewGroup topHolder = (ViewGroup) itemView.findViewById(R.id.card_top_holder);
+        ViewGroup bottomHolder = (ViewGroup) itemView.findViewById(R.id.card_bottom_holder);
+        TextView topTextView = (TextView) itemView.findViewById(R.id.card_top_text);
+        TextView bottomTextView = (TextView) itemView.findViewById(R.id.card_bottom_text);
+
+        final String topText = isSwapped ? card.getBackText() : card.getFrontText();
+        topTextView.setText(topText);
+        topHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewActivity.getTextToSpeech().speak(topText, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+        final String bottomText = isSwapped ? card.getFrontText() : card.getBackText();
+        bottomTextView.setText(bottomText);
+        bottomHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewActivity.getTextToSpeech().speak(bottomText, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 
     private void setupCardAnswerCover(View itemView) {

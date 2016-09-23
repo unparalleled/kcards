@@ -81,8 +81,8 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
 
         public CardHolder(View itemView) {
             super(itemView);
-            frontText = (TextView) itemView.findViewById(R.id.card_front_text);
-            backText = (TextView) itemView.findViewById(R.id.card_back_text);
+            frontText = (TextView) itemView.findViewById(R.id.card_top_text);
+            backText = (TextView) itemView.findViewById(R.id.card_bottom_text);
         }
     }
 
