@@ -12,6 +12,7 @@ import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHolder> {
@@ -35,6 +36,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
         int position = cardList.indexOf(card);
         cardList.remove(card);
         notifyItemRemoved(position);
+    }
+
+    public void shuffle() {
+        Collections.shuffle(cardList);
+        notifyDataSetChanged();
     }
 
     @Override

@@ -137,6 +137,9 @@ public class CardManagementActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_publish_unpublish) {
             handlePublishUnpublishActionClicked();
             return true;
+        } else if (item.getItemId() == R.id.action_suffle) {
+            cardListAdapter.shuffle();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
