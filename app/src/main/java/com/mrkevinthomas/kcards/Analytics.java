@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mrkevinthomas.kcards.models.Card;
@@ -23,6 +24,10 @@ public class Analytics {
     private static final String EVENT_EDIT_CARD = "edit_card";
     private static final String ARG_CARD_FRONT_TEXT = "front_text";
     private static final String ARG_CARD_BACK_TEXT = "back_text";
+
+    private static final String EVENT_OPTIONS_ITEM_SELECTED = "options_item_selected";
+    private static final String ARG_OPTIONS_ITEM_ID = "options_item_id";
+    private static final String ARG_OPTIONS_ITEM_TITLE = "options_item_title";
 
     public static void init(Context context) {
         // Obtain the FirebaseAnalytics instance.
@@ -61,6 +66,13 @@ public class Analytics {
         bundle.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
         bundle.putString(ARG_CARD_BACK_TEXT, card.getBackText());
         firebaseAnalytics.logEvent(EVENT_EDIT_CARD, bundle);
+    }
+
+    public static void logOptionsItemSelectedEvent(MenuItem item) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_OPTIONS_ITEM_ID, String.valueOf(item.getItemId()));
+        bundle.putString(ARG_OPTIONS_ITEM_TITLE, String.valueOf(item.getTitle()));
+        firebaseAnalytics.logEvent(EVENT_OPTIONS_ITEM_SELECTED, bundle);
     }
 
 }
