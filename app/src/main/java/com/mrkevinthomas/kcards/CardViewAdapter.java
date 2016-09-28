@@ -33,8 +33,8 @@ public class CardViewAdapter extends PagerAdapter {
         this.isHidden = isHidden;
     }
 
-    public void setIsHidden(boolean isHidden) {
-        this.isHidden = isHidden;
+    public void setHidden(boolean hidden) {
+        this.isHidden = hidden;
         for (View itemView : activeViews) {
             setupCardAnswerCover(itemView);
         }

@@ -90,7 +90,7 @@ public class CardViewActivity extends BaseActivity {
 
     private void handleShowHideActionClicked() {
         isHidden = !isHidden;
-        cardViewAdapter.setIsHidden(isHidden);
+        cardViewAdapter.setHidden(isHidden);
         showHideMenuItem.setIcon(isHidden ?
                 R.drawable.ic_visibility_white_48dp :
                 R.drawable.ic_visibility_off_white_48dp);
