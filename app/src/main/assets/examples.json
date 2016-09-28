@@ -1,7 +1,29 @@
 [
   {
-    "name": "Examples: Things",
-    "description": "한국어 <-> English",
+    "name": "Examples",
+    "description": "Seasons",
+    "cards": [
+      {
+        "frontText": "봄",
+        "backText": "Spring"
+      },
+      {
+        "frontText": "여름",
+        "backText": "Summer"
+      },
+      {
+        "frontText": "가을",
+        "backText": "Fall"
+      },
+      {
+        "frontText": "겨울",
+        "backText": "Winter"
+      }
+    ]
+  },
+  {
+    "name": "Examples",
+    "description": "Things",
     "cards": [
       {
         "frontText": "사과",
@@ -22,8 +44,8 @@
     ]
   },
   {
-    "name": "Examples: Places",
-    "description": "한국어 <-> English",
+    "name": "Examples",
+    "description": "Places",
     "cards": [
       {
         "frontText": "집",
