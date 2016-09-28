@@ -35,11 +35,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DeckManagementActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "DeckManagementActivity";
+    protected static final String TAG = "DeckManagementActivity";
 
     private static final String EXAMPLES_FILE = "examples.json";
 
-    private DeckListAdapter deckListAdapter;
+    protected DeckListAdapter deckListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,10 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
      * If it's done in Application then it can conflict with Firebase crash reporting.
      */
     private void setupFirebaseAuth() {
+        if (ThisApp.get().getFirebaseUser() != null) {
+            return; // no need to re-authenticate
+        }
+
         FirebaseAuth firebaseAuth;
         FirebaseAuth.AuthStateListener authStateListener;
 
@@ -77,6 +81,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    ThisApp.get().setFirebaseUser(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -105,7 +110,7 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
         loadDecks();
     }
 
-    private void loadDecks() {
+    protected void loadDecks() {
         SQLite.select()
                 .from(Deck.class)
                 .async()

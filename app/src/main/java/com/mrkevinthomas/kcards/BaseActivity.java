@@ -19,6 +19,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     public static final String ARG_DECK = "deck";
     public static final String ARG_POSITION = "position";
+    public static final String ARG_READ_ONLY = "read_only";
 
     protected Toolbar toolbar;
     protected FloatingActionButton fab;
@@ -32,6 +33,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     protected int getViewId() {
         return R.layout.recycler_view;
+    }
+
+    protected int getNavItemId() {
+        return R.id.nav_home;
     }
 
     @Override
@@ -70,6 +75,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             // disable nav drawer too
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        navigationView.setCheckedItem(getNavItemId());
     }
 
     @Override
@@ -112,12 +123,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
+        // ignore clicks on the current nav item
+        if (id != getNavItemId()) {
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(this, DeckManagementActivity.class));
+            } else if (id == R.id.nav_practice) {
+                // TODO
+            } else if (id == R.id.nav_trending) {
+                startActivity(new Intent(this, DeckViewActivity.class));
+            } else if (id == R.id.nav_capture) {
+                // TODO
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START);

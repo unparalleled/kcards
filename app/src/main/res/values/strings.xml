@@ -7,6 +7,10 @@
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="home">Home</string>
+    <string name="practice">Practice</string>
+    <string name="trending">Trending</string>
+    <string name="capture">Capture</string>
 
     <!-- action items -->
     <string name="settings">Settings</string>

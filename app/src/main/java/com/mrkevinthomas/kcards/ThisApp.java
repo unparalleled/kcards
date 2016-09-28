@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -11,6 +12,8 @@ public class ThisApp extends Application {
     private static final String TAG = "kcards";
 
     private static ThisApp thisApp;
+
+    private FirebaseUser firebaseUser;
 
     @Override
     public void onCreate() {
@@ -26,6 +29,14 @@ public class ThisApp extends Application {
 
     public static ThisApp get() {
         return thisApp;
+    }
+
+    public FirebaseUser getFirebaseUser() {
+        return firebaseUser;
+    }
+
+    public void setFirebaseUser(FirebaseUser firebaseUser) {
+        this.firebaseUser = firebaseUser;
     }
 
     /**

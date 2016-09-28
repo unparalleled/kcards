@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/home"/>
+        <item
+            android:id="@+id/nav_practice"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Practice"/>
+            android:title="@string/practice"/>
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_trending"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Trending"/>
+            android:title="@string/trending"/>
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_capture"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
+            android:title="@string/capture"/>
     </group>
 
 </menu>

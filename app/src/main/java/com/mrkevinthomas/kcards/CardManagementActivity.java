@@ -24,6 +24,7 @@ public class CardManagementActivity extends BaseActivity {
 
     private CardListAdapter cardListAdapter;
     private Deck deck;
+    private boolean isReadOnly;
 
     private MenuItem publishUnpublishMenuItem;
 
@@ -36,6 +37,7 @@ public class CardManagementActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
+        isReadOnly = getIntent().getBooleanExtra(ARG_READ_ONLY, false);
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -46,6 +48,9 @@ public class CardManagementActivity extends BaseActivity {
                 showCardDialog(null);
             }
         });
+        if (isReadOnly) {
+            fab.setVisibility(View.GONE);
+        }
 
         cardListAdapter = new CardListAdapter(this, deck);
 
@@ -55,6 +60,10 @@ public class CardManagementActivity extends BaseActivity {
     }
 
     protected void showCardDialog(@Nullable final Card card) {
+        if (isReadOnly) {
+            return; // do not show dialog
+        }
+
         View dialogView = getLayoutInflater().inflate(R.layout.card_edit_dialog, null);
         final EditText frontInput = (EditText) dialogView.findViewById(R.id.card_front_input);
         final EditText backInput = (EditText) dialogView.findViewById(R.id.card_back_input);
@@ -125,9 +134,13 @@ public class CardManagementActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
         publishUnpublishMenuItem = menu.findItem(R.id.action_publish_unpublish);
-        if (deck.isSyncedWithFirebase()) {
-            publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
-            publishUnpublishMenuItem.setTitle(R.string.unpublish);
+        if (!isReadOnly) {
+            if (deck.isSyncedWithFirebase()) {
+                publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+                publishUnpublishMenuItem.setTitle(R.string.unpublish);
+            }
+        } else {
+            publishUnpublishMenuItem.setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
