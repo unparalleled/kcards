@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        card_view:cardElevation="2dp">
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,8 +103,28 @@
                     android:id="@+id/card_answer_cover"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    card_view:cardBackgroundColor="@color/colorPrimary"
-                    card_view:cardElevation="4dp"/>
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardElevation="4dp"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_wrong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:src="@drawable/ic_close_white_48dp"
+                    app:backgroundTint="@color/red"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:src="@drawable/ic_check_white_48dp"
+                    app:backgroundTint="@color/green"/>
 
             </RelativeLayout>
 
