@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
@@ -115,17 +116,26 @@ public class CardViewAdapter extends PagerAdapter {
                 card.incrementCorrect();
                 correctFab.setVisibility(View.GONE);
                 wrongFab.setVisibility(View.GONE);
+                showToast(R.layout.toast_correct);
             }
         });
 
         wrongFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                card.incrementWrong();
+                card.incrementIncorrect();
                 correctFab.setVisibility(View.GONE);
                 wrongFab.setVisibility(View.GONE);
+                showToast(R.layout.toast_incorrect);
             }
         });
+    }
+
+    private void showToast(int layoutId) {
+        Toast toast = new Toast(cardViewActivity);
+        toast.setView(cardViewActivity.getLayoutInflater().inflate(layoutId, null));
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void setupCardAnswerCover(View itemView) {

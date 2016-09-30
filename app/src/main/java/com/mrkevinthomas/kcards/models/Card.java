@@ -35,7 +35,7 @@ public class Card extends BaseModel implements Parcelable {
     int correctCount;
 
     @Column
-    int wrongCount;
+    int incorrectCount;
 
     public Card() {
     }
@@ -80,8 +80,8 @@ public class Card extends BaseModel implements Parcelable {
         save();
     }
 
-    public void incrementWrong() {
-        wrongCount++;
+    public void incrementIncorrect() {
+        incorrectCount++;
         save();
     }
 
