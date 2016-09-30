@@ -165,8 +165,8 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
                 if (!TextUtils.isEmpty(name)) {
                     if (deck == null) {
                         Deck newDeck = new Deck(name, description);
-                        deckListAdapter.addDeck(newDeck);
                         newDeck.save();
+                        deckListAdapter.addDeck(newDeck);
 
                         Analytics.logAddDeckEvent(newDeck);
                     } else {
@@ -187,7 +187,12 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
             builder.setNeutralButton(R.string.delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    showDeleteDialog(deck);
+                    if (!deck.getCards().isEmpty()) {
+                        showDeleteDialog(deck);
+                    } else {
+                        deckListAdapter.removeDeck(deck);
+                        deck.delete();
+                    }
                 }
             });
             nameInput.setText(deck.getName());
