@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,7 @@ public class CardViewAdapter extends PagerAdapter {
         itemView.setTag(card);
 
         setupCardText(itemView, card);
+        setupCorrectAndWrongFabs(itemView, card);
         setupCardAnswerCover(itemView);
         setupWebView(itemView, card);
 
@@ -99,6 +101,29 @@ public class CardViewAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 cardViewActivity.getTextToSpeech().speak(bottomText, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+    }
+
+    private void setupCorrectAndWrongFabs(View itemView, final Card card) {
+        final FloatingActionButton correctFab = (FloatingActionButton) itemView.findViewById(R.id.fab_correct);
+        final FloatingActionButton wrongFab = (FloatingActionButton) itemView.findViewById(R.id.fab_wrong);
+
+        correctFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.incrementCorrect();
+                correctFab.setVisibility(View.GONE);
+                wrongFab.setVisibility(View.GONE);
+            }
+        });
+
+        wrongFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.incrementWrong();
+                correctFab.setVisibility(View.GONE);
+                wrongFab.setVisibility(View.GONE);
             }
         });
     }

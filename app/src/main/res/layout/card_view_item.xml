@@ -117,7 +117,7 @@
                     app:backgroundTint="@color/red"/>
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_right"
+                    android:id="@+id/fab_correct"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

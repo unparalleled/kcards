@@ -20,10 +20,22 @@ public class Card extends BaseModel implements Parcelable {
     long deckId;
 
     @Column
+    long createdTimeMs;
+
+    @Column
+    long updatedTimeMs;
+
+    @Column
     String frontText;
 
     @Column
     String backText;
+
+    @Column
+    int correctCount;
+
+    @Column
+    int wrongCount;
 
     public Card() {
     }
@@ -32,6 +44,15 @@ public class Card extends BaseModel implements Parcelable {
         this.deckId = deckId;
         this.frontText = frontText;
         this.backText = backText;
+    }
+
+    @Override
+    public void save() {
+        if (createdTimeMs == 0) {
+            createdTimeMs = System.currentTimeMillis();
+        }
+        updatedTimeMs = System.currentTimeMillis();
+        super.save();
     }
 
     public String getFrontText() {
@@ -52,6 +73,16 @@ public class Card extends BaseModel implements Parcelable {
 
     public void setDeckId(long deckId) {
         this.deckId = deckId;
+    }
+
+    public void incrementCorrect() {
+        correctCount++;
+        save();
+    }
+
+    public void incrementWrong() {
+        wrongCount++;
+        save();
     }
 
     // equals and hashcode
