@@ -19,13 +19,17 @@ import java.util.List;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHolder> {
 
     private CardManagementActivity cardManagementActivity;
-    private List<Card> cardList = new ArrayList<>();
-    private Deck deck;
 
-    public CardListAdapter(@NonNull CardManagementActivity cardManagementActivity, @NonNull Deck deck) {
+    private Deck deck;
+    private List<Card> cardList = new ArrayList<>();
+
+    private boolean isReadOnly;
+
+    public CardListAdapter(@NonNull CardManagementActivity cardManagementActivity, @NonNull Deck deck, boolean isReadOnly) {
         this.cardManagementActivity = cardManagementActivity;
-        this.cardList = deck.getCards();
         this.deck = deck;
+        this.cardList = deck.getCards();
+        this.isReadOnly = isReadOnly;
     }
 
     public void setDeck(Deck deck) {
@@ -65,6 +69,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
+                    intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
                     intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
                     cardManagementActivity.startActivityForResult(intent, BaseActivity.REQUEST_DECK);
@@ -73,7 +78,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    cardManagementActivity.showCardDialog(card);
+                    // no editing in read only mode
+                    if (!isReadOnly) {
+                        cardManagementActivity.showCardDialog(card);
+                    }
                     return true;
                 }
             });

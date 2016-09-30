@@ -25,6 +25,7 @@ public class CardManagementActivity extends BaseActivity {
 
     private CardListAdapter cardListAdapter;
     private Deck deck;
+
     private boolean isReadOnly;
 
     private MenuItem publishUnpublishMenuItem;
@@ -53,7 +54,7 @@ public class CardManagementActivity extends BaseActivity {
             fab.setVisibility(View.GONE);
         }
 
-        cardListAdapter = new CardListAdapter(this, deck);
+        cardListAdapter = new CardListAdapter(this, deck, isReadOnly);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(cardListAdapter);
@@ -70,10 +71,6 @@ public class CardManagementActivity extends BaseActivity {
     }
 
     protected void showCardDialog(@Nullable final Card card) {
-        if (isReadOnly) {
-            return; // do not show dialog
-        }
-
         View dialogView = getLayoutInflater().inflate(R.layout.card_edit_dialog, null);
         final EditText frontInput = (EditText) dialogView.findViewById(R.id.card_front_input);
         final EditText backInput = (EditText) dialogView.findViewById(R.id.card_back_input);

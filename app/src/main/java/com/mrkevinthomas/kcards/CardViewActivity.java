@@ -24,6 +24,7 @@ public class CardViewActivity extends BaseActivity {
 
     private MenuItem showHideMenuItem;
     private boolean isHidden = true; // start with answers hidden
+    private boolean isReadOnly;
 
     private TextToSpeech textToSpeech;
 
@@ -42,6 +43,7 @@ public class CardViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
         position = getIntent().getIntExtra(ARG_POSITION, 0);
+        isReadOnly = getIntent().getBooleanExtra(ARG_READ_ONLY, false);
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -50,7 +52,7 @@ public class CardViewActivity extends BaseActivity {
         viewPager.setVisibility(View.VISIBLE);
         fab.setVisibility(View.GONE);
 
-        cardViewAdapter = new CardViewAdapter(deck, this, isHidden);
+        cardViewAdapter = new CardViewAdapter(deck, this, isHidden, isReadOnly);
         viewPager.setAdapter(cardViewAdapter);
         viewPager.setCurrentItem(position);
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);

@@ -26,13 +26,15 @@ public class CardViewAdapter extends PagerAdapter {
     private CardViewActivity cardViewActivity;
     private boolean isHidden;
     private boolean isSwapped;
+    private boolean isReadOnly;
 
     private ArrayList<View> activeViews = new ArrayList<>();
 
-    public CardViewAdapter(@NonNull Deck deck, @NonNull CardViewActivity cardViewActivity, boolean isHidden) {
+    public CardViewAdapter(@NonNull Deck deck, @NonNull CardViewActivity cardViewActivity, boolean isHidden, boolean isReadOnly) {
         this.deck = deck;
         this.cardViewActivity = cardViewActivity;
         this.isHidden = isHidden;
+        this.isReadOnly = isReadOnly;
     }
 
     public void setHidden(boolean hidden) {
@@ -108,27 +110,32 @@ public class CardViewAdapter extends PagerAdapter {
 
     private void setupCorrectAndWrongFabs(View itemView, final Card card) {
         final FloatingActionButton correctFab = (FloatingActionButton) itemView.findViewById(R.id.fab_correct);
-        final FloatingActionButton wrongFab = (FloatingActionButton) itemView.findViewById(R.id.fab_wrong);
+        final FloatingActionButton incorrectFab = (FloatingActionButton) itemView.findViewById(R.id.fab_wrong);
 
         correctFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 card.incrementCorrect();
                 correctFab.setVisibility(View.GONE);
-                wrongFab.setVisibility(View.GONE);
+                incorrectFab.setVisibility(View.GONE);
                 showToast(R.layout.toast_correct);
             }
         });
 
-        wrongFab.setOnClickListener(new View.OnClickListener() {
+        incorrectFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 card.incrementIncorrect();
                 correctFab.setVisibility(View.GONE);
-                wrongFab.setVisibility(View.GONE);
+                incorrectFab.setVisibility(View.GONE);
                 showToast(R.layout.toast_incorrect);
             }
         });
+
+        if (isReadOnly) {
+            correctFab.setVisibility(View.GONE);
+            incorrectFab.setVisibility(View.GONE);
+        }
     }
 
     private void showToast(int layoutId) {
