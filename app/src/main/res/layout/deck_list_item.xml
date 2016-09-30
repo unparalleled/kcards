@@ -52,6 +52,7 @@
                 android:layout_alignBottom="@id/deck_description"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@id/deck_name"
+                android:layout_marginLeft="8dp"
                 android:gravity="center"
                 android:textSize="12sp"
                 tools:text="10 cards"/>

@@ -1,6 +1,7 @@
 package com.mrkevinthomas.kcards;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -57,6 +58,15 @@ public class CardManagementActivity extends BaseActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(cardListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_DECK && resultCode == RESULT_OK) {
+            deck = data.getParcelableExtra(ARG_DECK);
+            cardListAdapter.setDeck(deck);
+        }
     }
 
     protected void showCardDialog(@Nullable final Card card) {

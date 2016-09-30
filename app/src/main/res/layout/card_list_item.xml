@@ -10,7 +10,7 @@
     android:layout_marginTop="@dimen/activity_vertical_margin"
     app:cardElevation="2dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -22,19 +22,33 @@
 
         <TextView
             android:id="@+id/card_top_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/progress_indicator"
             android:textSize="16sp"
             tools:text="Card Front"/>
 
         <TextView
             android:id="@+id/card_bottom_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/card_top_text"
             android:layout_marginTop="12dp"
+            android:layout_toLeftOf="@+id/progress_indicator"
             android:textSize="16sp"
             tools:text="Card Back"/>
 
-    </LinearLayout>
+        <View
+            android:id="@+id/progress_indicator"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/card_bottom_text"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/card_top_text"
+            android:background="@color/green"/>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

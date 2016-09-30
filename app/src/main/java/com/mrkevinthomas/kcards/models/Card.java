@@ -75,6 +75,14 @@ public class Card extends BaseModel implements Parcelable {
         this.deckId = deckId;
     }
 
+    public int getCorrectCount() {
+        return correctCount;
+    }
+
+    public int getIncorrectCount() {
+        return incorrectCount;
+    }
+
     public void incrementCorrect() {
         correctCount++;
         save();
@@ -119,18 +127,26 @@ public class Card extends BaseModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
         dest.writeLong(this.deckId);
+        dest.writeLong(this.createdTimeMs);
+        dest.writeLong(this.updatedTimeMs);
         dest.writeString(this.frontText);
         dest.writeString(this.backText);
+        dest.writeInt(this.correctCount);
+        dest.writeInt(this.incorrectCount);
     }
 
     protected Card(Parcel in) {
         this.id = in.readLong();
         this.deckId = in.readLong();
+        this.createdTimeMs = in.readLong();
+        this.updatedTimeMs = in.readLong();
         this.frontText = in.readString();
         this.backText = in.readString();
+        this.correctCount = in.readInt();
+        this.incorrectCount = in.readInt();
     }
 
-    public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
         @Override
         public Card createFromParcel(Parcel source) {
             return new Card(source);

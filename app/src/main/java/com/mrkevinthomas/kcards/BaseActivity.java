@@ -21,6 +21,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public static final String ARG_POSITION = "position";
     public static final String ARG_READ_ONLY = "read_only";
 
+    public static final int REQUEST_DECK = 0;
+
     protected Toolbar toolbar;
     protected FloatingActionButton fab;
     protected DrawerLayout drawer;

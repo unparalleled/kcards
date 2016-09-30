@@ -1,5 +1,6 @@
 package com.mrkevinthomas.kcards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.ViewPager;
@@ -66,6 +67,16 @@ public class CardViewActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         textToSpeech.shutdown();
+    }
+
+    @Override
+    public void finish() {
+        // set the updated deck before finishing
+        Intent result = new Intent();
+        result.putExtra(ARG_DECK, deck);
+        setResult(RESULT_OK, result);
+
+        super.finish();
     }
 
     @Override

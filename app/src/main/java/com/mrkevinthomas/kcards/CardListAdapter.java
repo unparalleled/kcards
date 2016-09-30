@@ -1,5 +1,6 @@
 package com.mrkevinthomas.kcards;
 
+import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
         this.cardManagementActivity = cardManagementActivity;
         this.cardList = deck.getCards();
         this.deck = deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+        this.cardList = deck.getCards();
+        notifyDataSetChanged();
     }
 
     public void addCard(Card card) {
@@ -60,7 +67,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
                     Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
                     intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
-                    cardManagementActivity.startActivity(intent);
+                    cardManagementActivity.startActivityForResult(intent, BaseActivity.REQUEST_DECK);
                 }
             });
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -71,6 +78,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
                 }
             });
             holder.itemView.setVisibility(View.VISIBLE);
+            if (card.getCorrectCount() > 0 || card.getIncorrectCount() > 0) {
+                float totalCount = card.getCorrectCount() + card.getIncorrectCount();
+                float percentCorrect = card.getCorrectCount() / totalCount;
+                int correctColor = cardManagementActivity.getResources().getColor(R.color.green);
+                int incorrectColor = cardManagementActivity.getResources().getColor(R.color.red);
+                int color = (int) new ArgbEvaluator().evaluate(percentCorrect, incorrectColor, correctColor);
+                holder.progressIndicator.setBackgroundColor(color);
+                holder.progressIndicator.setVisibility(View.VISIBLE);
+            } else {
+                holder.progressIndicator.setVisibility(View.GONE);
+            }
         } else {
             holder.itemView.setVisibility(View.INVISIBLE); // dummy footer
         }
@@ -84,11 +102,13 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
     public static class CardHolder extends RecyclerView.ViewHolder {
         public final TextView frontText;
         public final TextView backText;
+        public final View progressIndicator;
 
         public CardHolder(View itemView) {
             super(itemView);
             frontText = (TextView) itemView.findViewById(R.id.card_top_text);
             backText = (TextView) itemView.findViewById(R.id.card_bottom_text);
+            progressIndicator = itemView.findViewById(R.id.progress_indicator);
         }
     }
 
