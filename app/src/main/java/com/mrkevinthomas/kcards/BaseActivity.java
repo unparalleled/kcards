@@ -129,12 +129,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (id != getNavItemId()) {
             if (id == R.id.nav_home) {
                 startActivity(new Intent(this, DeckManagementActivity.class));
-            } else if (id == R.id.nav_practice) {
+            } else if (id == R.id.nav_dictionary) {
                 // TODO
             } else if (id == R.id.nav_trending) {
                 startActivity(new Intent(this, DeckViewActivity.class));
-            } else if (id == R.id.nav_capture) {
-                // TODO
             }
         }
 

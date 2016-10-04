@@ -29,6 +29,7 @@ public class CardManagementActivity extends BaseActivity {
     private boolean isReadOnly;
 
     private MenuItem publishUnpublishMenuItem;
+    private MenuItem saveMenuItem;
 
     @Override
     protected boolean shouldShowUpButton() {
@@ -141,7 +142,9 @@ public class CardManagementActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
         publishUnpublishMenuItem = menu.findItem(R.id.action_publish_unpublish);
+        saveMenuItem = menu.findItem(R.id.action_save);
         if (!isReadOnly) {
+            saveMenuItem.setVisible(false);
             if (deck.isSyncedWithFirebase()) {
                 publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
                 publishUnpublishMenuItem.setTitle(R.string.unpublish);
@@ -156,6 +159,9 @@ public class CardManagementActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_publish_unpublish) {
             handlePublishUnpublishActionClicked();
+            return true;
+        } else if (item.getItemId() == R.id.action_save) {
+            handleSaveActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_suffle) {
             cardListAdapter.shuffle();
@@ -188,6 +194,16 @@ public class CardManagementActivity extends BaseActivity {
             builder.setCancelable(true);
             builder.show();
         }
+    }
+
+    private void handleSaveActionClicked() {
+        deck.save(); // auto generate deck id
+        for (Card card : deck.getCards()) {
+            card.setDeckId(deck.getId());
+            card.save();
+        }
+        saveMenuItem.setVisible(false);
+        Toast.makeText(this, R.string.deck_saved, Toast.LENGTH_LONG).show();
     }
 
     private void updateObjectInSharedFirebaseDb() {

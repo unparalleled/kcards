@@ -23,6 +23,56 @@
   },
   {
     "name": "Examples",
+    "description": "Weather",
+    "cards": [
+      {
+        "frontText": "더워요",
+        "backText": "Hot"
+      },
+      {
+        "frontText": "추워요",
+        "backText": "Cold"
+      },
+      {
+        "frontText": "맑아요",
+        "backText": "Clear"
+      },
+      {
+        "frontText": "흐려요",
+        "backText": "Cloudy"
+      },
+      {
+        "frontText": "따뜻해요",
+        "backText": "Warm"
+      },
+      {
+        "frontText": "비 와요",
+        "backText": "Raining"
+      },
+      {
+        "frontText": "눈 와요",
+        "backText": "Snowing"
+      },
+      {
+        "frontText": "습해요",
+        "backText": "Humid"
+      },
+      {
+        "frontText": "시원해요",
+        "backText": "Cool"
+      },
+      {
+        "frontText": "바람이 불어요",
+        "backText": "Windy"
+      },
+      {
+        "frontText": "안개가 껴요",
+        "backText": "Foggy"
+      }
+    ]
+  },
+  {
+    "name": "Examples",
     "description": "Things",
     "cards": [
       {
