@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="internalOnly"
     package="com.mrkevinthomas.kcards">
+
+    <!-- for downloading or uploading content -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- for determining whether a connection is available -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name="ThisApp"

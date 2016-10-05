@@ -20,6 +20,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 import java.util.ArrayList;
 
 public class CardViewAdapter extends PagerAdapter {
+    private static final String CACHE_MISS_DESCRIPTION = "net::ERR_CACHE_MISS";
 
     private Deck deck;
 
@@ -166,8 +167,23 @@ public class CardViewAdapter extends PagerAdapter {
         final ProgressBar progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+        if (ThisApp.get().isConnected()) {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        } else {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY); // attempt a force load of the cache
+        }
+
         webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                if (CACHE_MISS_DESCRIPTION.equals(description)) {
+                    // clear error response
+                    view.loadUrl("about:blank");
+                }
+            }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 // hide page headers
