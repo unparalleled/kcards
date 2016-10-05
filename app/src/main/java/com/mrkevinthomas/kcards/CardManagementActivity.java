@@ -151,6 +151,7 @@ public class CardManagementActivity extends BaseActivity {
             }
         } else {
             publishUnpublishMenuItem.setVisible(false);
+            menu.findItem(R.id.action_reset_progress).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -161,10 +162,13 @@ public class CardManagementActivity extends BaseActivity {
             handlePublishUnpublishActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_save) {
-            handleSaveActionClicked();
+            saveDeckToDeckList();
             return true;
         } else if (item.getItemId() == R.id.action_suffle) {
             cardListAdapter.shuffle();
+            return true;
+        } else if (item.getItemId() == R.id.action_reset_progress) {
+            resetDeckProgress();
             return true;
         }
 
@@ -196,7 +200,7 @@ public class CardManagementActivity extends BaseActivity {
         }
     }
 
-    private void handleSaveActionClicked() {
+    private void saveDeckToDeckList() {
         deck.save(); // auto generate deck id
         for (Card card : deck.getCards()) {
             card.setDeckId(deck.getId());
@@ -204,6 +208,13 @@ public class CardManagementActivity extends BaseActivity {
         }
         saveMenuItem.setVisible(false);
         Toast.makeText(this, R.string.deck_saved, Toast.LENGTH_LONG).show();
+    }
+
+    private void resetDeckProgress() {
+        for (Card card : deck.getCards()) {
+            card.resetProgress();
+        }
+        cardListAdapter.notifyDataSetChanged();
     }
 
     private void updateObjectInSharedFirebaseDb() {

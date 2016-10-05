@@ -93,6 +93,12 @@ public class Card extends BaseModel implements Parcelable {
         save();
     }
 
+    public void resetProgress() {
+        correctCount = 0;
+        incorrectCount = 0;
+        save();
+    }
+
     // equals and hashcode
 
     @Override

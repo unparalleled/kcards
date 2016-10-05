@@ -19,6 +19,7 @@
     <string name="show">Show</string>
     <string name="swap">Swap</string>
     <string name="shuffle">Shuffle</string>
+    <string name="reset_progress">Reset Progress</string>
 
     <!-- general ctas -->
     <string name="save">Save</string>
