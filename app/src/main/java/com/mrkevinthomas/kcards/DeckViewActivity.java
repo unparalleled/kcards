@@ -25,6 +25,7 @@ public class DeckViewActivity extends DeckManagementActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fab.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         getSupportActionBar().setTitle(R.string.trending);
         deckListAdapter.setReadOnly(true);
     }
@@ -46,6 +47,7 @@ public class DeckViewActivity extends DeckManagementActivity {
                 if (decks != null && !decks.isEmpty()) {
                     deckListAdapter.setDeckList(new ArrayList<>(decks.values()));
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +29,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected DrawerLayout drawer;
     protected ActionBarDrawerToggle toggle;
     protected NavigationView navigationView;
+    protected ProgressBar progressBar;
 
     protected boolean shouldShowUpButton() {
         return false;
@@ -46,9 +48,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_view);
 
-        // set the main content view in a frame layout
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
-        LayoutInflater.from(this).inflate(getViewId(), frameLayout, true);
+        // set the main content view in the holder layout
+        ViewGroup mainContentHolder = (ViewGroup) findViewById(R.id.main_content_holder);
+        LayoutInflater.from(this).inflate(getViewId(), mainContentHolder, true);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
