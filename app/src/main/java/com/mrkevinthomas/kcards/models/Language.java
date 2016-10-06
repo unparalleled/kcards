@@ -1,28 +1,39 @@
 package com.mrkevinthomas.kcards.models;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import java.util.Locale;
 
-@Table(database = AppDatabase.class)
-public class Language extends BaseModel {
+public class Language {
 
-    @Column
-    @PrimaryKey(autoincrement = true)
-    long id;
+    private static final Language[] languages = {
+            new Language("en", "English", Locale.ENGLISH),
+            new Language("ko", "Korean", Locale.KOREAN),
+    };
 
-    @Column
-    String displayName;
+    public static Language[] languages() {
+        return languages;
+    }
 
-    @Column
-    String code;
+    // use this as a unique key for a Language
+    private final String googleTranslateCode;
+    private final String displayName;
+    private final Locale locale;
+
+    private Language(String googleTranslateCode, String displayName, Locale locale) {
+        this.googleTranslateCode = googleTranslateCode;
+        this.displayName = displayName;
+        this.locale = locale;
+    }
+
+    public String getGoogleTranslateCode() {
+        return googleTranslateCode;
+    }
 
     public String getDisplayName() {
         return displayName;
     }
 
-    public String getCode() {
-        return code;
+    public Locale getLocale() {
+        return locale;
     }
+
 }
