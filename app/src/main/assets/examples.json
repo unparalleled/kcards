@@ -5,19 +5,27 @@
     "cards": [
       {
         "frontText": "봄",
-        "backText": "Spring"
+        "backText": "Spring",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "여름",
-        "backText": "Summer"
+        "backText": "Summer",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "가을",
-        "backText": "Fall"
+        "backText": "Fall",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "겨울",
-        "backText": "Winter"
+        "backText": "Winter",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       }
     ]
   },
@@ -27,47 +35,69 @@
     "cards": [
       {
         "frontText": "더워요",
-        "backText": "Hot"
+        "backText": "Hot",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "추워요",
-        "backText": "Cold"
+        "backText": "Cold",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "맑아요",
-        "backText": "Clear"
+        "backText": "Clear",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "흐려요",
-        "backText": "Cloudy"
+        "backText": "Cloudy",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "따뜻해요",
-        "backText": "Warm"
+        "backText": "Warm",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "비 와요",
-        "backText": "Raining"
+        "backText": "Raining",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "눈 와요",
-        "backText": "Snowing"
+        "backText": "Snowing",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "습해요",
-        "backText": "Humid"
+        "backText": "Humid",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "시원해요",
-        "backText": "Cool"
+        "backText": "Cool",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "바람이 불어요",
-        "backText": "Windy"
+        "backText": "Windy",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "안개가 껴요",
-        "backText": "Foggy"
+        "backText": "Foggy",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       }
     ]
   },
@@ -77,19 +107,27 @@
     "cards": [
       {
         "frontText": "사과",
-        "backText": "Apple"
+        "backText": "Apple",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "감자",
-        "backText": "Potato"
+        "backText": "Potato",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "맥주",
-        "backText": "Beer"
+        "backText": "Beer",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "책",
-        "backText": "Book"
+        "backText": "Book",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       }
     ]
   },
@@ -99,143 +137,213 @@
     "cards": [
       {
         "frontText": "집",
-        "backText": "House"
+        "backText": "House",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "극장",
-        "backText": "Theater"
+        "backText": "Theater",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "화장실",
-        "backText": "Bathroom"
+        "backText": "Bathroom",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "학교",
-        "backText": "School"
+        "backText": "School",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "교실",
-        "backText": "Classroom"
+        "backText": "Classroom",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "미용실",
-        "backText": "Salon"
+        "backText": "Salon",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "병원",
-        "backText": "Hospital"
+        "backText": "Hospital",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "은행",
-        "backText": "Bank"
+        "backText": "Bank",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "슈퍼마켓",
-        "backText": "Supermarket"
+        "backText": "Supermarket",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "편의점",
-        "backText": "Convenience Store"
+        "backText": "Convenience Store",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "노래방",
-        "backText": "Karaoke Room"
+        "backText": "Karaoke Room",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "공항",
-        "backText": "Airport"
+        "backText": "Airport",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "우체국",
-        "backText": "Post Office"
+        "backText": "Post Office",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "주차장",
-        "backText": "Parking Lot"
+        "backText": "Parking Lot",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "주유소",
-        "backText": "Gas Station"
+        "backText": "Gas Station",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "헬스장",
-        "backText": "Gym"
+        "backText": "Gym",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "식당",
-        "backText": "Restaurant"
+        "backText": "Restaurant",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "도서관",
-        "backText": "Library"
+        "backText": "Library",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "서점",
-        "backText": "Bookstore"
+        "backText": "Bookstore",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "백화점",
-        "backText": "Department Store"
+        "backText": "Department Store",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "시장",
-        "backText": "Market"
+        "backText": "Market",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "목욕탕",
-        "backText": "Bathhouse"
+        "backText": "Bathhouse",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "약국",
-        "backText": "Pharmacy"
+        "backText": "Pharmacy",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "술집",
-        "backText": "Bar"
+        "backText": "Bar",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "공원",
-        "backText": "Park"
+        "backText": "Park",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "지하철역",
-        "backText": "Subway Station"
+        "backText": "Subway Station",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "버스정류장",
-        "backText": "Bus Stop"
+        "backText": "Bus Stop",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "박물관",
-        "backText": "Museum"
+        "backText": "Museum",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "피씨방",
-        "backText": "Internet Cafe"
+        "backText": "Internet Cafe",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "아파트",
-        "backText": "Apartment"
+        "backText": "Apartment",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "소방서",
-        "backText": "Fire Station"
+        "backText": "Fire Station",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "경찰서",
-        "backText": "Police Station"
+        "backText": "Police Station",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "기차역",
-        "backText": "Train Station"
+        "backText": "Train Station",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "수영장",
-        "backText": "Swimming Pool"
+        "backText": "Swimming Pool",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       },
       {
         "frontText": "커피숍",
-        "backText": "Coffee Shop"
+        "backText": "Coffee Shop",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
       }
     ]
   }

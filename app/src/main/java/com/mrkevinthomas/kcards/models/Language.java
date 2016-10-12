@@ -1,5 +1,7 @@
 package com.mrkevinthomas.kcards.models;
 
+import android.support.annotation.Nullable;
+
 import java.util.Locale;
 
 public class Language {
@@ -11,6 +13,15 @@ public class Language {
 
     public static Language[] languages() {
         return languages;
+    }
+
+    public static Language fromCode(@Nullable String code) {
+        for (Language language : languages) {
+            if (language.getGoogleTranslateCode().equalsIgnoreCase(code)) {
+                return language;
+            }
+        }
+        return languages[0]; // default to first language in the list
     }
 
     // use this as a unique key for a Language

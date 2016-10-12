@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class SettingsActivity extends BaseActivity {
     private static final String TAG = "SettingsActivity";
 
-    private static final String MAIN_LANGUAGE = "main_language";
-    private static final String SECONDARY_LANGUAGE = "secondary_language";
+    private static final String KEY_MAIN_LANGUAGE = "main_language";
+    private static final String KEY_SECONDARY_LANGUAGE = "secondary_language";
 
     private SharedPreferences preferences;
 
@@ -53,7 +53,8 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setupLanguageSpinners();
+        setupLanguageSpinner(mainLanguageSpinner, KEY_MAIN_LANGUAGE);
+        setupLanguageSpinner(secondaryLanguageSpinner, KEY_SECONDARY_LANGUAGE);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class SettingsActivity extends BaseActivity {
         return true;
     }
 
-    private void setupLanguageSpinners() {
+    private void setupLanguageSpinner(Spinner languageSpinner, final String LANGUAGE_CODE_KEY) {
         ArrayList<String> languageNames = new ArrayList<>();
         for (Language language : Language.languages()) {
             languageNames.add(language.getDisplayName());
@@ -71,41 +72,24 @@ public class SettingsActivity extends BaseActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languageNames);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mainLanguageSpinner.setAdapter(arrayAdapter);
-        secondaryLanguageSpinner.setAdapter(arrayAdapter);
+        languageSpinner.setAdapter(arrayAdapter);
 
-        // set spinners to current user's references
-        String mainLanguageCode = preferences.getString(MAIN_LANGUAGE, null);
-        String secondaryLanguageCode = preferences.getString(SECONDARY_LANGUAGE, null);
+        String languageCode = preferences.getString(LANGUAGE_CODE_KEY, null);
+
+        // set spinner to current user's references
         int i = 0;
         for (Language language : Language.languages()) {
-            if (language.getGoogleTranslateCode().equals(mainLanguageCode)) {
-                mainLanguageSpinner.setSelection(i);
-            }
-            if (language.getGoogleTranslateCode().equals(secondaryLanguageCode)) {
-                secondaryLanguageSpinner.setSelection(i);
+            if (language.getGoogleTranslateCode().equals(languageCode)) {
+                languageSpinner.setSelection(i);
             }
             i++;
         }
 
-        mainLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Language language = Language.languages()[i];
-                preferences.edit().putString(MAIN_LANGUAGE, language.getGoogleTranslateCode()).apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // no worries
-            }
-        });
-
-        secondaryLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Language language = Language.languages()[i];
-                preferences.edit().putString(SECONDARY_LANGUAGE, language.getGoogleTranslateCode()).apply();
+                preferences.edit().putString(LANGUAGE_CODE_KEY, language.getGoogleTranslateCode()).apply();
             }
 
             @Override

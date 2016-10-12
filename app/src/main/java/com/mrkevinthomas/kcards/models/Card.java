@@ -32,6 +32,12 @@ public class Card extends BaseModel implements Parcelable {
     String backText;
 
     @Column
+    String frontLanguageCode;
+
+    @Column
+    String backLanguageCode;
+
+    @Column
     int correctCount;
 
     @Column
@@ -55,6 +61,10 @@ public class Card extends BaseModel implements Parcelable {
         super.save();
     }
 
+    public void setDeckId(long deckId) {
+        this.deckId = deckId;
+    }
+
     public String getFrontText() {
         return frontText;
     }
@@ -71,8 +81,12 @@ public class Card extends BaseModel implements Parcelable {
         this.backText = backText;
     }
 
-    public void setDeckId(long deckId) {
-        this.deckId = deckId;
+    public Language getFrontLanguage() {
+        return Language.fromCode(frontLanguageCode);
+    }
+
+    public Language getBackLanguage() {
+        return Language.fromCode(backLanguageCode);
     }
 
     public int getCorrectCount() {
@@ -113,14 +127,12 @@ public class Card extends BaseModel implements Parcelable {
         Card card = (Card) o;
 
         return id == card.id;
-
     }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
-
 
     // parcelable
 
@@ -137,6 +149,8 @@ public class Card extends BaseModel implements Parcelable {
         dest.writeLong(this.updatedTimeMs);
         dest.writeString(this.frontText);
         dest.writeString(this.backText);
+        dest.writeString(this.frontLanguageCode);
+        dest.writeString(this.backLanguageCode);
         dest.writeInt(this.correctCount);
         dest.writeInt(this.incorrectCount);
     }
@@ -148,6 +162,8 @@ public class Card extends BaseModel implements Parcelable {
         this.updatedTimeMs = in.readLong();
         this.frontText = in.readString();
         this.backText = in.readString();
+        this.frontLanguageCode = in.readString();
+        this.backLanguageCode = in.readString();
         this.correctCount = in.readInt();
         this.incorrectCount = in.readInt();
     }
