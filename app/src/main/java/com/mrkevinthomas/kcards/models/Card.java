@@ -74,6 +74,14 @@ public class Card extends BaseModel implements Parcelable {
         return updatedTimeMs;
     }
 
+    public void setUpdatedTimeMs(long updatedTimeMs) {
+        this.updatedTimeMs = updatedTimeMs;
+    }
+
+    public void setCreatedTimeMs(long createdTimeMs) {
+        this.createdTimeMs = createdTimeMs;
+    }
+
     public String getFrontText() {
         return frontText;
     }
@@ -98,6 +106,14 @@ public class Card extends BaseModel implements Parcelable {
         return backLanguageCode;
     }
 
+    public void setFrontLanguageCode(String frontLanguageCode) {
+        this.frontLanguageCode = frontLanguageCode;
+    }
+
+    public void setBackLanguageCode(String backLanguageCode) {
+        this.backLanguageCode = backLanguageCode;
+    }
+
     @Exclude
     public Language getFrontLanguage() {
         return Language.fromCode(frontLanguageCode);
@@ -108,10 +124,12 @@ public class Card extends BaseModel implements Parcelable {
         return Language.fromCode(backLanguageCode);
     }
 
+    @Exclude
     public int getCorrectCount() {
         return correctCount;
     }
 
+    @Exclude
     public int getIncorrectCount() {
         return incorrectCount;
     }
