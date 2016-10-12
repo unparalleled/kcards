@@ -3,6 +3,7 @@ package com.mrkevinthomas.kcards.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -65,6 +66,14 @@ public class Card extends BaseModel implements Parcelable {
         this.deckId = deckId;
     }
 
+    public long getCreatedTimeMs() {
+        return createdTimeMs;
+    }
+
+    public long getUpdatedTimeMs() {
+        return updatedTimeMs;
+    }
+
     public String getFrontText() {
         return frontText;
     }
@@ -81,10 +90,20 @@ public class Card extends BaseModel implements Parcelable {
         this.backText = backText;
     }
 
+    public String getFrontLanguageCode() {
+        return frontLanguageCode;
+    }
+
+    public String getBackLanguageCode() {
+        return backLanguageCode;
+    }
+
+    @Exclude
     public Language getFrontLanguage() {
         return Language.fromCode(frontLanguageCode);
     }
 
+    @Exclude
     public Language getBackLanguage() {
         return Language.fromCode(backLanguageCode);
     }
