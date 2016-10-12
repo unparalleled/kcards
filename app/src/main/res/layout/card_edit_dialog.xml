@@ -4,13 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.mrkevinthomas.kcards.ui.LanguageSpinner
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/card_front_language"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/card_front_input_title"/>
+        android:layout_marginTop="12dp"
+        android:spinnerMode="dropdown"/>
 
     <EditText
         android:id="@+id/card_front_input"
@@ -20,13 +22,15 @@
         android:layout_marginRight="12dp"
         android:hint="@string/card_front_input_hint"/>
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.mrkevinthomas.kcards.ui.LanguageSpinner
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/card_back_language"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="12dp"
-        android:hint="@string/card_back_input_title"/>
+        android:spinnerMode="dropdown"/>
 
     <EditText
         android:id="@+id/card_back_input"

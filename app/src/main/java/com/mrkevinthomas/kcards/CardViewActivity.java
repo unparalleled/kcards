@@ -10,8 +10,6 @@ import android.view.View;
 
 import com.mrkevinthomas.kcards.models.Deck;
 
-import java.util.Locale;
-
 public class CardViewActivity extends BaseActivity {
 
     private static final int OFFSCREEN_PAGE_LIMIT = 2;
@@ -62,7 +60,6 @@ public class CardViewActivity extends BaseActivity {
             public void onInit(int status) {
             }
         });
-        textToSpeech.setLanguage(Locale.US);
     }
 
     @Override

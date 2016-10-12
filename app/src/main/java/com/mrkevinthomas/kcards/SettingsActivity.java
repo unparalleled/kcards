@@ -1,17 +1,13 @@
 package com.mrkevinthomas.kcards;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.mrkevinthomas.kcards.models.Language;
-
-import java.util.ArrayList;
+import com.mrkevinthomas.kcards.ui.LanguageSpinner;
 
 public class SettingsActivity extends BaseActivity {
     private static final String TAG = "SettingsActivity";
@@ -19,11 +15,13 @@ public class SettingsActivity extends BaseActivity {
     private static final String KEY_MAIN_LANGUAGE = "main_language";
     private static final String KEY_SECONDARY_LANGUAGE = "secondary_language";
 
-    private SharedPreferences preferences;
+    public static SharedPreferences getPrefs(Context context) {
+        return context.getSharedPreferences(TAG, MODE_PRIVATE);
+    }
 
     private TextView appVersionTextView;
-    private Spinner mainLanguageSpinner;
-    private Spinner secondaryLanguageSpinner;
+    private LanguageSpinner mainLanguageSpinner;
+    private LanguageSpinner secondaryLanguageSpinner;
 
     protected boolean shouldShowUpButton() {
         return true;
@@ -39,11 +37,9 @@ public class SettingsActivity extends BaseActivity {
         fab.setVisibility(View.GONE);
         getSupportActionBar().setTitle(R.string.settings);
 
-        preferences = getSharedPreferences(TAG, MODE_PRIVATE);
-
         appVersionTextView = (TextView) findViewById(R.id.settings_app_version);
-        mainLanguageSpinner = (Spinner) findViewById(R.id.settings_main_language);
-        secondaryLanguageSpinner = (Spinner) findViewById(R.id.settings_secondary_language);
+        mainLanguageSpinner = (LanguageSpinner) findViewById(R.id.settings_main_language);
+        secondaryLanguageSpinner = (LanguageSpinner) findViewById(R.id.settings_secondary_language);
 
         appVersionTextView.setText(getString(R.string.app_version_text,
                 ThisApp.get().getAppVersionName(),
@@ -53,8 +49,8 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setupLanguageSpinner(mainLanguageSpinner, KEY_MAIN_LANGUAGE);
-        setupLanguageSpinner(secondaryLanguageSpinner, KEY_SECONDARY_LANGUAGE);
+        mainLanguageSpinner.initialize(getPrefs(this), KEY_MAIN_LANGUAGE);
+        secondaryLanguageSpinner.initialize(getPrefs(this), KEY_SECONDARY_LANGUAGE);
     }
 
     @Override
@@ -62,41 +58,6 @@ public class SettingsActivity extends BaseActivity {
         // don't show settings overflow item
         // this is already the settings activity
         return true;
-    }
-
-    private void setupLanguageSpinner(Spinner languageSpinner, final String LANGUAGE_CODE_KEY) {
-        ArrayList<String> languageNames = new ArrayList<>();
-        for (Language language : Language.languages()) {
-            languageNames.add(language.getDisplayName());
-        }
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languageNames);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        languageSpinner.setAdapter(arrayAdapter);
-
-        String languageCode = preferences.getString(LANGUAGE_CODE_KEY, null);
-
-        // set spinner to current user's references
-        int i = 0;
-        for (Language language : Language.languages()) {
-            if (language.getGoogleTranslateCode().equals(languageCode)) {
-                languageSpinner.setSelection(i);
-            }
-            i++;
-        }
-
-        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Language language = Language.languages()[i];
-                preferences.edit().putString(LANGUAGE_CODE_KEY, language.getGoogleTranslateCode()).apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // no worries
-            }
-        });
     }
 
 }

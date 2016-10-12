@@ -95,6 +95,8 @@ public class CardViewAdapter extends PagerAdapter {
         topHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cardViewActivity.getTextToSpeech()
+                        .setLanguage(isSwapped ? card.getBackLanguage().getLocale() : card.getFrontLanguage().getLocale());
                 cardViewActivity.getTextToSpeech().speak(topText, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
@@ -104,6 +106,8 @@ public class CardViewAdapter extends PagerAdapter {
         bottomHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cardViewActivity.getTextToSpeech()
+                        .setLanguage(isSwapped ? card.getFrontLanguage().getLocale() : card.getBackLanguage().getLocale());
                 cardViewActivity.getTextToSpeech().speak(bottomText, TextToSpeech.QUEUE_FLUSH, null);
             }
         });

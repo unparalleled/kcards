@@ -20,13 +20,12 @@
             android:text="@string/main_language"
             android:textSize="20sp"/>
 
-        <android.support.v7.widget.AppCompatSpinner
+        <com.mrkevinthomas.kcards.ui.LanguageSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_main_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="@string/main_language"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dropdown"/>
     </LinearLayout>
 
     <LinearLayout
@@ -42,13 +41,12 @@
             android:text="@string/secondary_language"
             android:textSize="20sp"/>
 
-        <android.support.v7.widget.AppCompatSpinner
+        <com.mrkevinthomas.kcards.ui.LanguageSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_secondary_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="@string/secondary_language"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dropdown"/>
     </LinearLayout>
 
     <TextView
