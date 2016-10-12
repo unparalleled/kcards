@@ -24,6 +24,8 @@ public class Analytics {
     private static final String EVENT_EDIT_CARD = "edit_card";
     private static final String ARG_CARD_FRONT_TEXT = "front_text";
     private static final String ARG_CARD_BACK_TEXT = "back_text";
+    private static final String ARG_CARD_FRONT_LANGUAGE = "front_language";
+    private static final String ARG_CARD_BACK_LANGUAGE = "back_language";
 
     private static final String EVENT_OPTIONS_ITEM_SELECTED = "options_item_selected";
     private static final String ARG_OPTIONS_ITEM_ID = "options_item_id";
@@ -58,6 +60,8 @@ public class Analytics {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
         bundle.putString(ARG_CARD_BACK_TEXT, card.getBackText());
+        bundle.putString(ARG_CARD_FRONT_LANGUAGE, card.getFrontLanguageCode());
+        bundle.putString(ARG_CARD_BACK_LANGUAGE, card.getBackLanguageCode());
         firebaseAnalytics.logEvent(EVENT_ADD_CARD, bundle);
     }
 
@@ -65,6 +69,8 @@ public class Analytics {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
         bundle.putString(ARG_CARD_BACK_TEXT, card.getBackText());
+        bundle.putString(ARG_CARD_FRONT_LANGUAGE, card.getFrontLanguageCode());
+        bundle.putString(ARG_CARD_BACK_LANGUAGE, card.getBackLanguageCode());
         firebaseAnalytics.logEvent(EVENT_EDIT_CARD, bundle);
     }
 

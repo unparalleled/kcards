@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
+import com.mrkevinthomas.kcards.ui.LanguageSpinner;
 
 public class CardManagementActivity extends BaseActivity {
 
@@ -75,6 +76,8 @@ public class CardManagementActivity extends BaseActivity {
         View dialogView = getLayoutInflater().inflate(R.layout.card_edit_dialog, null);
         final EditText frontInput = (EditText) dialogView.findViewById(R.id.card_front_input);
         final EditText backInput = (EditText) dialogView.findViewById(R.id.card_back_input);
+        final LanguageSpinner frontLanguage = (LanguageSpinner) dialogView.findViewById(R.id.card_front_language);
+        final LanguageSpinner backLanguage = (LanguageSpinner) dialogView.findViewById(R.id.card_back_language);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.card));
@@ -84,9 +87,12 @@ public class CardManagementActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String frontText = frontInput.getText().toString();
                 String backText = backInput.getText().toString();
+                String frontLanguageCode = frontLanguage.getSelectedLanguage().getGoogleTranslateCode();
+                String backLanguageCode = backLanguage.getSelectedLanguage().getGoogleTranslateCode();
+
                 if (!TextUtils.isEmpty(frontText)) {
                     if (card == null) {
-                        Card newCard = new Card(deck.getId(), frontText, backText);
+                        Card newCard = new Card(deck.getId(), frontText, backText, frontLanguageCode, backLanguageCode);
                         cardListAdapter.addCard(newCard);
                         newCard.save();
                         updateObjectInSharedFirebaseDb();
@@ -103,6 +109,8 @@ public class CardManagementActivity extends BaseActivity {
                     } else {
                         card.setFrontText(frontText);
                         card.setBackText(backText);
+                        card.setFrontLanguageCode(frontLanguageCode);
+                        card.setBackLanguageCode(backLanguageCode);
                         card.save();
                         cardListAdapter.notifyDataSetChanged();
                         updateObjectInSharedFirebaseDb();
@@ -128,6 +136,13 @@ public class CardManagementActivity extends BaseActivity {
             // move cursor to the end of the input text
             frontInput.setSelection(card.getFrontText() != null ? card.getFrontText().length() : 0);
             backInput.setText(card.getBackText());
+
+            frontLanguage.setSelectedLanguage(card.getFrontLanguageCode());
+            backLanguage.setSelectedLanguage(card.getBackLanguageCode());
+        } else {
+            // default to main/secondary language settings
+            frontLanguage.setSelectedLanguage(SettingsActivity.getMainLanguage(this));
+            backLanguage.setSelectedLanguage(SettingsActivity.getSecondaryLanguage(this));
         }
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.setCancelable(true);

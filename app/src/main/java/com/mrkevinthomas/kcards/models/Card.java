@@ -47,10 +47,12 @@ public class Card extends BaseModel implements Parcelable {
     public Card() {
     }
 
-    public Card(long deckId, String frontText, String backText) {
+    public Card(long deckId, String frontText, String backText, String frontLanguageCode, String backLanguageCode) {
         this.deckId = deckId;
         this.frontText = frontText;
         this.backText = backText;
+        this.frontLanguageCode = frontLanguageCode;
+        this.backLanguageCode = backLanguageCode;
     }
 
     @Override
