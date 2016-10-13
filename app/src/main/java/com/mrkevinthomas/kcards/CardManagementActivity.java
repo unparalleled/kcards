@@ -160,7 +160,7 @@ public class CardManagementActivity extends BaseActivity {
         saveMenuItem = menu.findItem(R.id.action_save);
         if (!isReadOnly) {
             saveMenuItem.setVisible(false);
-            if (deck.syncedWithFirebase()) {
+            if (deck.isSyncedWithFirebase()) {
                 publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
                 publishUnpublishMenuItem.setTitle(R.string.unpublish);
             }
@@ -191,7 +191,7 @@ public class CardManagementActivity extends BaseActivity {
     }
 
     private void handlePublishUnpublishActionClicked() {
-        if (!deck.syncedWithFirebase()) {
+        if (!deck.isSyncedWithFirebase()) {
             createNewObjectInSharedFirebaseDb();
             publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             publishUnpublishMenuItem.setTitle(R.string.unpublish);
@@ -233,7 +233,7 @@ public class CardManagementActivity extends BaseActivity {
     }
 
     private void updateObjectInSharedFirebaseDb() {
-        if (deck.syncedWithFirebase()) {
+        if (deck.isSyncedWithFirebase()) {
             // update previous deck object using firebase key
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = database.getReference("decks/" + deck.getFirebaseKey());

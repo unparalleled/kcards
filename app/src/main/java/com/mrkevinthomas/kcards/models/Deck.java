@@ -3,6 +3,7 @@ package com.mrkevinthomas.kcards.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -49,15 +50,18 @@ public class Deck extends BaseModel implements Parcelable {
         this.description = description;
     }
 
+    @Exclude
     public long getId() {
         return id;
     }
 
+    @Exclude
     public String getFirebaseKey() {
         return firebaseKey;
     }
 
-    public boolean syncedWithFirebase() {
+    @Exclude
+    public boolean isSyncedWithFirebase() {
         return firebaseKey != null && !firebaseKey.isEmpty();
     }
 
