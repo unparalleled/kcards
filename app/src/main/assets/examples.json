@@ -103,6 +103,54 @@
   },
   {
     "name": "Examples",
+    "description": "Days of the Week",
+    "cards": [
+      {
+        "frontText": "월요일",
+        "backText": "Monday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "화요일",
+        "backText": "Tuesday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "수요일",
+        "backText": "Wednesday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "목요일",
+        "backText": "Thursday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "금요일",
+        "backText": "Friday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "토요일",
+        "backText": "Saturday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "일요일",
+        "backText": "Sunday",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      }
+    ]
+  },
+  {
+    "name": "Examples",
     "description": "Things",
     "cards": [
       {
