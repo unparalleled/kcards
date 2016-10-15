@@ -132,7 +132,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         // ignore clicks on the current nav item
         if (id != getNavItemId()) {
             if (id == R.id.nav_home) {
-                startActivity(new Intent(this, DeckManagementActivity.class));
+                startActivity(new Intent(this, DeckListActivity.class));
             } else if (id == R.id.nav_dictionary) {
                 // TODO
             } else if (id == R.id.nav_trending) {

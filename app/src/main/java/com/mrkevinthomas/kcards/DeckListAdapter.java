@@ -15,12 +15,12 @@ import java.util.List;
 
 public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHolder> {
 
-    private DeckManagementActivity deckManagementActivity;
+    private DeckListActivity deckListActivity;
     private List<Deck> deckList = new ArrayList<>();
     private boolean isReadOnly;
 
-    public DeckListAdapter(@NonNull DeckManagementActivity deckManagementActivity) {
-        this.deckManagementActivity = deckManagementActivity;
+    public DeckListAdapter(@NonNull DeckListActivity deckListActivity) {
+        this.deckListActivity = deckListActivity;
     }
 
     public void setDeckList(@NonNull List<Deck> deckList) {
@@ -55,21 +55,21 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
             holder.deckName.setText(deck.getName());
             holder.deckDescription.setText(deck.getDescription());
             holder.deckCount.setText(
-                    deckManagementActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
+                    deckListActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(deckManagementActivity, CardManagementActivity.class);
+                    Intent intent = new Intent(deckListActivity, CardListActivity.class);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
                     intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
-                    deckManagementActivity.startActivity(intent);
+                    deckListActivity.startActivity(intent);
                 }
             });
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (!isReadOnly) {
-                        deckManagementActivity.showDeckDialog(deck);
+                        deckListActivity.showDeckDialog(deck);
                     }
                     return true;
                 }

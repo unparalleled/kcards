@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="DeckManagementActivity"
+            android:name=".DeckListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -29,19 +29,19 @@
 
         <activity
             android:name=".DeckViewActivity"
-            android:parentActivityName=".DeckManagementActivity"
+            android:parentActivityName=".DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name="CardManagementActivity"
-            android:parentActivityName=".DeckManagementActivity"
+            android:name=".CardListActivity"
+            android:parentActivityName=".DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name="CardViewActivity"
-            android:parentActivityName=".CardManagementActivity"
+            android:parentActivityName=".CardListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

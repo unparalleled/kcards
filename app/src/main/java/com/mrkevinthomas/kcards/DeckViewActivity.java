@@ -15,7 +15,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DeckViewActivity extends DeckManagementActivity {
+public class DeckViewActivity extends DeckListActivity {
 
     protected int getNavItemId() {
         return R.id.nav_trending;

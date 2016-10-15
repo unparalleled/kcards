@@ -18,15 +18,15 @@ import java.util.List;
 
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHolder> {
 
-    private CardManagementActivity cardManagementActivity;
+    private CardListActivity cardListActivity;
 
     private Deck deck;
     private List<Card> cardList = new ArrayList<>();
 
     private boolean isReadOnly;
 
-    public CardListAdapter(@NonNull CardManagementActivity cardManagementActivity, @NonNull Deck deck, boolean isReadOnly) {
-        this.cardManagementActivity = cardManagementActivity;
+    public CardListAdapter(@NonNull CardListActivity cardListActivity, @NonNull Deck deck, boolean isReadOnly) {
+        this.cardListActivity = cardListActivity;
         this.deck = deck;
         this.cardList = deck.getCards();
         this.isReadOnly = isReadOnly;
@@ -68,11 +68,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(cardManagementActivity, CardViewActivity.class);
+                    Intent intent = new Intent(cardListActivity, CardViewActivity.class);
                     intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
                     intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());
-                    cardManagementActivity.startActivityForResult(intent, BaseActivity.REQUEST_DECK);
+                    cardListActivity.startActivityForResult(intent, BaseActivity.REQUEST_DECK);
                 }
             });
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -80,7 +80,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
                 public boolean onLongClick(View v) {
                     // no editing in read only mode
                     if (!isReadOnly) {
-                        cardManagementActivity.showCardDialog(card);
+                        cardListActivity.showCardDialog(card);
                     }
                     return true;
                 }
@@ -89,8 +89,8 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
             if (card.getCorrectCount() > 0 || card.getIncorrectCount() > 0) {
                 float totalCount = card.getCorrectCount() + card.getIncorrectCount();
                 float percentCorrect = card.getCorrectCount() / totalCount;
-                int correctColor = cardManagementActivity.getResources().getColor(R.color.green);
-                int incorrectColor = cardManagementActivity.getResources().getColor(R.color.red);
+                int correctColor = cardListActivity.getResources().getColor(R.color.green);
+                int incorrectColor = cardListActivity.getResources().getColor(R.color.red);
                 int color = (int) new ArgbEvaluator().evaluate(percentCorrect, incorrectColor, correctColor);
                 holder.progressIndicator.setBackgroundColor(color);
                 holder.progressIndicator.setVisibility(View.VISIBLE);

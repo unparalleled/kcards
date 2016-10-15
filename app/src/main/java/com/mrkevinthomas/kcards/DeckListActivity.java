@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,8 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DeckManagementActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    protected static final String TAG = "DeckManagementActivity";
+public class DeckListActivity extends BaseActivity {
+    protected static final String TAG = "DeckListActivity";
 
     private static final String EXAMPLES_FILE = "examples.json";
 
@@ -177,9 +176,9 @@ public class DeckManagementActivity extends BaseActivity implements NavigationVi
 
                         Analytics.logEditDeckEvent(deck);
                     }
-                    Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeckListActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(DeckManagementActivity.this, getString(R.string.deck_must_have_name), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DeckListActivity.this, getString(R.string.deck_must_have_name), Toast.LENGTH_LONG).show();
                 }
             }
         });

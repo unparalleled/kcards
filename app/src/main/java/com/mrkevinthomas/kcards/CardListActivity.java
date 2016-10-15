@@ -22,7 +22,7 @@ import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.LanguageSpinner;
 
-public class CardManagementActivity extends BaseActivity {
+public class CardListActivity extends BaseActivity {
 
     private CardListAdapter cardListAdapter;
     private Deck deck;
@@ -117,9 +117,9 @@ public class CardManagementActivity extends BaseActivity {
 
                         Analytics.logEditCardEvent(card);
                     }
-                    Toast.makeText(CardManagementActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CardListActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(CardManagementActivity.this, getString(R.string.card_must_have_front), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardListActivity.this, getString(R.string.card_must_have_front), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -206,7 +206,7 @@ public class CardManagementActivity extends BaseActivity {
                     deleteObjectInSharedFirebaseDb();
                     publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
                     publishUnpublishMenuItem.setTitle(R.string.publish);
-                    Toast.makeText(CardManagementActivity.this, getString(R.string.deck_unpublished), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardListActivity.this, getString(R.string.deck_unpublished), Toast.LENGTH_LONG).show();
                 }
             });
             builder.setNegativeButton(getString(R.string.cancel), null);
