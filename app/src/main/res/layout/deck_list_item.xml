@@ -69,7 +69,7 @@
                     android:layout_above="@id/deck_count"
                     android:layout_alignLeft="@id/deck_count"
                     android:layout_alignRight="@id/deck_count"
-                    android:src="@drawable/ic_play_arrow_black_48dp"/>
+                    android:src="@drawable/ic_subscriptions_black_48dp"/>
             </RelativeLayout>
 
         </RelativeLayout>
