@@ -64,6 +64,11 @@ public class Card extends BaseModel implements Parcelable {
         super.save();
     }
 
+    @Exclude
+    public long getId() {
+        return id;
+    }
+
     public void setDeckId(long deckId) {
         this.deckId = deckId;
     }

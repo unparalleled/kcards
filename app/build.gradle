@@ -49,4 +49,5 @@ dependencies {
 
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 
+    compile 'com.lorentzos.swipecards:library:1.0.9@aar'
 }

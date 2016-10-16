@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.mrkevinthomas.kcards.models.Deck;
 
-public class CardViewActivity extends BaseActivity {
+public class CardPagerActivity extends BaseActivity {
 
     private static final int OFFSCREEN_PAGE_LIMIT = 2;
 
@@ -18,7 +18,7 @@ public class CardViewActivity extends BaseActivity {
     private int position;
 
     private ViewPager viewPager;
-    private CardViewAdapter cardViewAdapter;
+    private CardPagerAdapter cardPagerAdapter;
 
     private MenuItem showHideMenuItem;
     private boolean isHidden = true; // start with answers hidden
@@ -46,12 +46,12 @@ public class CardViewActivity extends BaseActivity {
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setVisibility(View.VISIBLE);
         fab.setVisibility(View.GONE);
 
-        cardViewAdapter = new CardViewAdapter(deck, this, isHidden, isReadOnly);
-        viewPager.setAdapter(cardViewAdapter);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+
+        cardPagerAdapter = new CardPagerAdapter(deck, this, isHidden, isReadOnly);
+        viewPager.setAdapter(cardPagerAdapter);
         viewPager.setCurrentItem(position);
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
 
@@ -91,7 +91,7 @@ public class CardViewActivity extends BaseActivity {
             handleShowHideActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_show_swap) {
-            cardViewAdapter.swap();
+            cardPagerAdapter.swap();
             return true;
         }
 
@@ -100,7 +100,7 @@ public class CardViewActivity extends BaseActivity {
 
     private void handleShowHideActionClicked() {
         isHidden = !isHidden;
-        cardViewAdapter.setHidden(isHidden);
+        cardPagerAdapter.setHidden(isHidden);
         showHideMenuItem.setIcon(isHidden ?
                 R.drawable.ic_visibility_white_48dp :
                 R.drawable.ic_visibility_off_white_48dp);

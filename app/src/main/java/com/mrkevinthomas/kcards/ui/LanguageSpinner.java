@@ -12,13 +12,11 @@ import java.util.ArrayList;
 public class LanguageSpinner extends AppCompatSpinner {
 
     public LanguageSpinner(Context context) {
-        super(context);
-        initialize();
+        this(context, null);
     }
 
     public LanguageSpinner(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initialize();
+        this(context, attrs, 0);
     }
 
     public LanguageSpinner(Context context, AttributeSet attrs, int defStyleAttr) {

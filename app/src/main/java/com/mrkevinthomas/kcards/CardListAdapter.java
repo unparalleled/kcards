@@ -68,7 +68,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(cardListActivity, CardViewActivity.class);
+                    Intent intent = new Intent(cardListActivity, CardPagerActivity.class);
                     intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
                     intent.putExtra(BaseActivity.ARG_POSITION, holder.getAdapterPosition());

@@ -40,8 +40,14 @@
         </activity>
 
         <activity
-            android:name="CardViewActivity"
+            android:name=".CardPagerActivity"
             android:parentActivityName=".CardListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".CardSwipeActivity"
+            android:parentActivityName=".DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
