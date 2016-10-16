@@ -70,6 +70,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
                 public void onClick(View v) {
                     Intent intent = new Intent(deckListActivity, CardSwipeActivity.class);
                     intent.putExtra(BaseActivity.ARG_DECK, deck);
+                    intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
                     deckListActivity.startActivity(intent);
                 }
             });

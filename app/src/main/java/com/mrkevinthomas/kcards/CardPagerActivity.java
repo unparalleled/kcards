@@ -80,7 +80,7 @@ public class CardPagerActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.card_viewer, menu);
+        getMenuInflater().inflate(R.menu.card_pager, menu);
         showHideMenuItem = menu.findItem(R.id.action_show_hide);
         return super.onCreateOptionsMenu(menu);
     }

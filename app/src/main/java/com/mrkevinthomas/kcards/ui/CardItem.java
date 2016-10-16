@@ -7,14 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.ThisApp;
@@ -27,6 +25,8 @@ public class CardItem extends FrameLayout {
         boolean isSwapped();
         boolean isReadOnly();
         TextToSpeech getTextToSpeech();
+        void onCorrect();
+        void onIncorrect();
     }
 
     private Card card;
@@ -60,14 +60,12 @@ public class CardItem extends FrameLayout {
     }
 
     public void setupCardText() {
-        ViewGroup topHolder = (ViewGroup) findViewById(R.id.card_top_holder);
-        ViewGroup bottomHolder = (ViewGroup) findViewById(R.id.card_bottom_holder);
         TextView topTextView = (TextView) findViewById(R.id.card_top_text);
         TextView bottomTextView = (TextView) findViewById(R.id.card_bottom_text);
 
         final String topText = delegate.isSwapped() ? card.getBackText() : card.getFrontText();
         topTextView.setText(topText);
-        topHolder.setOnClickListener(new View.OnClickListener() {
+        topTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delegate.getTextToSpeech()
@@ -78,7 +76,7 @@ public class CardItem extends FrameLayout {
 
         final String bottomText = delegate.isSwapped() ? card.getFrontText() : card.getBackText();
         bottomTextView.setText(bottomText);
-        bottomHolder.setOnClickListener(new View.OnClickListener() {
+        bottomTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delegate.getTextToSpeech()
@@ -114,7 +112,8 @@ public class CardItem extends FrameLayout {
                 card.incrementCorrect();
                 correctFab.setVisibility(View.GONE);
                 incorrectFab.setVisibility(View.GONE);
-                showToast(R.layout.toast_correct);
+                ThisApp.get().showToast(R.layout.toast_correct);
+                delegate.onCorrect();
             }
         });
 
@@ -124,7 +123,8 @@ public class CardItem extends FrameLayout {
                 card.incrementIncorrect();
                 correctFab.setVisibility(View.GONE);
                 incorrectFab.setVisibility(View.GONE);
-                showToast(R.layout.toast_incorrect);
+                ThisApp.get().showToast(R.layout.toast_incorrect);
+                delegate.onIncorrect();
             }
         });
 
@@ -132,13 +132,6 @@ public class CardItem extends FrameLayout {
             correctFab.setVisibility(View.GONE);
             incorrectFab.setVisibility(View.GONE);
         }
-    }
-
-    private void showToast(int layoutId) {
-        Toast toast = new Toast(getContext());
-        toast.setView(LayoutInflater.from(getContext()).inflate(layoutId, null));
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     private void setupWebView() {

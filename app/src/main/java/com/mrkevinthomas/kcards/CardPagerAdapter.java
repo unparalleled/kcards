@@ -91,4 +91,14 @@ public class CardPagerAdapter extends PagerAdapter implements CardItem.Delegate 
         return cardPagerActivity.getTextToSpeech();
     }
 
+    @Override
+    public void onCorrect() {
+
+    }
+
+    @Override
+    public void onIncorrect() {
+
+    }
+
 }

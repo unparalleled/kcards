@@ -2,14 +2,19 @@ package com.mrkevinthomas.kcards;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 
 public class CardSwipeActivity extends BaseActivity {
 
     private Deck deck;
+
+    private boolean isReadOnly;
 
     private SwipeFlingAdapterView swipeFlingAdapterView;
     private CardSwipeAdapter cardSwipeAdapter;
@@ -30,6 +35,7 @@ public class CardSwipeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
+        isReadOnly = getIntent().getBooleanExtra(ARG_READ_ONLY, false);
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -37,7 +43,7 @@ public class CardSwipeActivity extends BaseActivity {
         fab.setVisibility(View.GONE);
 
         swipeFlingAdapterView = (SwipeFlingAdapterView) findViewById(R.id.swipe_container);
-        cardSwipeAdapter = new CardSwipeAdapter(deck, this);
+        cardSwipeAdapter = new CardSwipeAdapter(deck, this, isReadOnly);
         swipeFlingAdapterView.setAdapter(cardSwipeAdapter);
         swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -47,17 +53,21 @@ public class CardSwipeActivity extends BaseActivity {
 
             @Override
             public void onLeftCardExit(Object o) {
-
+                Card card = (Card) o;
+                card.incrementIncorrect();
+                ThisApp.get().showToast(R.layout.toast_incorrect);
             }
 
             @Override
             public void onRightCardExit(Object o) {
-
+                Card card = (Card) o;
+                card.incrementCorrect();
+                ThisApp.get().showToast(R.layout.toast_correct);
             }
 
             @Override
             public void onAdapterAboutToEmpty(int i) {
-
+                cardSwipeAdapter.chooseCardsToShow();
             }
 
             @Override
@@ -81,6 +91,26 @@ public class CardSwipeActivity extends BaseActivity {
 
     public TextToSpeech getTextToSpeech() {
         return textToSpeech;
+    }
+
+    public SwipeFlingAdapterView getSwipeFlingAdapterView() {
+        return swipeFlingAdapterView;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.card_swipe, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_show_swap) {
+            cardSwipeAdapter.swap();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -6,22 +6,26 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
-public class ThisApp extends Application {
-    private static final String TAG = "kcards";
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
+public class ThisApp extends Application {
     private static ThisApp thisApp;
 
+    private Toast toaster;
     private FirebaseUser firebaseUser;
 
     @Override
     public void onCreate() {
         super.onCreate();
         thisApp = this;
+        toaster = new Toast(this);
 
         // initialize firebase analytics
         Analytics.init(this);
@@ -46,6 +50,12 @@ public class ThisApp extends Application {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void showToast(int layoutId) {
+        toaster.setView(LayoutInflater.from(getContext()).inflate(layoutId, null));
+        toaster.setDuration(Toast.LENGTH_SHORT);
+        toaster.show();
     }
 
     /**

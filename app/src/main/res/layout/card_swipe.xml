@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:max_visible="4"
-        app:min_adapter_stack="1"
+        app:min_adapter_stack="2"
         app:rotation_degrees="16"/>
 
 </FrameLayout>
