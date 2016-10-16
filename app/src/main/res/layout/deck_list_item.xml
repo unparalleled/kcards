@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/deck_count"
+                android:layout_toLeftOf="@+id/deck_count_holder"
                 android:textSize="20sp"
                 tools:text="Deck Name"/>
 
@@ -41,21 +41,36 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/deck_name"
                 android:layout_marginTop="12dp"
-                android:layout_toLeftOf="@+id/deck_count"
+                android:layout_toLeftOf="@+id/deck_count_holder"
                 android:textSize="16sp"
                 tools:text="Deck Description"/>
 
-            <TextView
-                android:id="@+id/deck_count"
+            <RelativeLayout
+                android:id="@+id/deck_count_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/deck_description"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/deck_name"
-                android:layout_marginLeft="8dp"
-                android:gravity="center"
-                android:textSize="12sp"
-                tools:text="10 cards"/>
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp">
+
+                <TextView
+                    android:id="@+id/deck_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    tools:text="10 cards"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/deck_count"
+                    android:layout_alignLeft="@id/deck_count"
+                    android:layout_alignRight="@id/deck_count"
+                    android:src="@drawable/ic_play_arrow_black_48dp"/>
+            </RelativeLayout>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

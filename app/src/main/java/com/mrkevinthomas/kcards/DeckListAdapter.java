@@ -65,6 +65,14 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
                     deckListActivity.startActivity(intent);
                 }
             });
+            holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(deckListActivity, CardSwipeActivity.class);
+                    intent.putExtra(BaseActivity.ARG_DECK, deck);
+                    deckListActivity.startActivity(intent);
+                }
+            });
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -89,12 +97,14 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
         public final TextView deckName;
         public final TextView deckDescription;
         public final TextView deckCount;
+        public final View deckCountHolder;
 
         public DeckHolder(View itemView) {
             super(itemView);
             deckName = (TextView) itemView.findViewById(R.id.deck_name);
             deckDescription = (TextView) itemView.findViewById(R.id.deck_description);
             deckCount = (TextView) itemView.findViewById(R.id.deck_count);
+            deckCountHolder = itemView.findViewById(R.id.deck_count_holder);
         }
     }
 
