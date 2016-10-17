@@ -32,6 +32,14 @@ public class CardItem extends FrameLayout {
     private Card card;
     private Delegate delegate;
 
+    private TextView topTextView;
+    private TextView bottomTextView;
+    private View cardAnswerCover;
+    private FloatingActionButton correctFab;
+    private FloatingActionButton incorrectFab;
+    private WebView webView;
+    private ProgressBar progressBar;
+
     public CardItem(Context context) {
         this(context, null);
     }
@@ -53,6 +61,14 @@ public class CardItem extends FrameLayout {
         this.card = card;
         this.delegate = delegate;
 
+        topTextView = (TextView) findViewById(R.id.card_top_text);
+        bottomTextView = (TextView) findViewById(R.id.card_bottom_text);
+        cardAnswerCover = findViewById(R.id.card_answer_cover);
+        correctFab = (FloatingActionButton) findViewById(R.id.fab_correct);
+        incorrectFab = (FloatingActionButton) findViewById(R.id.fab_wrong);
+        webView = (WebView) findViewById(R.id.web_view);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
         setupCardText();
         setupCardAnswerCover();
         setupCorrectAndWrongFabs();
@@ -60,9 +76,6 @@ public class CardItem extends FrameLayout {
     }
 
     public void setupCardText() {
-        TextView topTextView = (TextView) findViewById(R.id.card_top_text);
-        TextView bottomTextView = (TextView) findViewById(R.id.card_bottom_text);
-
         final String topText = delegate.isSwapped() ? card.getBackText() : card.getFrontText();
         topTextView.setText(topText);
         topTextView.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +100,6 @@ public class CardItem extends FrameLayout {
     }
 
     public void setupCardAnswerCover() {
-        final View cardAnswerCover = findViewById(R.id.card_answer_cover);
-
         if (delegate.isHidden()) {
             cardAnswerCover.setVisibility(View.VISIBLE);
             cardAnswerCover.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +114,6 @@ public class CardItem extends FrameLayout {
     }
 
     private void setupCorrectAndWrongFabs() {
-        final FloatingActionButton correctFab = (FloatingActionButton) findViewById(R.id.fab_correct);
-        final FloatingActionButton incorrectFab = (FloatingActionButton) findViewById(R.id.fab_wrong);
-
         correctFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,9 +144,6 @@ public class CardItem extends FrameLayout {
 
     private void setupWebView() {
         final String CACHE_MISS_DESCRIPTION = "net::ERR_CACHE_MISS";
-
-        final WebView webView = (WebView) findViewById(R.id.web_view);
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         webView.getSettings().setJavaScriptEnabled(true);
 

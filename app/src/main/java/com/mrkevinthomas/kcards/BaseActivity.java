@@ -29,6 +29,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected DrawerLayout drawer;
     protected ActionBarDrawerToggle toggle;
     protected NavigationView navigationView;
+
+    protected ViewGroup mainContentHolder;
     protected ProgressBar progressBar;
 
     protected boolean shouldShowUpButton() {
@@ -49,7 +51,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_card_view);
 
         // set the main content view in the holder layout
-        ViewGroup mainContentHolder = (ViewGroup) findViewById(R.id.main_content_holder);
+        mainContentHolder = (ViewGroup) findViewById(R.id.main_content_holder);
         LayoutInflater.from(this).inflate(getViewId(), mainContentHolder, true);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
