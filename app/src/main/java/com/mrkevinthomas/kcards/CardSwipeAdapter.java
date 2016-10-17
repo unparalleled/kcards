@@ -73,6 +73,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
                 cards.add(chosen);
             }
         }
+        notifyDataSetChanged();
     }
 
     @Override
