@@ -14,8 +14,6 @@ public class CardSwipeActivity extends BaseActivity {
 
     private Deck deck;
 
-    private boolean isReadOnly;
-
     private SwipeFlingAdapterView swipeFlingAdapterView;
     private CardSwipeAdapter cardSwipeAdapter;
 
@@ -35,7 +33,6 @@ public class CardSwipeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck = getIntent().getParcelableExtra(ARG_DECK);
-        isReadOnly = getIntent().getBooleanExtra(ARG_READ_ONLY, false);
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -43,7 +40,7 @@ public class CardSwipeActivity extends BaseActivity {
         fab.setVisibility(View.GONE);
 
         swipeFlingAdapterView = (SwipeFlingAdapterView) findViewById(R.id.swipe_container);
-        cardSwipeAdapter = new CardSwipeAdapter(deck, this, isReadOnly);
+        cardSwipeAdapter = new CardSwipeAdapter(deck, this);
         swipeFlingAdapterView.setAdapter(cardSwipeAdapter);
         swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override

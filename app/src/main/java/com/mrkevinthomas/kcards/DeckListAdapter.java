@@ -56,6 +56,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
             holder.deckDescription.setText(deck.getDescription());
             holder.deckCount.setText(
                     deckListActivity.getResources().getQuantityString(R.plurals.card_count, deck.size(), deck.size()));
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -65,15 +66,22 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
                     deckListActivity.startActivity(intent);
                 }
             });
-            holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(deckListActivity, CardSwipeActivity.class);
-                    intent.putExtra(BaseActivity.ARG_DECK, deck);
-                    intent.putExtra(BaseActivity.ARG_READ_ONLY, isReadOnly);
-                    deckListActivity.startActivity(intent);
-                }
-            });
+
+            if (!isReadOnly) {
+                holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(deckListActivity, CardSwipeActivity.class);
+                        intent.putExtra(BaseActivity.ARG_DECK, deck);
+                        deckListActivity.startActivity(intent);
+                    }
+                });
+                holder.deckSwipeIcon.setVisibility(View.VISIBLE);
+            } else {
+                holder.deckCountHolder.setClickable(false);
+                holder.deckSwipeIcon.setVisibility(View.GONE);
+            }
+
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -83,6 +91,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
                     return true;
                 }
             });
+
             holder.itemView.setVisibility(View.VISIBLE);
         } else {
             holder.itemView.setVisibility(View.INVISIBLE); // dummy footer
@@ -99,6 +108,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
         public final TextView deckDescription;
         public final TextView deckCount;
         public final View deckCountHolder;
+        public final View deckSwipeIcon;
 
         public DeckHolder(View itemView) {
             super(itemView);
@@ -106,6 +116,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
             deckDescription = (TextView) itemView.findViewById(R.id.deck_description);
             deckCount = (TextView) itemView.findViewById(R.id.deck_count);
             deckCountHolder = itemView.findViewById(R.id.deck_count_holder);
+            deckSwipeIcon = itemView.findViewById(R.id.deck_swipe_icon);
         }
     }
 

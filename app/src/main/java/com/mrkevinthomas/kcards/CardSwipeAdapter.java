@@ -23,16 +23,14 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     private Deck deck;
     private CardSwipeActivity cardSwipeActivity;
-    private boolean isReadOnly;
     private boolean isSwapped;
 
     private List<Card> cards = new ArrayList<>();
     private Map<Integer, CardItem> activeViews = new HashMap<>();
 
-    public CardSwipeAdapter(@NonNull Deck deck, @NonNull CardSwipeActivity cardSwipeActivity, boolean isReadOnly) {
+    public CardSwipeAdapter(@NonNull Deck deck, @NonNull CardSwipeActivity cardSwipeActivity) {
         this.deck = deck;
         this.cardSwipeActivity = cardSwipeActivity;
-        this.isReadOnly = isReadOnly;
         chooseCardsToShow();
     }
 
@@ -113,7 +111,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     @Override
     public boolean isReadOnly() {
-        return isReadOnly;
+        return false;
     }
 
     @Override
