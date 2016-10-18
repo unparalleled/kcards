@@ -103,6 +103,8 @@ public class CardSwipeActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_show_swap) {
+            // workaround for https://github.com/Diolor/Swipecards/issues/29
+            swipeFlingAdapterView.removeAllViewsInLayout();
             cardSwipeAdapter.swap();
             return true;
         }

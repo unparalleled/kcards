@@ -9,8 +9,8 @@
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:max_visible="4"
-        app:min_adapter_stack="2"
+        app:max_visible="2"
+        app:min_adapter_stack="3"
         app:rotation_degrees="16"/>
 
 </FrameLayout>

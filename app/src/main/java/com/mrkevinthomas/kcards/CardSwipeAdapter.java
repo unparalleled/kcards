@@ -12,9 +12,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.CardItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
@@ -26,7 +24,6 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
     private boolean isSwapped;
 
     private List<Card> cards = new ArrayList<>();
-    private Map<Integer, CardItem> activeViews = new HashMap<>();
 
     public CardSwipeAdapter(@NonNull Deck deck, @NonNull CardSwipeActivity cardSwipeActivity) {
         this.deck = deck;
@@ -36,19 +33,16 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     public void swap() {
         isSwapped = !isSwapped;
-        for (CardItem cardItem : activeViews.values()) {
-            cardItem.setupCardText();
-        }
+        notifyDataSetChanged();
     }
 
     public void removeFirst() {
         cards.remove(0);
-        activeViews.remove(0);
         notifyDataSetChanged();
     }
 
     public void chooseCardsToShow() {
-        final int CARD_LIST_SIZE = Math.min(4, deck.size());
+        final int CARD_LIST_SIZE = Math.min(3, deck.size());
         final double DEFAULT_WEIGHT = 10;
         final Random RANDOM = new Random();
 
@@ -71,6 +65,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
                 cards.add(chosen);
             }
         }
+
         notifyDataSetChanged();
     }
 
@@ -92,10 +87,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CardItem cardItem = (CardItem) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-
         cardItem.setupViews(cards.get(position), this);
-
-        activeViews.put(position, cardItem);
         return cardItem;
     }
 
