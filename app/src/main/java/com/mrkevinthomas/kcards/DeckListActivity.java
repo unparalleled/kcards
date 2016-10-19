@@ -156,7 +156,7 @@ public class DeckListActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.deck_of_cards);
         builder.setView(dialogView);
-        builder.setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = nameInput.getText().toString();
@@ -176,9 +176,9 @@ public class DeckListActivity extends BaseActivity {
 
                         Analytics.logEditDeckEvent(deck);
                     }
-                    Toast.makeText(DeckListActivity.this, getString(R.string.deck_saved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeckListActivity.this, R.string.deck_saved, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(DeckListActivity.this, getString(R.string.deck_must_have_name), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DeckListActivity.this, R.string.deck_must_have_name, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -199,7 +199,7 @@ public class DeckListActivity extends BaseActivity {
             nameInput.setSelection(deck.getName() != null ? deck.getName().length() : 0);
             descriptionInput.setText(deck.getDescription());
         }
-        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
 
         // show keyboard by default
@@ -212,14 +212,14 @@ public class DeckListActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.are_you_sure);
         builder.setMessage(getResources().getQuantityString(R.plurals.you_have_x_many_cards, deck.size(), deck.size()));
-        builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deckListAdapter.removeDeck(deck);
                 deck.delete();
             }
         });
-        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
         builder.show();
     }

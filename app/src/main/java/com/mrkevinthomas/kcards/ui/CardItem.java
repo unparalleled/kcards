@@ -1,9 +1,12 @@
 package com.mrkevinthomas.kcards.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,10 @@ import android.widget.TextView;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.ThisApp;
 import com.mrkevinthomas.kcards.models.Card;
+
+import java.util.Locale;
+
+import static android.speech.tts.TextToSpeech.LANG_AVAILABLE;
 
 public class CardItem extends FrameLayout {
 
@@ -33,7 +40,9 @@ public class CardItem extends FrameLayout {
     private Delegate delegate;
 
     private TextView topTextView;
+    private View topTextHolder;
     private TextView bottomTextView;
+    private View bottomTextHolder;
     private View cardAnswerCover;
     private FloatingActionButton correctFab;
     private FloatingActionButton incorrectFab;
@@ -62,7 +71,9 @@ public class CardItem extends FrameLayout {
         this.delegate = delegate;
 
         topTextView = (TextView) findViewById(R.id.card_top_text);
+        topTextHolder = findViewById(R.id.card_top_holder);
         bottomTextView = (TextView) findViewById(R.id.card_bottom_text);
+        bottomTextHolder = findViewById(R.id.card_bottom_holder);
         cardAnswerCover = findViewById(R.id.card_answer_cover);
         correctFab = (FloatingActionButton) findViewById(R.id.fab_correct);
         incorrectFab = (FloatingActionButton) findViewById(R.id.fab_wrong);
@@ -78,25 +89,47 @@ public class CardItem extends FrameLayout {
     public void setupCardText() {
         final String topText = delegate.isSwapped() ? card.getBackText() : card.getFrontText();
         topTextView.setText(topText);
-        topTextView.setOnClickListener(new View.OnClickListener() {
+        topTextHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delegate.getTextToSpeech()
-                        .setLanguage(delegate.isSwapped() ? card.getBackLanguage().getLocale() : card.getFrontLanguage().getLocale());
-                delegate.getTextToSpeech().speak(topText, TextToSpeech.QUEUE_FLUSH, null);
+                Locale locale = delegate.isSwapped() ? card.getBackLanguage().getLocale() : card.getFrontLanguage().getLocale();
+                playTextToSpeech(locale, topText);
             }
         });
 
         final String bottomText = delegate.isSwapped() ? card.getFrontText() : card.getBackText();
         bottomTextView.setText(bottomText);
-        bottomTextView.setOnClickListener(new View.OnClickListener() {
+        bottomTextHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delegate.getTextToSpeech()
-                        .setLanguage(delegate.isSwapped() ? card.getFrontLanguage().getLocale() : card.getBackLanguage().getLocale());
-                delegate.getTextToSpeech().speak(bottomText, TextToSpeech.QUEUE_FLUSH, null);
+                Locale locale = delegate.isSwapped() ? card.getFrontLanguage().getLocale() : card.getBackLanguage().getLocale();
+                playTextToSpeech(locale, bottomText);
             }
         });
+    }
+
+    private void playTextToSpeech(Locale locale, String text) {
+        TextToSpeech textToSpeech = delegate.getTextToSpeech();
+        if (textToSpeech.isLanguageAvailable(locale) == LANG_AVAILABLE) {
+            textToSpeech.setLanguage(locale);
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle(R.string.text_to_speech_dialog_title);
+            builder.setMessage(R.string.text_to_speech_dialog_message);
+            builder.setNegativeButton(R.string.cancel, null);
+            builder.setPositiveButton(R.string.continue_string, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // open text to speech settings
+                    Intent intent = new Intent();
+                    intent.setAction("com.android.settings.TTS_SETTINGS");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+            });
+            builder.show();
+        }
     }
 
     public void setupCardAnswerCover() {

@@ -25,6 +25,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="continue_string">Continue</string>
 
     <!-- deck create/edit dialog -->
     <string name="deck_of_cards">Deck of Cards</string>
@@ -65,5 +66,9 @@
     <string name="deck_published">Deck Published!</string>
     <string name="deck_unpublished">Deck Unpublished!</string>
     <string name="deck_unpublish_message">This will unpublish the deck from the shared deck list.</string>
+
+    <!-- text to speech dialog -->
+    <string name="text_to_speech_dialog_title">Language Not Supported</string>
+    <string name="text_to_speech_dialog_message">Would you like to continue to the system settings to install this language?</string>
 
 </resources>

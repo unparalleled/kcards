@@ -80,9 +80,9 @@ public class CardListActivity extends BaseActivity {
         final LanguageSpinner backLanguage = (LanguageSpinner) dialogView.findViewById(R.id.card_back_language);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.card));
+        builder.setTitle(R.string.card);
         builder.setView(dialogView);
-        builder.setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String frontText = frontInput.getText().toString();
@@ -117,9 +117,9 @@ public class CardListActivity extends BaseActivity {
 
                         Analytics.logEditCardEvent(card);
                     }
-                    Toast.makeText(CardListActivity.this, getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CardListActivity.this, R.string.card_saved, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(CardListActivity.this, getString(R.string.card_must_have_front), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardListActivity.this, R.string.card_must_have_front, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -144,7 +144,7 @@ public class CardListActivity extends BaseActivity {
             frontLanguage.setSelectedLanguage(SettingsActivity.getMainLanguage(this));
             backLanguage.setSelectedLanguage(SettingsActivity.getSecondaryLanguage(this));
         }
-        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
 
         // show keyboard by default
@@ -195,21 +195,21 @@ public class CardListActivity extends BaseActivity {
             createNewObjectInSharedFirebaseDb();
             publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             publishUnpublishMenuItem.setTitle(R.string.unpublish);
-            Toast.makeText(this, getString(R.string.deck_published), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.deck_published, Toast.LENGTH_LONG).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.are_you_sure);
-            builder.setMessage(getString(R.string.deck_unpublish_message));
-            builder.setPositiveButton(getString(R.string.unpublish), new DialogInterface.OnClickListener() {
+            builder.setMessage(R.string.deck_unpublish_message);
+            builder.setPositiveButton(R.string.unpublish, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     deleteObjectInSharedFirebaseDb();
                     publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
                     publishUnpublishMenuItem.setTitle(R.string.publish);
-                    Toast.makeText(CardListActivity.this, getString(R.string.deck_unpublished), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardListActivity.this, R.string.deck_unpublished, Toast.LENGTH_LONG).show();
                 }
             });
-            builder.setNegativeButton(getString(R.string.cancel), null);
+            builder.setNegativeButton(R.string.cancel, null);
             builder.setCancelable(true);
             builder.show();
         }
