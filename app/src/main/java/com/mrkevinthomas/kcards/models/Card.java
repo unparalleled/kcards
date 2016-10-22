@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.Exclude;
+import com.mrkevinthomas.kcards.Analytics;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -142,11 +143,13 @@ public class Card extends BaseModel implements Parcelable {
     }
 
     public void incrementCorrect() {
+        Analytics.logEventProgressCorrect();
         correctCount++;
         save();
     }
 
     public void incrementIncorrect() {
+        Analytics.logEventProgressIncorrect();
         incorrectCount++;
         save();
     }

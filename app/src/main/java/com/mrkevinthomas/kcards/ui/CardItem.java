@@ -129,7 +129,7 @@ public class CardItem extends FrameLayout {
             builder.setTitle(R.string.text_to_speech_dialog_title);
             builder.setMessage(R.string.text_to_speech_dialog_message);
             builder.setNegativeButton(R.string.cancel, null);
-            builder.setPositiveButton(R.string.continue_string, new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // open text to speech settings

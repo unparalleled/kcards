@@ -25,7 +25,6 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
-    <string name="continue_string">Continue</string>
 
     <!-- deck create/edit dialog -->
     <string name="deck_of_cards">Deck of Cards</string>
