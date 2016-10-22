@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,24 +89,34 @@ public class CardItem extends FrameLayout {
 
     public void setupCardText() {
         final String topText = delegate.isSwapped() ? card.getBackText() : card.getFrontText();
-        topTextView.setText(topText);
-        topTextHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Locale locale = delegate.isSwapped() ? card.getBackLanguage().getLocale() : card.getFrontLanguage().getLocale();
-                playTextToSpeech(locale, topText);
-            }
-        });
+        if (!TextUtils.isEmpty(topText)) {
+            topTextView.setText(topText);
+            topTextHolder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Locale locale = delegate.isSwapped() ? card.getBackLanguage().getLocale() : card.getFrontLanguage().getLocale();
+                    playTextToSpeech(locale, topText);
+                }
+            });
+            topTextHolder.setVisibility(VISIBLE);
+        } else {
+            topTextHolder.setVisibility(INVISIBLE); // preserve layout
+        }
 
         final String bottomText = delegate.isSwapped() ? card.getFrontText() : card.getBackText();
-        bottomTextView.setText(bottomText);
-        bottomTextHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Locale locale = delegate.isSwapped() ? card.getFrontLanguage().getLocale() : card.getBackLanguage().getLocale();
-                playTextToSpeech(locale, bottomText);
-            }
-        });
+        if (!TextUtils.isEmpty(bottomText)) {
+            bottomTextView.setText(bottomText);
+            bottomTextHolder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Locale locale = delegate.isSwapped() ? card.getFrontLanguage().getLocale() : card.getBackLanguage().getLocale();
+                    playTextToSpeech(locale, bottomText);
+                }
+            });
+            bottomTextHolder.setVisibility(VISIBLE);
+        } else {
+            bottomTextHolder.setVisibility(INVISIBLE); // preserve layout
+        }
     }
 
     private void playTextToSpeech(Locale locale, String text) {
