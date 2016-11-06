@@ -9,12 +9,11 @@ import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
 @Table(database = AppDatabase.class)
-public class Deck extends BaseModel implements Parcelable {
+public class Deck extends BaseDbModel implements Parcelable {
 
     @Column
     @PrimaryKey(autoincrement = true)
@@ -60,21 +59,12 @@ public class Deck extends BaseModel implements Parcelable {
         return firebaseKey;
     }
 
-    @Exclude
-    public boolean isSyncedWithFirebase() {
-        return firebaseKey != null && !firebaseKey.isEmpty();
-    }
-
     public String getName() {
         return name;
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public int size() {
-        return cards.size();
     }
 
     public void setFirebaseKey(String firebaseKey) {
@@ -87,6 +77,32 @@ public class Deck extends BaseModel implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Exclude
+    public boolean isSyncedWithFirebase() {
+        return firebaseKey != null && !firebaseKey.isEmpty();
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+    // force firebase to serialize/deserialize these fields
+    public long getCreatedTimeMs() {
+        return createdTimeMs;
+    }
+
+    public long getUpdatedTimeMs() {
+        return updatedTimeMs;
+    }
+
+    public void setUpdatedTimeMs(long updatedTimeMs) {
+        this.updatedTimeMs = updatedTimeMs;
+    }
+
+    public void setCreatedTimeMs(long createdTimeMs) {
+        this.createdTimeMs = createdTimeMs;
     }
 
     // equals and hashcode
@@ -103,7 +119,6 @@ public class Deck extends BaseModel implements Parcelable {
         Deck deck = (Deck) o;
 
         return id == deck.id;
-
     }
 
     @Override
@@ -121,6 +136,8 @@ public class Deck extends BaseModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
+        dest.writeLong(this.createdTimeMs);
+        dest.writeLong(this.updatedTimeMs);
         dest.writeString(this.firebaseKey);
         dest.writeString(this.name);
         dest.writeString(this.description);
@@ -129,6 +146,8 @@ public class Deck extends BaseModel implements Parcelable {
 
     protected Deck(Parcel in) {
         this.id = in.readLong();
+        this.createdTimeMs = in.readLong();
+        this.updatedTimeMs = in.readLong();
         this.firebaseKey = in.readString();
         this.name = in.readString();
         this.description = in.readString();

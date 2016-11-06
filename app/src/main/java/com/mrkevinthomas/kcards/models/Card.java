@@ -9,10 +9,9 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = AppDatabase.class)
-public class Card extends BaseModel implements Parcelable {
+public class Card extends BaseDbModel implements Parcelable {
 
     @Column
     @PrimaryKey(autoincrement = true)
@@ -20,12 +19,6 @@ public class Card extends BaseModel implements Parcelable {
 
     @ForeignKey(tableClass = Deck.class)
     long deckId;
-
-    @Column
-    long createdTimeMs;
-
-    @Column
-    long updatedTimeMs;
 
     @Column
     String frontText;
@@ -56,15 +49,6 @@ public class Card extends BaseModel implements Parcelable {
         this.backLanguageCode = backLanguageCode;
     }
 
-    @Override
-    public void save() {
-        if (createdTimeMs == 0) {
-            createdTimeMs = System.currentTimeMillis();
-        }
-        updatedTimeMs = System.currentTimeMillis();
-        super.save();
-    }
-
     @Exclude
     public long getId() {
         return id;
@@ -72,22 +56,6 @@ public class Card extends BaseModel implements Parcelable {
 
     public void setDeckId(long deckId) {
         this.deckId = deckId;
-    }
-
-    public long getCreatedTimeMs() {
-        return createdTimeMs;
-    }
-
-    public long getUpdatedTimeMs() {
-        return updatedTimeMs;
-    }
-
-    public void setUpdatedTimeMs(long updatedTimeMs) {
-        this.updatedTimeMs = updatedTimeMs;
-    }
-
-    public void setCreatedTimeMs(long createdTimeMs) {
-        this.createdTimeMs = createdTimeMs;
     }
 
     public String getFrontText() {
@@ -158,6 +126,23 @@ public class Card extends BaseModel implements Parcelable {
         correctCount = 0;
         incorrectCount = 0;
         save();
+    }
+
+    // force firebase to serialize/deserialize these fields
+    public long getCreatedTimeMs() {
+        return createdTimeMs;
+    }
+
+    public long getUpdatedTimeMs() {
+        return updatedTimeMs;
+    }
+
+    public void setUpdatedTimeMs(long updatedTimeMs) {
+        this.updatedTimeMs = updatedTimeMs;
+    }
+
+    public void setCreatedTimeMs(long createdTimeMs) {
+        this.createdTimeMs = createdTimeMs;
     }
 
     // equals and hashcode

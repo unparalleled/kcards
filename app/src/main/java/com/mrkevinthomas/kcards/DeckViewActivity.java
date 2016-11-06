@@ -2,6 +2,8 @@ package com.mrkevinthomas.kcards;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +40,7 @@ public class DeckViewActivity extends DeckListActivity {
     private void retrieveDecksFromSharedFirebaseDb() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("decks");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<HashMap<String, Deck>> t = new GenericTypeIndicator<HashMap<String, Deck>>() {
@@ -55,6 +57,23 @@ public class DeckViewActivity extends DeckListActivity {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.deck_view, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_sort) {
+            return true;
+        } else if (item.getItemId() == R.id.action_filter) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

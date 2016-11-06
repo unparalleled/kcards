@@ -1,5 +1,6 @@
 package com.mrkevinthomas.kcards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
@@ -86,12 +87,14 @@ public class CardSwipeActivity extends BaseActivity {
         textToSpeech.shutdown();
     }
 
-    public TextToSpeech getTextToSpeech() {
-        return textToSpeech;
-    }
+    @Override
+    public void finish() {
+        // set the updated deck before finishing
+        Intent result = new Intent();
+        result.putExtra(ARG_DECK, deck);
+        setResult(RESULT_OK, result);
 
-    public SwipeFlingAdapterView getSwipeFlingAdapterView() {
-        return swipeFlingAdapterView;
+        super.finish();
     }
 
     @Override
@@ -110,6 +113,14 @@ public class CardSwipeActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public TextToSpeech getTextToSpeech() {
+        return textToSpeech;
+    }
+
+    public SwipeFlingAdapterView getSwipeFlingAdapterView() {
+        return swipeFlingAdapterView;
     }
 
 }

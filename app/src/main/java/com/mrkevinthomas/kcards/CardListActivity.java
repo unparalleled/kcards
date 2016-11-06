@@ -29,6 +29,7 @@ public class CardListActivity extends BaseActivity {
 
     private boolean isReadOnly;
 
+    private MenuItem practiceMenuItem;
     private MenuItem publishUnpublishMenuItem;
     private MenuItem saveMenuItem;
 
@@ -156,6 +157,7 @@ public class CardListActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
+        practiceMenuItem = menu.findItem(R.id.action_practice);
         publishUnpublishMenuItem = menu.findItem(R.id.action_publish_unpublish);
         saveMenuItem = menu.findItem(R.id.action_save);
         if (!isReadOnly) {
@@ -165,6 +167,7 @@ public class CardListActivity extends BaseActivity {
                 publishUnpublishMenuItem.setTitle(R.string.unpublish);
             }
         } else {
+            practiceMenuItem.setVisible(false);
             publishUnpublishMenuItem.setVisible(false);
             menu.findItem(R.id.action_reset_progress).setVisible(false);
         }
@@ -173,14 +176,19 @@ public class CardListActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_publish_unpublish) {
+        if (item.getItemId() == R.id.action_practice) {
+            Intent intent = new Intent(this, CardSwipeActivity.class);
+            intent.putExtra(BaseActivity.ARG_DECK, deck);
+            startActivityForResult(intent, BaseActivity.REQUEST_DECK);
+            return true;
+        } else if (item.getItemId() == R.id.action_shuffle) {
+            cardListAdapter.shuffle();
+            return true;
+        } else if (item.getItemId() == R.id.action_publish_unpublish) {
             handlePublishUnpublishActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_save) {
             saveDeckToDeckList();
-            return true;
-        } else if (item.getItemId() == R.id.action_suffle) {
-            cardListAdapter.shuffle();
             return true;
         } else if (item.getItemId() == R.id.action_reset_progress) {
             resetDeckProgress();
