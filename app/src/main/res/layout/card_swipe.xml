@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- the next two cards are for the material effect of a stack of cards -->
+
+    <com.mrkevinthomas.kcards.ui.CardItem
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationX="4dp"
+        android:translationY="8dp"
+        app:cardElevation="2dp"/>
+
+    <com.mrkevinthomas.kcards.ui.CardItem
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationX="2dp"
+        android:translationY="4dp"
+        app:cardElevation="4dp"/>
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/swipe_container"
@@ -13,4 +29,4 @@
         app:min_adapter_stack="3"
         app:rotation_degrees="16"/>
 
-</FrameLayout>
+</RelativeLayout>
