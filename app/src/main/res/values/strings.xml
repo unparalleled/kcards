@@ -34,6 +34,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="reset">Reset</string>
 
     <!-- deck create/edit dialog -->
     <string name="deck_of_cards">Deck of Cards</string>
@@ -78,5 +79,8 @@
     <!-- text to speech dialog -->
     <string name="text_to_speech_dialog_title">Language Not Supported</string>
     <string name="text_to_speech_dialog_message">Would you like to continue to the system settings to install this language?</string>
+
+    <string name="deck_reset_progress">This will reset progress for all cards in this deck.</string>
+
 
 </resources>

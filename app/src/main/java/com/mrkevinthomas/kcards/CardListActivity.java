@@ -191,7 +191,7 @@ public class CardListActivity extends BaseActivity {
             saveDeckToDeckList();
             return true;
         } else if (item.getItemId() == R.id.action_reset_progress) {
-            resetDeckProgress();
+            showResetProgressDialog();
             return true;
         }
 
@@ -233,11 +233,22 @@ public class CardListActivity extends BaseActivity {
         Toast.makeText(this, R.string.deck_saved, Toast.LENGTH_LONG).show();
     }
 
-    private void resetDeckProgress() {
-        for (Card card : deck.getCards()) {
-            card.resetProgress();
-        }
-        cardListAdapter.notifyDataSetChanged();
+    private void showResetProgressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.are_you_sure);
+        builder.setMessage(R.string.deck_reset_progress);
+        builder.setPositiveButton(R.string.reset, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (Card card : deck.getCards()) {
+                    card.resetProgress();
+                }
+                cardListAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, null);
+        builder.setCancelable(true);
+        builder.show();
     }
 
     private void updateObjectInSharedFirebaseDb() {
