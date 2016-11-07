@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sort_name"
+        android:title="@string/name"/>
+    <item
+        android:id="@+id/sort_description"
+        android:title="@string/description"/>
+    <item
+        android:id="@+id/sort_created"
+        android:title="@string/created"/>
+    <item
+        android:id="@+id/sort_updated"
+        android:title="@string/updated"/>
+</menu>

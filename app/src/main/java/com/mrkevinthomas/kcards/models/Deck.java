@@ -85,7 +85,7 @@ public class Deck extends BaseDbModel implements Parcelable {
     }
 
     public int size() {
-        return cards.size();
+        return cards != null ? cards.size() : 0;
     }
 
     // force firebase to serialize/deserialize these fields

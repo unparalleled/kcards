@@ -151,36 +151,6 @@
   },
   {
     "name": "Examples",
-    "description": "Things",
-    "cards": [
-      {
-        "frontText": "사과",
-        "backText": "Apple",
-        "frontLanguageCode": "ko",
-        "backLanguageCode": "en"
-      },
-      {
-        "frontText": "감자",
-        "backText": "Potato",
-        "frontLanguageCode": "ko",
-        "backLanguageCode": "en"
-      },
-      {
-        "frontText": "맥주",
-        "backText": "Beer",
-        "frontLanguageCode": "ko",
-        "backLanguageCode": "en"
-      },
-      {
-        "frontText": "책",
-        "backText": "Book",
-        "frontLanguageCode": "ko",
-        "backLanguageCode": "en"
-      }
-    ]
-  },
-  {
-    "name": "Examples",
     "description": "Places",
     "cards": [
       {
@@ -390,6 +360,36 @@
       {
         "frontText": "커피숍",
         "backText": "Coffee Shop",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      }
+    ]
+  },
+  {
+    "name": "Examples",
+    "description": "Things",
+    "cards": [
+      {
+        "frontText": "사과",
+        "backText": "Apple",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "감자",
+        "backText": "Potato",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "맥주",
+        "backText": "Beer",
+        "frontLanguageCode": "ko",
+        "backLanguageCode": "en"
+      },
+      {
+        "frontText": "책",
+        "backText": "Book",
         "frontLanguageCode": "ko",
         "backLanguageCode": "en"
       }

@@ -24,6 +24,12 @@
     <string name="sort">Sort</string>
     <string name="filter">Filter</string>
 
+    <!-- sort items -->
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="created">Created</string>
+    <string name="updated">Updated</string>
+
     <!-- general ctas -->
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>

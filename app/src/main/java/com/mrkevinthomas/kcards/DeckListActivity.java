@@ -6,9 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -31,6 +34,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class DeckListActivity extends BaseActivity {
@@ -222,6 +226,69 @@ public class DeckListActivity extends BaseActivity {
         builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
         builder.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.deck_view, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_sort) {
+            showSortMenu();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showSortMenu() {
+        PopupMenu popup = new PopupMenu(this, findViewById(R.id.action_sort));
+        popup.getMenuInflater().inflate(R.menu.deck_sort, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                Analytics.logSortItemSelectedEvent(item);
+                handleSortActionClicked(item);
+                return true;
+            }
+        });
+
+        popup.show();
+    }
+
+    protected void handleSortActionClicked(MenuItem item) {
+        if (item.getItemId() == R.id.sort_name) {
+            deckListAdapter.sort(new Comparator<Deck>() {
+                @Override
+                public int compare(Deck deck1, Deck deck2) {
+                    return ("" + deck1.getName()).compareTo(deck2.getName());
+                }
+            });
+        } else if (item.getItemId() == R.id.sort_description) {
+            deckListAdapter.sort(new Comparator<Deck>() {
+                @Override
+                public int compare(Deck deck1, Deck deck2) {
+                    return ("" + deck1.getDescription()).compareTo(deck2.getDescription());
+                }
+            });
+        } else if (item.getItemId() == R.id.sort_created) {
+            deckListAdapter.sort(new Comparator<Deck>() {
+                @Override
+                public int compare(Deck deck1, Deck deck2) {
+                    return (int) (deck2.getCreatedTimeMs() - deck1.getCreatedTimeMs());
+                }
+            });
+        } else if (item.getItemId() == R.id.sort_updated) {
+            deckListAdapter.sort(new Comparator<Deck>() {
+                @Override
+                public int compare(Deck deck1, Deck deck2) {
+                    return (int) (deck2.getUpdatedTimeMs() - deck1.getUpdatedTimeMs());
+                }
+            });
+        }
     }
 
 }

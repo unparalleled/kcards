@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.mrkevinthomas.kcards.models.Deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHolder> {
@@ -37,6 +39,16 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
         int position = deckList.indexOf(deck);
         deckList.remove(deck);
         notifyItemRemoved(position);
+    }
+
+    public void clear() {
+        deckList = new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
+    public void sort(Comparator<Deck> comparator) {
+        Collections.sort(deckList, comparator);
+        notifyDataSetChanged();
     }
 
     public void setReadOnly(boolean readOnly) {

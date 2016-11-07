@@ -31,6 +31,10 @@ public class Analytics {
     private static final String ARG_OPTIONS_ITEM_ID = "options_item_id";
     private static final String ARG_OPTIONS_ITEM_TITLE = "options_item_title";
 
+    private static final String EVENT_SORT_ITEM_SELECTED = "sort_item_selected";
+    private static final String ARG_SORT_ITEM_ID = "sort_item_id";
+    private static final String ARG_SORT_ITEM_TITLE = "sort_item_title";
+
     private static final String EVENT_PROGRESS_CORRECT = "progress_correct";
     private static final String EVENT_PROGRESS_INCORRECT = "progress_incorrect";
 
@@ -82,6 +86,13 @@ public class Analytics {
         bundle.putString(ARG_OPTIONS_ITEM_ID, String.valueOf(item.getItemId()));
         bundle.putString(ARG_OPTIONS_ITEM_TITLE, String.valueOf(item.getTitle()));
         firebaseAnalytics.logEvent(EVENT_OPTIONS_ITEM_SELECTED, bundle);
+    }
+
+    public static void logSortItemSelectedEvent(MenuItem item) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_SORT_ITEM_ID, String.valueOf(item.getItemId()));
+        bundle.putString(ARG_SORT_ITEM_TITLE, String.valueOf(item.getTitle()));
+        firebaseAnalytics.logEvent(EVENT_SORT_ITEM_SELECTED, bundle);
     }
 
     public static void logEventProgressCorrect() {
