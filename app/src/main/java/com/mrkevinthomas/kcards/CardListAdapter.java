@@ -1,12 +1,12 @@
 package com.mrkevinthomas.kcards;
 
-import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.models.Card;
@@ -87,15 +87,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
             });
             holder.itemView.setVisibility(View.VISIBLE);
             if (card.getCorrectCount() > 0 || card.getIncorrectCount() > 0) {
-                float totalCount = card.getCorrectCount() + card.getIncorrectCount();
-                float percentCorrect = card.getCorrectCount() / totalCount;
-                int correctColor = cardListActivity.getResources().getColor(R.color.green);
-                int incorrectColor = cardListActivity.getResources().getColor(R.color.red);
-                int color = (int) new ArgbEvaluator().evaluate(percentCorrect, incorrectColor, correctColor);
-                holder.progressIndicator.setBackgroundColor(color);
-                holder.progressIndicator.setVisibility(View.VISIBLE);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.progressIndicatorCorrect.getLayoutParams();
+                params.weight = card.getCorrectCount();
+                holder.progressIndicatorCorrect.setLayoutParams(params);
+
+                params = (LinearLayout.LayoutParams) holder.progressIndicatorIncorrect.getLayoutParams();
+                params.weight = card.getIncorrectCount();
+                holder.progressIndicatorIncorrect.setLayoutParams(params);
+
+                holder.progressIndicatorHolder.setVisibility(View.VISIBLE);
             } else {
-                holder.progressIndicator.setVisibility(View.GONE);
+                holder.progressIndicatorHolder.setVisibility(View.GONE);
             }
         } else {
             holder.itemView.setVisibility(View.INVISIBLE); // dummy footer
@@ -110,13 +112,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
     public static class CardHolder extends RecyclerView.ViewHolder {
         public final TextView frontText;
         public final TextView backText;
-        public final View progressIndicator;
+        public final View progressIndicatorHolder;
+        public final View progressIndicatorCorrect;
+        public final View progressIndicatorIncorrect;
 
         public CardHolder(View itemView) {
             super(itemView);
             frontText = (TextView) itemView.findViewById(R.id.card_top_text);
             backText = (TextView) itemView.findViewById(R.id.card_bottom_text);
-            progressIndicator = itemView.findViewById(R.id.progress_indicator);
+            progressIndicatorHolder = itemView.findViewById(R.id.progress_indicator_holder);
+            progressIndicatorCorrect = itemView.findViewById(R.id.progress_indicator_correct);
+            progressIndicatorIncorrect = itemView.findViewById(R.id.progress_indicator_incorrect);
         }
     }
 

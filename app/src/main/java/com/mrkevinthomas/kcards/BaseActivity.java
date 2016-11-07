@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +19,9 @@ import android.widget.ProgressBar;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String ARG_DECK = "deck";
-    public static final String ARG_POSITION = "position";
-    public static final String ARG_READ_ONLY = "read_only";
+    public static final String ARG_DECK = "arg_deck";
+    public static final String ARG_POSITION = "arg_position";
+    public static final String ARG_READ_ONLY = "arg_read_only";
 
     public static final int REQUEST_DECK = 0;
 
@@ -127,14 +128,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         // ignore clicks on the current nav item
         if (id != getNavItemId()) {
             if (id == R.id.nav_home) {
-                startActivity(new Intent(this, DeckListActivity.class));
+                Intent intent = new Intent(this, DeckListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // start fresh from home
+                startActivity(intent);
             } else if (id == R.id.nav_dictionary) {
                 // TODO
             } else if (id == R.id.nav_trending) {

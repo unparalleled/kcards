@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/progress_indicator"
+            android:layout_toLeftOf="@+id/progress_indicator_holder"
             android:textSize="16sp"
             tools:text="Card Front"/>
 
@@ -36,18 +36,32 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@id/card_top_text"
             android:layout_marginTop="12dp"
-            android:layout_toLeftOf="@+id/progress_indicator"
+            android:layout_toLeftOf="@+id/progress_indicator_holder"
             android:textSize="16sp"
             tools:text="Card Back"/>
 
-        <View
-            android:id="@+id/progress_indicator"
-            android:layout_width="12dp"
+        <LinearLayout
+            android:id="@+id/progress_indicator_holder"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/card_bottom_text"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/card_top_text"
-            android:background="@color/green"/>
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/progress_indicator_correct"
+                android:layout_width="12dp"
+                android:layout_height="0dp"
+                android:background="@color/green"/>
+
+            <View
+                android:id="@+id/progress_indicator_incorrect"
+                android:layout_width="12dp"
+                android:layout_height="0dp"
+                android:background="@color/red"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
