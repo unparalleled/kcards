@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mrkevinthomas.kcards.models.Deck;
 
@@ -48,7 +49,13 @@ public class DeckViewActivity extends DeckListActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("decks");
-        databaseReference.orderByChild(SORT_BY).limitToLast(MAX_DECKS).addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = databaseReference.orderByChild(SORT_BY);
+        if (reverseOrder) {
+            query.limitToLast(MAX_DECKS);
+        } else {
+            query.limitToFirst(MAX_DECKS);
+        }
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<Deck> t = new GenericTypeIndicator<Deck>() {
