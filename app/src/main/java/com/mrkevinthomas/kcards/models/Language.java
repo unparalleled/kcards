@@ -7,7 +7,12 @@ import java.util.Locale;
 public class Language {
 
     private static final Language[] languages = {
+            new Language("zh-CN", "Chinese", Locale.CHINESE),
             new Language("en", "English", Locale.ENGLISH),
+            new Language("fr", "French", Locale.FRENCH),
+            new Language("de", "German", Locale.GERMAN),
+            new Language("it", "Italian", Locale.ITALIAN),
+            new Language("ja", "Japanese", Locale.JAPANESE),
             new Language("ko", "Korean", Locale.KOREAN),
     };
 
