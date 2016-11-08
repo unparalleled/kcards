@@ -16,13 +16,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.mrkevinthomas.kcards.Analytics;
 import com.mrkevinthomas.kcards.BaseActivity;
-import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
+import com.mrkevinthomas.kcards.FirebaseDb;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.SettingsActivity;
+import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.LanguageSpinner;
@@ -101,7 +100,7 @@ public class CardListActivity extends BaseActivity {
                         Card newCard = new Card(deck.getId(), frontText, backText, frontLanguageCode, backLanguageCode);
                         cardListAdapter.addCard(newCard);
                         newCard.save();
-                        updateObjectInSharedFirebaseDb();
+                        FirebaseDb.updateDeck(deck);
 
                         // show another dialog for continuing card creation
                         new Handler().postDelayed(new Runnable() {
@@ -119,7 +118,7 @@ public class CardListActivity extends BaseActivity {
                         card.setBackLanguageCode(backLanguageCode);
                         card.save();
                         cardListAdapter.notifyDataSetChanged();
-                        updateObjectInSharedFirebaseDb();
+                        FirebaseDb.updateDeck(deck);
 
                         Analytics.logEditCardEvent(card);
                     }
@@ -135,7 +134,7 @@ public class CardListActivity extends BaseActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     cardListAdapter.removeCard(card);
                     card.delete();
-                    updateObjectInSharedFirebaseDb();
+                    FirebaseDb.updateDeck(deck);
                 }
             });
             frontInput.setText(card.getFrontText());
@@ -205,7 +204,7 @@ public class CardListActivity extends BaseActivity {
 
     private void handlePublishUnpublishActionClicked() {
         if (!deck.isSyncedWithFirebase()) {
-            createNewObjectInSharedFirebaseDb();
+            FirebaseDb.createNewDeck(deck);
             publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             publishUnpublishMenuItem.setTitle(R.string.unpublish);
             Toast.makeText(this, R.string.deck_published, Toast.LENGTH_LONG).show();
@@ -216,7 +215,7 @@ public class CardListActivity extends BaseActivity {
             builder.setPositiveButton(R.string.unpublish, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    deleteObjectInSharedFirebaseDb();
+                    FirebaseDb.deleteDeck(deck);
                     publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
                     publishUnpublishMenuItem.setTitle(R.string.publish);
                     Toast.makeText(CardListActivity.this, R.string.deck_unpublished, Toast.LENGTH_LONG).show();
@@ -254,36 +253,6 @@ public class CardListActivity extends BaseActivity {
         builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
         builder.show();
-    }
-
-    private void updateObjectInSharedFirebaseDb() {
-        if (deck.isSyncedWithFirebase()) {
-            // update previous deck object using firebase key
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = database.getReference("decks/" + deck.getFirebaseKey());
-            databaseReference.setValue(deck);
-        }
-    }
-
-    private void createNewObjectInSharedFirebaseDb() {
-        // push new deck object
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("decks").push();
-        databaseReference.setValue(deck);
-
-        String firebaseKey = databaseReference.getKey();
-        deck.setFirebaseKey(firebaseKey);
-        deck.save();
-    }
-
-    private void deleteObjectInSharedFirebaseDb() {
-        // remove deck object using firebase key
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("decks/" + deck.getFirebaseKey());
-        databaseReference.removeValue();
-
-        deck.setFirebaseKey(null);
-        deck.save();
     }
 
 }
