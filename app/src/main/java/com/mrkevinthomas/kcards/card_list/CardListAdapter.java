@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.BaseActivity;
-import com.mrkevinthomas.kcards.card_pager.CardPagerActivity;
 import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.card_pager.CardPagerActivity;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHolder> {
+public class CardListAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     private CardListActivity cardListActivity;
 
@@ -58,12 +57,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
     }
 
     @Override
-    public CardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CardHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_list_item, parent, false));
+    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new CardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final CardHolder holder, int position) {
+    public void onBindViewHolder(final CardViewHolder holder, int position) {
         if (position < cardList.size()) {
             final Card card = cardList.get(position);
             holder.frontText.setText(card.getFrontText());
@@ -112,22 +111,4 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardHo
         return cardList.size() + 1;
     }
 
-    public static class CardHolder extends RecyclerView.ViewHolder {
-        public final TextView frontText;
-        public final TextView backText;
-        public final View progressIndicatorHolder;
-        public final View progressIndicatorCorrect;
-        public final View progressIndicatorIncorrect;
-
-        public CardHolder(View itemView) {
-            super(itemView);
-            frontText = (TextView) itemView.findViewById(R.id.card_top_text);
-            backText = (TextView) itemView.findViewById(R.id.card_bottom_text);
-            progressIndicatorHolder = itemView.findViewById(R.id.progress_indicator_holder);
-            progressIndicatorCorrect = itemView.findViewById(R.id.progress_indicator_correct);
-            progressIndicatorIncorrect = itemView.findViewById(R.id.progress_indicator_incorrect);
-        }
-    }
-
 }
-

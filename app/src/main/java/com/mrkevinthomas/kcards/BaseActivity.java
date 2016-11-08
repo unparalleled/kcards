@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.mrkevinthomas.kcards.deck_list.DeckListActivity;
-import com.mrkevinthomas.kcards.deck_list.DeckViewActivity;
+import com.mrkevinthomas.kcards.deck_list.FirebaseDeckListActivity;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -144,7 +144,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             } else if (id == R.id.nav_dictionary) {
                 // TODO
             } else if (id == R.id.nav_trending) {
-                startActivity(new Intent(this, DeckViewActivity.class));
+                startActivity(new Intent(this, FirebaseDeckListActivity.class));
             }
         }
 

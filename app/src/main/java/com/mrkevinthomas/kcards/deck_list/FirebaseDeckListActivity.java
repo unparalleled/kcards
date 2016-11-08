@@ -18,7 +18,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DeckViewActivity extends DeckListActivity {
+public class FirebaseDeckListActivity extends DeckListActivity {
 
     private static final int MAX_DECKS = 50;
 

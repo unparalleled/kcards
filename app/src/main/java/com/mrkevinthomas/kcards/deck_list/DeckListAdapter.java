@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.BaseActivity;
 import com.mrkevinthomas.kcards.R;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHolder> {
+public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
 
     private DeckListActivity deckListActivity;
     private List<Deck> deckList = new ArrayList<>();
@@ -60,12 +59,12 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
     }
 
     @Override
-    public DeckHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new DeckHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list_item, parent, false));
+    public DeckViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new DeckViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(DeckHolder holder, int position) {
+    public void onBindViewHolder(DeckViewHolder holder, int position) {
         if (position < deckList.size()) {
             final Deck deck = deckList.get(position);
             holder.deckName.setText(deck.getName());
@@ -117,23 +116,6 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.DeckHo
     @Override
     public int getItemCount() {
         return deckList.size() + 1;
-    }
-
-    public static class DeckHolder extends RecyclerView.ViewHolder {
-        public final TextView deckName;
-        public final TextView deckDescription;
-        public final TextView deckCount;
-        public final View deckCountHolder;
-        public final View deckSwipeIcon;
-
-        public DeckHolder(View itemView) {
-            super(itemView);
-            deckName = (TextView) itemView.findViewById(R.id.deck_name);
-            deckDescription = (TextView) itemView.findViewById(R.id.deck_description);
-            deckCount = (TextView) itemView.findViewById(R.id.deck_count);
-            deckCountHolder = itemView.findViewById(R.id.deck_count_holder);
-            deckSwipeIcon = itemView.findViewById(R.id.deck_swipe_icon);
-        }
     }
 
 }
