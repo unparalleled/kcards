@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.deck_list;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -23,6 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
+import com.mrkevinthomas.kcards.Analytics;
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.ThisApp;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.raizlabs.android.dbflow.sql.language.CursorResult;

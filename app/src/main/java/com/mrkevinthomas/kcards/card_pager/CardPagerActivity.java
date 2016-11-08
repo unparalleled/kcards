@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_pager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Deck;
 
 public class CardPagerActivity extends BaseActivity {

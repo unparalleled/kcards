@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_list;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +18,11 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mrkevinthomas.kcards.Analytics;
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
+import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.SettingsActivity;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.LanguageSpinner;

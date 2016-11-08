@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_swipe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.ThisApp;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 

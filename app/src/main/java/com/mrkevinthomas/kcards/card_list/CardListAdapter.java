@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_list;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.card_pager.CardPagerActivity;
+import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 

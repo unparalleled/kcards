@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_swipe;
 
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.CardItem;

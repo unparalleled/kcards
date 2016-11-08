@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.mrkevinthomas.kcards.deck_list.DeckListActivity;
+import com.mrkevinthomas.kcards.deck_list.DeckViewActivity;
+
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String ARG_DECK = "arg_deck";

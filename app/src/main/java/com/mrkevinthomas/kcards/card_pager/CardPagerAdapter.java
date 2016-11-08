@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.card_pager;
 
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.ui.CardItem;
 

@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards;
+package com.mrkevinthomas.kcards.deck_list;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.card_list.CardListActivity;
+import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
 import com.mrkevinthomas.kcards.models.Deck;
 
 import java.util.ArrayList;

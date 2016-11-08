@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".DeckListActivity"
+            android:name=".deck_list.DeckListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -28,26 +28,26 @@
         </activity>
 
         <activity
-            android:name=".DeckViewActivity"
-            android:parentActivityName=".DeckListActivity"
+            android:name=".deck_list.DeckViewActivity"
+            android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".CardListActivity"
-            android:parentActivityName=".DeckListActivity"
+            android:name=".card_list.CardListActivity"
+            android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".CardPagerActivity"
-            android:parentActivityName=".CardListActivity"
+            android:name=".card_pager.CardPagerActivity"
+            android:parentActivityName=".card_list.CardListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".CardSwipeActivity"
-            android:parentActivityName=".DeckListActivity"
+            android:name=".card_swipe.CardSwipeActivity"
+            android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
