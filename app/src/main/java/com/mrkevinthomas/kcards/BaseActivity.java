@@ -143,7 +143,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             } else if (id == R.id.nav_dictionary) {
                 // TODO
-            } else if (id == R.id.nav_trending) {
+            } else if (id == R.id.nav_shared) {
                 startActivity(new Intent(this, FirebaseDeckListActivity.class));
             }
         }

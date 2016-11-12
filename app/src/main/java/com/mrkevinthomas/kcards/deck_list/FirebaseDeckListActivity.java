@@ -28,14 +28,14 @@ public class FirebaseDeckListActivity extends DeckListActivity {
     private static final String SORT_BY_DESCRIPTION = "description";
 
     protected int getNavItemId() {
-        return R.id.nav_trending;
+        return R.id.nav_shared;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fab.setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.trending);
+        getSupportActionBar().setTitle(R.string.shared);
         deckListAdapter.setReadOnly(true);
     }
 

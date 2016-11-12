@@ -92,10 +92,9 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                         deckListActivity.startActivity(intent);
                     }
                 });
-                holder.deckSwipeIcon.setVisibility(View.VISIBLE);
+                holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_play_black_48dp);
             } else {
-                holder.deckCountHolder.setClickable(false);
-                holder.deckSwipeIcon.setVisibility(View.GONE);
+                holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_black_48dp);
             }
 
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

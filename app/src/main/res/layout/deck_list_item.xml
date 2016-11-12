@@ -86,12 +86,11 @@
                     tools:text="10 cards"/>
 
                 <ImageView
-                    android:id="@+id/deck_swipe_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/deck_action_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_above="@id/deck_count"
-                    android:layout_alignLeft="@id/deck_count"
-                    android:layout_alignRight="@id/deck_count"
+                    android:layout_alignParentRight="@id/deck_count"
                     android:src="@drawable/ic_playlist_play_black_48dp"/>
             </RelativeLayout>
 

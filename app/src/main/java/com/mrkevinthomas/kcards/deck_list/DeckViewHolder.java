@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards.deck_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.R;
@@ -11,7 +12,7 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
     public final TextView deckDescription;
     public final TextView deckCount;
     public final View deckCountHolder;
-    public final View deckSwipeIcon;
+    public final ImageView deckActionIcon;
     public final TextView deckCreated;
     public final TextView deckUpdated;
 
@@ -21,7 +22,7 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
         deckDescription = (TextView) itemView.findViewById(R.id.deck_description);
         deckCount = (TextView) itemView.findViewById(R.id.deck_count);
         deckCountHolder = itemView.findViewById(R.id.deck_count_holder);
-        deckSwipeIcon = itemView.findViewById(R.id.deck_swipe_icon);
+        deckActionIcon = (ImageView) itemView.findViewById(R.id.deck_action_icon);
         deckCreated = (TextView) itemView.findViewById(R.id.deck_created);
         deckUpdated = (TextView) itemView.findViewById(R.id.deck_updated);
     }
