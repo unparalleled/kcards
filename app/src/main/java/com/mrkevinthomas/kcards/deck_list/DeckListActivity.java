@@ -270,14 +270,14 @@ public class DeckListActivity extends BaseActivity {
             deckListAdapter.sort(new Comparator<Deck>() {
                 @Override
                 public int compare(Deck deck1, Deck deck2) {
-                    return ("" + deck1.getName()).compareTo(deck2.getName());
+                    return ("" + deck1.getName()).compareToIgnoreCase(deck2.getName());
                 }
             });
         } else if (item.getItemId() == R.id.sort_description) {
             deckListAdapter.sort(new Comparator<Deck>() {
                 @Override
                 public int compare(Deck deck1, Deck deck2) {
-                    return ("" + deck1.getDescription()).compareTo(deck2.getDescription());
+                    return ("" + deck1.getDescription()).compareToIgnoreCase(deck2.getDescription());
                 }
             });
         } else if (item.getItemId() == R.id.sort_created) {

@@ -12,6 +12,8 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
     public final TextView deckCount;
     public final View deckCountHolder;
     public final View deckSwipeIcon;
+    public final TextView deckCreated;
+    public final TextView deckUpdated;
 
     public DeckViewHolder(View itemView) {
         super(itemView);
@@ -20,5 +22,7 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
         deckCount = (TextView) itemView.findViewById(R.id.deck_count);
         deckCountHolder = itemView.findViewById(R.id.deck_count_holder);
         deckSwipeIcon = itemView.findViewById(R.id.deck_swipe_icon);
+        deckCreated = (TextView) itemView.findViewById(R.id.deck_created);
+        deckUpdated = (TextView) itemView.findViewById(R.id.deck_updated);
     }
 }

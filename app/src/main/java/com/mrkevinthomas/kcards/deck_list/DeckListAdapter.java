@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.mrkevinthomas.kcards.BaseActivity;
 import com.mrkevinthomas.kcards.R;
+import com.mrkevinthomas.kcards.Utils;
 import com.mrkevinthomas.kcards.card_list.CardListActivity;
 import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
 import com.mrkevinthomas.kcards.models.Deck;
@@ -106,6 +107,12 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                     return true;
                 }
             });
+
+            String createdDate = Utils.getDateString(deck.getCreatedTimeMs());
+            holder.deckCreated.setText(deckListActivity.getString(R.string.created_at, createdDate));
+
+            String updatedDate = Utils.getDateString(deck.getUpdatedTimeMs());
+            holder.deckUpdated.setText(deckListActivity.getString(R.string.updated_at, updatedDate));
 
             holder.itemView.setVisibility(View.VISIBLE);
         } else {

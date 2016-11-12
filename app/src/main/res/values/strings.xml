@@ -54,6 +54,9 @@
         <item quantity="other">You will lose the %s cards in this deck.</item>
     </plurals>
 
+    <!-- progress reset dialog -->
+    <string name="deck_reset_progress">This will reset progress for all cards in this deck.</string>
+
     <!-- toasts -->
     <string name="deck_must_have_name">Deck must have a name</string>
     <string name="card_must_have_front">Card must have a front</string>
@@ -80,7 +83,8 @@
     <string name="text_to_speech_dialog_title">Language Not Supported</string>
     <string name="text_to_speech_dialog_message">Would you like to continue to the system settings to install this language?</string>
 
-    <string name="deck_reset_progress">This will reset progress for all cards in this deck.</string>
-
+    <!-- date displays -->
+    <string name="created_at">Created %s</string>
+    <string name="updated_at">Updated %s</string>
 
 </resources>

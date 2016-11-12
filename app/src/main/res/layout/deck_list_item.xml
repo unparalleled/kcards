@@ -32,6 +32,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/deck_count_holder"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 tools:text="Deck Name"/>
 
             <TextView
@@ -42,8 +43,28 @@
                 android:layout_below="@id/deck_name"
                 android:layout_marginTop="12dp"
                 android:layout_toLeftOf="@+id/deck_count_holder"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 tools:text="Deck Description"/>
+
+            <TextView
+                android:id="@+id/deck_created"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/deck_description"
+                android:layout_marginTop="12dp"
+                android:textSize="10sp"
+                tools:text="Created 10/11/16"/>
+
+            <TextView
+                android:id="@+id/deck_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/deck_description"
+                android:layout_marginTop="12dp"
+                android:textSize="10sp"
+                tools:text="Updated 10/12/16"/>
 
             <RelativeLayout
                 android:id="@+id/deck_count_holder"
@@ -61,6 +82,7 @@
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     tools:text="10 cards"/>
 
                 <ImageView
