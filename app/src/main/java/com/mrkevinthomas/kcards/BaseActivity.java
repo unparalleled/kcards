@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.mrkevinthomas.kcards.deck_list.DeckListActivity;
-import com.mrkevinthomas.kcards.deck_list.FirebaseDeckListActivity;
+import com.mrkevinthomas.kcards.deck_list.SharedDeckListActivity;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -141,10 +141,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, DeckListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // start fresh from home
                 startActivity(intent);
+            } else if (id == R.id.nav_shared) {
+                startActivity(new Intent(this, SharedDeckListActivity.class));
             } else if (id == R.id.nav_dictionary) {
                 // TODO
-            } else if (id == R.id.nav_shared) {
-                startActivity(new Intent(this, FirebaseDeckListActivity.class));
             }
         }
 

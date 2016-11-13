@@ -39,7 +39,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class DeckListActivity extends BaseActivity {
@@ -128,6 +128,8 @@ public class DeckListActivity extends BaseActivity {
                         // called when query returns on UI thread
                         List<Deck> decks = tResult.toListClose();
                         if (decks != null && !decks.isEmpty()) {
+                            // default to sorting by last updated
+                            Collections.sort(decks, Deck.UPDATED_COMPARATOR);
                             deckListAdapter.setDeckList(decks);
                         } else {
                             loadExampleDecksFromFile();
@@ -266,34 +268,14 @@ public class DeckListActivity extends BaseActivity {
     }
 
     protected void handleSortActionClicked(MenuItem item) {
-        if (item.getItemId() == R.id.sort_name) {
-            deckListAdapter.sort(new Comparator<Deck>() {
-                @Override
-                public int compare(Deck deck1, Deck deck2) {
-                    return ("" + deck1.getName()).compareToIgnoreCase(deck2.getName());
-                }
-            });
-        } else if (item.getItemId() == R.id.sort_description) {
-            deckListAdapter.sort(new Comparator<Deck>() {
-                @Override
-                public int compare(Deck deck1, Deck deck2) {
-                    return ("" + deck1.getDescription()).compareToIgnoreCase(deck2.getDescription());
-                }
-            });
+        if (item.getItemId() == R.id.sort_updated) {
+            deckListAdapter.sort(Deck.UPDATED_COMPARATOR);
         } else if (item.getItemId() == R.id.sort_created) {
-            deckListAdapter.sort(new Comparator<Deck>() {
-                @Override
-                public int compare(Deck deck1, Deck deck2) {
-                    return (int) (deck2.getCreatedTimeMs() - deck1.getCreatedTimeMs());
-                }
-            });
-        } else if (item.getItemId() == R.id.sort_updated) {
-            deckListAdapter.sort(new Comparator<Deck>() {
-                @Override
-                public int compare(Deck deck1, Deck deck2) {
-                    return (int) (deck2.getUpdatedTimeMs() - deck1.getUpdatedTimeMs());
-                }
-            });
+            deckListAdapter.sort(Deck.CREATED_COMPARATOR);
+        } else if (item.getItemId() == R.id.sort_name) {
+            deckListAdapter.sort(Deck.NAME_COMPARATOR);
+        } else if (item.getItemId() == R.id.sort_description) {
+            deckListAdapter.sort(Deck.DESCRIPTION_COMPARATOR);
         }
     }
 

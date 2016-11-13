@@ -18,7 +18,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FirebaseDeckListActivity extends DeckListActivity {
+public class SharedDeckListActivity extends DeckListActivity {
 
     private static final int MAX_DECKS = 50;
 
@@ -41,7 +41,7 @@ public class FirebaseDeckListActivity extends DeckListActivity {
 
     @Override
     protected void loadDecks() {
-        retrieveDecksFromSharedFirebaseDb(SORT_BY_CREATED, true);
+        retrieveDecksFromSharedFirebaseDb(SORT_BY_UPDATED, true);
     }
 
     private void retrieveDecksFromSharedFirebaseDb(final String SORT_BY, final boolean reverseOrder) {
@@ -66,7 +66,7 @@ public class FirebaseDeckListActivity extends DeckListActivity {
                 // iterate through the children to preserve order
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Deck deck = snapshot.getValue(t);
-                    deck.setFirebaseKey(snapshot.getKey());
+                    deck.setFirebaseKey(snapshot.getKey()); // track firebase reference for following
                     decks.add(deck);
                 }
 
@@ -88,14 +88,14 @@ public class FirebaseDeckListActivity extends DeckListActivity {
 
     @Override
     protected void handleSortActionClicked(MenuItem item) {
-        if (item.getItemId() == R.id.sort_name) {
+        if (item.getItemId() == R.id.sort_updated) {
+            retrieveDecksFromSharedFirebaseDb(SORT_BY_UPDATED, true);
+        } else if (item.getItemId() == R.id.sort_created) {
+            retrieveDecksFromSharedFirebaseDb(SORT_BY_CREATED, true);
+        } else if (item.getItemId() == R.id.sort_name) {
             retrieveDecksFromSharedFirebaseDb(SORT_BY_NAME, false);
         } else if (item.getItemId() == R.id.sort_description) {
             retrieveDecksFromSharedFirebaseDb(SORT_BY_DESCRIPTION, false);
-        } else if (item.getItemId() == R.id.sort_created) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_CREATED, true);
-        } else if (item.getItemId() == R.id.sort_updated) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_UPDATED, true);
         }
     }
 

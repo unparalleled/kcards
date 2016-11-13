@@ -10,10 +10,39 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Table(database = AppDatabase.class)
 public class Deck extends BaseDbModel implements Parcelable {
+
+    public static final Comparator<Deck> UPDATED_COMPARATOR = new Comparator<Deck>() {
+        @Override
+        public int compare(Deck deck1, Deck deck2) {
+            return (int) (deck2.getUpdatedTimeMs() - deck1.getUpdatedTimeMs());
+        }
+    };
+
+    public static final Comparator<Deck> CREATED_COMPARATOR = new Comparator<Deck>() {
+        @Override
+        public int compare(Deck deck1, Deck deck2) {
+            return (int) (deck2.getCreatedTimeMs() - deck1.getCreatedTimeMs());
+        }
+    };
+
+    public static final Comparator<Deck> NAME_COMPARATOR = new Comparator<Deck>() {
+        @Override
+        public int compare(Deck deck1, Deck deck2) {
+            return ("" + deck1.getName()).compareToIgnoreCase(deck2.getName());
+        }
+    };
+
+    public static final Comparator<Deck> DESCRIPTION_COMPARATOR = new Comparator<Deck>() {
+        @Override
+        public int compare(Deck deck1, Deck deck2) {
+            return ("" + deck1.getDescription()).compareToIgnoreCase(deck2.getDescription());
+        }
+    };
 
     @Column
     @PrimaryKey(autoincrement = true)

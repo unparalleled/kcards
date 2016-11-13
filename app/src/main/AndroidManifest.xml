@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name=".deck_list.FirebaseDeckListActivity"
+            android:name=".deck_list.SharedDeckListActivity"
             android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
