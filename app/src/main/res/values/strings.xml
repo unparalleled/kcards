@@ -79,6 +79,10 @@
     <string name="deck_unshared">Deck Unshared!</string>
     <string name="deck_unshare_message">This will remove the deck from the shared deck list.</string>
 
+    <!-- deck following and unfollowing -->
+    <string name="deck_followed">Deck Followed!</string>
+    <string name="deck_unfollowed">Deck Unfollowed!</string>
+
     <!-- text to speech dialog -->
     <string name="text_to_speech_dialog_title">Language Not Supported</string>
     <string name="text_to_speech_dialog_message">Would you like to continue to the system settings to install this language?</string>

@@ -207,7 +207,7 @@ public class CardListActivity extends BaseActivity {
             FirebaseDb.createNewDeck(deck);
             shareUnshareMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             shareUnshareMenuItem.setTitle(R.string.unshare);
-            Toast.makeText(this, R.string.deck_shared, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.deck_shared, Toast.LENGTH_SHORT).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.are_you_sure);
@@ -218,7 +218,7 @@ public class CardListActivity extends BaseActivity {
                     FirebaseDb.deleteDeck(deck);
                     shareUnshareMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
                     shareUnshareMenuItem.setTitle(R.string.share);
-                    Toast.makeText(CardListActivity.this, R.string.deck_unshared, Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardListActivity.this, R.string.deck_unshared, Toast.LENGTH_SHORT).show();
                 }
             });
             builder.setNegativeButton(R.string.cancel, null);

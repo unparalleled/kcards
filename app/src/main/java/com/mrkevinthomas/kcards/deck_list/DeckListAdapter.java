@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.BaseActivity;
+import com.mrkevinthomas.kcards.Preferences;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.Utils;
 import com.mrkevinthomas.kcards.card_list.CardListActivity;
@@ -65,7 +67,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(DeckViewHolder holder, int position) {
+    public void onBindViewHolder(final DeckViewHolder holder, int position) {
         if (position < deckList.size()) {
             final Deck deck = deckList.get(position);
             holder.deckName.setText(deck.getName());
@@ -94,8 +96,22 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                     }
                 });
             } else {
-                holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_black_48dp);
-
+                holder.deckActionIcon.setImageResource(Preferences.isFollowingDeck(deck.getFirebaseKey()) ?
+                        R.drawable.ic_playlist_add_check_black_48dp : R.drawable.ic_playlist_add_black_48dp);
+                holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Preferences.isFollowingDeck(deck.getFirebaseKey())) {
+                            Toast.makeText(deckListActivity, R.string.deck_unfollowed, Toast.LENGTH_SHORT).show();
+                            Preferences.unfollowDeck(deck.getFirebaseKey());
+                            holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_black_48dp);
+                        } else {
+                            Toast.makeText(deckListActivity, R.string.deck_followed, Toast.LENGTH_SHORT).show();
+                            Preferences.followDeck(deck.getFirebaseKey());
+                            holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_check_black_48dp);
+                        }
+                    }
+                });
             }
 
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

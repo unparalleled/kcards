@@ -65,7 +65,9 @@ public class FirebaseDeckListActivity extends DeckListActivity {
                 ArrayList<Deck> decks = new ArrayList<>();
                 // iterate through the children to preserve order
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    decks.add(snapshot.getValue(t));
+                    Deck deck = snapshot.getValue(t);
+                    deck.setFirebaseKey(snapshot.getKey());
+                    decks.add(deck);
                 }
 
                 // for ordering by timestamps, order by most recent

@@ -6,7 +6,10 @@ import java.util.Locale;
 
 public class Language {
 
+    public static final Language DEFAULT = new Language("en", "English", Locale.ENGLISH);
+
     private static final Language[] languages = {
+            new Language("zh-CN", "Chinese", Locale.CHINESE),
             new Language("en", "English", Locale.ENGLISH),
             new Language("fr", "French", Locale.FRENCH),
             new Language("de", "German", Locale.GERMAN),
