@@ -84,6 +84,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
             });
 
             if (!isReadOnly) {
+                holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_play_black_48dp);
                 holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -92,9 +93,9 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                         deckListActivity.startActivity(intent);
                     }
                 });
-                holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_play_black_48dp);
             } else {
                 holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_black_48dp);
+
             }
 
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

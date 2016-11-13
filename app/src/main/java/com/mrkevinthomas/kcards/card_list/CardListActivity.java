@@ -19,8 +19,8 @@ import android.widget.Toast;
 import com.mrkevinthomas.kcards.Analytics;
 import com.mrkevinthomas.kcards.BaseActivity;
 import com.mrkevinthomas.kcards.FirebaseDb;
+import com.mrkevinthomas.kcards.Preferences;
 import com.mrkevinthomas.kcards.R;
-import com.mrkevinthomas.kcards.SettingsActivity;
 import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
@@ -146,8 +146,8 @@ public class CardListActivity extends BaseActivity {
             backLanguage.setSelectedLanguage(card.getBackLanguageCode());
         } else {
             // default to main/secondary language settings
-            frontLanguage.setSelectedLanguage(SettingsActivity.getMainLanguage(this));
-            backLanguage.setSelectedLanguage(SettingsActivity.getSecondaryLanguage(this));
+            frontLanguage.setSelectedLanguage(Preferences.getMainLanguage(this));
+            backLanguage.setSelectedLanguage(Preferences.getSecondaryLanguage(this));
         }
         builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
