@@ -34,7 +34,7 @@ public class CardListActivity extends BaseActivity {
     private boolean isReadOnly;
 
     private MenuItem practiceMenuItem;
-    private MenuItem publishUnpublishMenuItem;
+    private MenuItem shareUnshareMenuItem;
     private MenuItem saveMenuItem;
 
     @Override
@@ -162,17 +162,17 @@ public class CardListActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.card_management, menu);
         practiceMenuItem = menu.findItem(R.id.action_practice);
-        publishUnpublishMenuItem = menu.findItem(R.id.action_publish_unpublish);
+        shareUnshareMenuItem = menu.findItem(R.id.action_share_unshare);
         saveMenuItem = menu.findItem(R.id.action_save);
         if (!isReadOnly) {
             saveMenuItem.setVisible(false);
             if (deck.isSyncedWithFirebase()) {
-                publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
-                publishUnpublishMenuItem.setTitle(R.string.unpublish);
+                shareUnshareMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+                shareUnshareMenuItem.setTitle(R.string.unshare);
             }
         } else {
             practiceMenuItem.setVisible(false);
-            publishUnpublishMenuItem.setVisible(false);
+            shareUnshareMenuItem.setVisible(false);
             menu.findItem(R.id.action_reset_progress).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
@@ -188,7 +188,7 @@ public class CardListActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_shuffle) {
             cardListAdapter.shuffle();
             return true;
-        } else if (item.getItemId() == R.id.action_publish_unpublish) {
+        } else if (item.getItemId() == R.id.action_share_unshare) {
             handlePublishUnpublishActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_save) {
@@ -205,20 +205,20 @@ public class CardListActivity extends BaseActivity {
     private void handlePublishUnpublishActionClicked() {
         if (!deck.isSyncedWithFirebase()) {
             FirebaseDb.createNewDeck(deck);
-            publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
-            publishUnpublishMenuItem.setTitle(R.string.unpublish);
-            Toast.makeText(this, R.string.deck_published, Toast.LENGTH_LONG).show();
+            shareUnshareMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
+            shareUnshareMenuItem.setTitle(R.string.unshare);
+            Toast.makeText(this, R.string.deck_shared, Toast.LENGTH_LONG).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.are_you_sure);
-            builder.setMessage(R.string.deck_unpublish_message);
-            builder.setPositiveButton(R.string.unpublish, new DialogInterface.OnClickListener() {
+            builder.setMessage(R.string.deck_unshare_message);
+            builder.setPositiveButton(R.string.unshare, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseDb.deleteDeck(deck);
-                    publishUnpublishMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
-                    publishUnpublishMenuItem.setTitle(R.string.publish);
-                    Toast.makeText(CardListActivity.this, R.string.deck_unpublished, Toast.LENGTH_LONG).show();
+                    shareUnshareMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
+                    shareUnshareMenuItem.setTitle(R.string.share);
+                    Toast.makeText(CardListActivity.this, R.string.deck_unshared, Toast.LENGTH_LONG).show();
                 }
             });
             builder.setNegativeButton(R.string.cancel, null);
