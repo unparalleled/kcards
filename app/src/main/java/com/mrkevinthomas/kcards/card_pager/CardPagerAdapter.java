@@ -34,14 +34,14 @@ public class CardPagerAdapter extends PagerAdapter implements CardItem.Delegate 
     public void setHidden(boolean hidden) {
         this.isHidden = hidden;
         for (CardItem cardItem : activeViews) {
-            cardItem.setupCardAnswerCover();
+            cardItem.setupCardAnswerCover(); // update ui directly without having to notify a dataset change
         }
     }
 
     public void swap() {
         isSwapped = !isSwapped;
         for (CardItem cardItem : activeViews) {
-            cardItem.setupCardText();
+            cardItem.setupCardText(); // update ui directly without having to notify a dataset change
         }
     }
 

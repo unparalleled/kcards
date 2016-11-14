@@ -68,7 +68,7 @@ public class SharedDeckListActivity extends DeckListActivity {
                 // iterate through the children to preserve order
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Deck deck = snapshot.getValue(t);
-                    deck.setFirebaseKey(snapshot.getKey()); // track firebase reference for following decks
+                    deck.setFirebaseKey(snapshot.getKey()); // firebase reference for tracking following status
                     decks.add(deck);
                 }
 

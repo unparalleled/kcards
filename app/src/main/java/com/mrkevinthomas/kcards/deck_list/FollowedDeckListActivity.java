@@ -35,7 +35,6 @@ public class FollowedDeckListActivity extends DeckListActivity {
         fab.setVisibility(View.GONE);
         getSupportActionBar().setTitle(R.string.followed);
         deckListAdapter.setReadOnly(true);
-        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class FollowedDeckListActivity extends DeckListActivity {
         if (keySet.isEmpty()) {
             return;
         }
-
+        progressBar.setVisibility(View.VISIBLE);
         loadCount = new AtomicInteger(keySet.size());
 
         for (String key : keySet) {
@@ -53,9 +52,6 @@ public class FollowedDeckListActivity extends DeckListActivity {
     }
 
     private void retrieveDeckFromFirebaseDb(String key) {
-        deckListAdapter.clear();
-        progressBar.setVisibility(View.VISIBLE);
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference(FirebaseDb.DECK_KEY + "/" + key);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -66,6 +62,7 @@ public class FollowedDeckListActivity extends DeckListActivity {
 
                 Deck deck = dataSnapshot.getValue(t);
                 if (deck != null) {
+                    deck.setFirebaseKey(dataSnapshot.getKey()); // firebase reference for tracking following status
                     decks.add(deck);
                 }
                 onDeckLoadedOrFailed();
