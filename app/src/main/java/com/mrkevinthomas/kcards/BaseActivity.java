@@ -2,6 +2,7 @@ package com.mrkevinthomas.kcards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -38,16 +39,32 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected ViewGroup mainContentHolder;
     protected ProgressBar progressBar;
 
-    protected boolean shouldShowUpButton() {
-        return false;
-    }
-
+    /**
+     * @return the resource id of the main layout to be inflated and attached to the main content holder
+     */
+    @LayoutRes
     protected int getViewId() {
         return R.layout.recycler_view;
     }
 
+    /**
+     * Used for checking the current nav item and ignoring clicks on it.
+     * This can be ignored if {@link #shouldShowUpButton()} returns true as there is no nav drawer.
+     *
+     * @return id of the navigation item which corresponds to the current activity
+     */
     protected int getNavItemId() {
         return R.id.nav_home;
+    }
+
+    /**
+     * Determines whether or not to show the up button or hamburger menu.
+     * If this returns false, then you MUST return a nav item id from {@link #getNavItemId()}.
+     *
+     * @return whether or not to show the up button instead of the hamburger menu
+     */
+    protected boolean shouldShowUpButton() {
+        return false;
     }
 
     @Override
@@ -107,22 +124,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.base_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         Analytics.logOptionsItemSelectedEvent(item);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (item.getItemId() == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
@@ -130,10 +140,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         // ignore clicks on the current nav item
