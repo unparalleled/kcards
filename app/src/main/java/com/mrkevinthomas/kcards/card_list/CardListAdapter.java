@@ -108,7 +108,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @Override
     public int getItemCount() {
-        return cardList.size() + 1;
+        return cardList.size() + 1; // +1 for dummy footer
     }
 
 }

@@ -11,6 +11,10 @@
             android:icon="@drawable/ic_folder_shared_black_48dp"
             android:title="@string/shared"/>
         <item
+            android:id="@+id/nav_followed"
+            android:icon="@drawable/ic_folder_special_black_48dp"
+            android:title="@string/followed"/>
+        <item
             android:id="@+id/nav_dictionary"
             android:icon="@drawable/ic_translate_black_48dp"
             android:title="@string/dictionary"/>

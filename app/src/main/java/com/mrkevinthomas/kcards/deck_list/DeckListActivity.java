@@ -43,7 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class DeckListActivity extends BaseActivity {
-    protected static final String TAG = "DeckListActivity";
+    private static final String TAG = "DeckListActivity";
 
     private static final String EXAMPLES_FILE = "examples.json";
 

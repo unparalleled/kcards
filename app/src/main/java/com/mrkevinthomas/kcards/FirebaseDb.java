@@ -6,7 +6,7 @@ import com.mrkevinthomas.kcards.models.Deck;
 
 public class FirebaseDb {
 
-    private static final String DECK_KEY = "decks";
+    public static final String DECK_KEY = "decks";
 
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
 

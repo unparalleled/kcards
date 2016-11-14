@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.mrkevinthomas.kcards.deck_list.DeckListActivity;
+import com.mrkevinthomas.kcards.deck_list.FollowedDeckListActivity;
 import com.mrkevinthomas.kcards.deck_list.SharedDeckListActivity;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -143,6 +144,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             } else if (id == R.id.nav_shared) {
                 startActivity(new Intent(this, SharedDeckListActivity.class));
+            } else if (id == R.id.nav_followed) {
+                startActivity(new Intent(this, FollowedDeckListActivity.class));
             } else if (id == R.id.nav_dictionary) {
                 // TODO
             }

@@ -138,7 +138,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
 
     @Override
     public int getItemCount() {
-        return deckList.size() + 1;
+        return deckList.size() + 1; // +1 for dummy footer
     }
 
 }

@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.mrkevinthomas.kcards.FirebaseDb;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Deck;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SharedDeckListActivity extends DeckListActivity {
+    private static final String TAG = "SharedDeckListActivity";
 
     private static final int MAX_DECKS = 50;
 
@@ -41,15 +43,15 @@ public class SharedDeckListActivity extends DeckListActivity {
 
     @Override
     protected void loadDecks() {
-        retrieveDecksFromSharedFirebaseDb(SORT_BY_UPDATED, true);
+        retrieveDecksFromFirebaseDb(SORT_BY_UPDATED, true);
     }
 
-    private void retrieveDecksFromSharedFirebaseDb(final String SORT_BY, final boolean reverseOrder) {
+    private void retrieveDecksFromFirebaseDb(final String SORT_BY, final boolean reverseOrder) {
         deckListAdapter.clear();
         progressBar.setVisibility(View.VISIBLE);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("decks");
+        DatabaseReference databaseReference = database.getReference(FirebaseDb.DECK_KEY);
         Query query = databaseReference.orderByChild(SORT_BY);
         if (reverseOrder) {
             query.limitToLast(MAX_DECKS);
@@ -66,7 +68,7 @@ public class SharedDeckListActivity extends DeckListActivity {
                 // iterate through the children to preserve order
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Deck deck = snapshot.getValue(t);
-                    deck.setFirebaseKey(snapshot.getKey()); // track firebase reference for following
+                    deck.setFirebaseKey(snapshot.getKey()); // track firebase reference for following decks
                     decks.add(deck);
                 }
 
@@ -89,13 +91,13 @@ public class SharedDeckListActivity extends DeckListActivity {
     @Override
     protected void handleSortActionClicked(MenuItem item) {
         if (item.getItemId() == R.id.sort_updated) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_UPDATED, true);
+            retrieveDecksFromFirebaseDb(SORT_BY_UPDATED, true);
         } else if (item.getItemId() == R.id.sort_created) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_CREATED, true);
+            retrieveDecksFromFirebaseDb(SORT_BY_CREATED, true);
         } else if (item.getItemId() == R.id.sort_name) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_NAME, false);
+            retrieveDecksFromFirebaseDb(SORT_BY_NAME, false);
         } else if (item.getItemId() == R.id.sort_description) {
-            retrieveDecksFromSharedFirebaseDb(SORT_BY_DESCRIPTION, false);
+            retrieveDecksFromFirebaseDb(SORT_BY_DESCRIPTION, false);
         }
     }
 

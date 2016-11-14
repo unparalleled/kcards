@@ -34,6 +34,12 @@
         </activity>
 
         <activity
+            android:name=".deck_list.FollowedDeckListActivity"
+            android:parentActivityName=".deck_list.DeckListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
             android:name=".card_list.CardListActivity"
             android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
