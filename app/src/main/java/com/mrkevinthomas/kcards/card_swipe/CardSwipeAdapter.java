@@ -38,7 +38,6 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
         notifyDataSetChanged();
     }
 
-
     public void removeFirst() {
         cards.remove(0);
         notifyDataSetChanged();
