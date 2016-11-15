@@ -20,22 +20,24 @@ import java.util.TreeMap;
 
 public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
-    private Deck deck;
     private CardSwipeActivity cardSwipeActivity;
+    private Deck deck;
     private boolean isSwapped;
 
     private List<Card> cards = new ArrayList<>();
 
-    public CardSwipeAdapter(@NonNull Deck deck, @NonNull CardSwipeActivity cardSwipeActivity) {
-        this.deck = deck;
+    public CardSwipeAdapter(@NonNull CardSwipeActivity cardSwipeActivity, @NonNull Deck deck, boolean isSwapped) {
         this.cardSwipeActivity = cardSwipeActivity;
+        this.deck = deck;
+        this.isSwapped = isSwapped;
         chooseCardsToShow();
     }
 
-    public void swap() {
-        isSwapped = !isSwapped;
+    public void setSwapped(boolean swapped) {
+        isSwapped = swapped;
         notifyDataSetChanged();
     }
+
 
     public void removeFirst() {
         cards.remove(0);

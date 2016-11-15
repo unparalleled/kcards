@@ -18,6 +18,8 @@ public class CardSwipeActivity extends BaseActivity {
 
     private Deck deck;
 
+    private boolean isSwapped;
+
     private SwipeFlingAdapterView swipeFlingAdapterView;
     private CardSwipeAdapter cardSwipeAdapter;
 
@@ -34,17 +36,29 @@ public class CardSwipeActivity extends BaseActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(KEY_IS_SWAPPED, isSwapped);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         deck = getIntent().getParcelableExtra(ARG_DECK);
+
+        if (savedInstanceState != null) {
+            isSwapped = savedInstanceState.getBoolean(KEY_IS_SWAPPED);
+        }
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
 
         fab.setVisibility(View.GONE);
 
+        cardSwipeAdapter = new CardSwipeAdapter(this, deck, isSwapped);
+
         swipeFlingAdapterView = (SwipeFlingAdapterView) findViewById(R.id.swipe_container);
-        cardSwipeAdapter = new CardSwipeAdapter(deck, this);
         swipeFlingAdapterView.setAdapter(cardSwipeAdapter);
         swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -111,7 +125,8 @@ public class CardSwipeActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_show_swap) {
             // workaround for https://github.com/Diolor/Swipecards/issues/29
             swipeFlingAdapterView.removeAllViewsInLayout();
-            cardSwipeAdapter.swap();
+            isSwapped = !isSwapped;
+            cardSwipeAdapter.setSwapped(isSwapped);
             return true;
         }
 

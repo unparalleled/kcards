@@ -28,6 +28,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public static final String ARG_POSITION = "arg_position";
     public static final String ARG_READ_ONLY = "arg_read_only";
 
+    public static final String KEY_IS_SWAPPED = "key_is_swapped";
+    public static final String KEY_IS_HIDDEN = "key_is_hidden";
+
     public static final int REQUEST_DECK = 0;
 
     protected Toolbar toolbar;

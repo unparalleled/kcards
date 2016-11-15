@@ -15,31 +15,35 @@ import java.util.ArrayList;
 
 public class CardPagerAdapter extends PagerAdapter implements CardItem.Delegate {
 
-    private Deck deck;
-
     private CardPagerActivity cardPagerActivity;
-    private boolean isHidden;
-    private boolean isSwapped;
+    private Deck deck;
     private boolean isReadOnly;
+    private boolean isSwapped;
+    private boolean isHidden;
 
     private ArrayList<CardItem> activeViews = new ArrayList<>();
 
-    public CardPagerAdapter(@NonNull Deck deck, @NonNull CardPagerActivity cardPagerActivity, boolean isHidden, boolean isReadOnly) {
-        this.deck = deck;
+    public CardPagerAdapter(@NonNull CardPagerActivity cardPagerActivity,
+                            @NonNull Deck deck,
+                            boolean isReadOnly,
+                            boolean isSwapped,
+                            boolean isHidden) {
         this.cardPagerActivity = cardPagerActivity;
-        this.isHidden = isHidden;
+        this.deck = deck;
         this.isReadOnly = isReadOnly;
+        this.isSwapped = isSwapped;
+        this.isHidden = isHidden;
     }
 
     public void setHidden(boolean hidden) {
-        this.isHidden = hidden;
+        isHidden = hidden;
         for (CardItem cardItem : activeViews) {
             cardItem.setupCardAnswerCover(); // update ui directly without having to notify a dataset change
         }
     }
 
-    public void swap() {
-        isSwapped = !isSwapped;
+    public void setSwapped(boolean swapped) {
+        isSwapped = swapped;
         for (CardItem cardItem : activeViews) {
             cardItem.setupCardText(); // update ui directly without having to notify a dataset change
         }

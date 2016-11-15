@@ -19,12 +19,14 @@ public class CardPagerActivity extends BaseActivity {
     private Deck deck;
     private int position;
 
+    private boolean isReadOnly;
+    private boolean isSwapped;
+    private boolean isHidden = true; // start with answers hidden
+
     private ViewPager viewPager;
     private CardPagerAdapter cardPagerAdapter;
 
     private MenuItem showHideMenuItem;
-    private boolean isHidden = true; // start with answers hidden
-    private boolean isReadOnly;
 
     private TextToSpeech textToSpeech;
 
@@ -39,11 +41,24 @@ public class CardPagerActivity extends BaseActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(KEY_IS_SWAPPED, isSwapped);
+        outState.putBoolean(KEY_IS_HIDDEN, isHidden);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         deck = getIntent().getParcelableExtra(ARG_DECK);
         position = getIntent().getIntExtra(ARG_POSITION, 0);
         isReadOnly = getIntent().getBooleanExtra(ARG_READ_ONLY, false);
+
+        if (savedInstanceState != null) {
+            isSwapped = savedInstanceState.getBoolean(KEY_IS_SWAPPED);
+            isHidden = savedInstanceState.getBoolean(KEY_IS_HIDDEN);
+        }
 
         getSupportActionBar().setTitle(deck.getName());
         getSupportActionBar().setSubtitle(deck.getDescription());
@@ -52,7 +67,7 @@ public class CardPagerActivity extends BaseActivity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        cardPagerAdapter = new CardPagerAdapter(deck, this, isHidden, isReadOnly);
+        cardPagerAdapter = new CardPagerAdapter(this, deck, isReadOnly, isSwapped, isHidden);
         viewPager.setAdapter(cardPagerAdapter);
         viewPager.setCurrentItem(position);
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
@@ -93,7 +108,8 @@ public class CardPagerActivity extends BaseActivity {
             handleShowHideActionClicked();
             return true;
         } else if (item.getItemId() == R.id.action_show_swap) {
-            cardPagerAdapter.swap();
+            isSwapped = !isSwapped;
+            cardPagerAdapter.setSwapped(isSwapped);
             return true;
         }
 
