@@ -3,7 +3,6 @@ package com.mrkevinthomas.kcards;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.mrkevinthomas.kcards.models.Language;
 
@@ -12,32 +11,37 @@ import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ * This class manages persistent preferences for this app.
+ *
+ * The SharedPreferences implementation is encapsulated in this class and hidden behind helper methods.
+ * The helper methods provide simplicity and ensure consistent usage of keys and types.
+ */
 public class Preferences {
     private static final String TAG = "kcards";
 
-    public static final String KEY_MAIN_LANGUAGE = "key_main_language";
-    public static final String KEY_SECONDARY_LANGUAGE = "key_secondary_language";
+    private static final String KEY_MAIN_LANGUAGE = "key_main_language";
+    private static final String KEY_SECONDARY_LANGUAGE = "key_secondary_language";
 
-    public static final String KEY_FOLLOWING_DECKS = "key_following_decks";
+    private static final String KEY_FOLLOWING_DECKS = "key_following_decks";
 
     private static final SharedPreferences preferences = ThisApp.get().getSharedPreferences(TAG, MODE_PRIVATE);
 
-    public static void putString(String key, String value) {
-        preferences.edit().putString(key, value).apply();
+    public static void putMainLanguageCode(String languageCode) {
+        preferences.edit().putString(KEY_MAIN_LANGUAGE, languageCode).apply();
     }
 
-    @Nullable
-    public static String getString(String key) {
-        return preferences.getString(key, null);
+    public static void putSecondaryLanguageCode(String languageCode) {
+        preferences.edit().putString(KEY_SECONDARY_LANGUAGE, languageCode).apply();
     }
 
     @NonNull
-    public static String getMainLanguage(Context context) {
+    public static String getMainLanguageCode(Context context) {
         return context.getSharedPreferences(TAG, MODE_PRIVATE).getString(KEY_MAIN_LANGUAGE, Language.DEFAULT.getGoogleTranslateCode());
     }
 
     @NonNull
-    public static String getSecondaryLanguage(Context context) {
+    public static String getSecondaryLanguageCode(Context context) {
         return context.getSharedPreferences(TAG, MODE_PRIVATE).getString(KEY_SECONDARY_LANGUAGE, Language.DEFAULT.getGoogleTranslateCode());
     }
 
@@ -58,6 +62,7 @@ public class Preferences {
         preferences.edit().putStringSet(KEY_FOLLOWING_DECKS, deckKeys).apply();
     }
 
+    @NonNull
     public static Set<String> getFollowedKeySet() {
         // create copy to ensure consistency, see `getStringSet`
         return new HashSet<>(preferences.getStringSet(KEY_FOLLOWING_DECKS, new HashSet<String>()));

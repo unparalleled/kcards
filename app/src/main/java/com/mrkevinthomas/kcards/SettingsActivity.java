@@ -1,6 +1,7 @@
 package com.mrkevinthomas.kcards;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import com.mrkevinthomas.kcards.models.Language;
 import com.mrkevinthomas.kcards.ui.LanguageSpinner;
 
 public class SettingsActivity extends BaseActivity {
+    private static final String TAG = "SettingsActivity";
 
     private TextView appVersionTextView;
     private LanguageSpinner mainLanguageSpinner;
@@ -36,13 +38,12 @@ public class SettingsActivity extends BaseActivity {
         appVersionTextView.setText(getString(R.string.app_version_text,
                 ThisApp.get().getAppVersionName(),
                 String.valueOf(ThisApp.get().getAppVersionCode())));
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        setupLanguageSpinner(mainLanguageSpinner, Preferences.KEY_MAIN_LANGUAGE);
-        setupLanguageSpinner(secondaryLanguageSpinner, Preferences.KEY_SECONDARY_LANGUAGE);
+        mainLanguageSpinner.setSelectedLanguage(Preferences.getMainLanguageCode(this));
+        setupLanguageSpinnerListener(mainLanguageSpinner);
+
+        secondaryLanguageSpinner.setSelectedLanguage(Preferences.getSecondaryLanguageCode(this));
+        setupLanguageSpinnerListener(secondaryLanguageSpinner);
     }
 
     @Override
@@ -52,15 +53,18 @@ public class SettingsActivity extends BaseActivity {
         return true;
     }
 
-    private void setupLanguageSpinner(LanguageSpinner languageSpinner, final String LANGUAGE_CODE_KEY) {
-        String selectedLanguageCode = Preferences.getString(LANGUAGE_CODE_KEY);
-        languageSpinner.setSelectedLanguage(selectedLanguageCode);
-
+    private void setupLanguageSpinnerListener(LanguageSpinner languageSpinner) {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Language language = Language.languages()[i];
-                Preferences.putString(LANGUAGE_CODE_KEY, language.getGoogleTranslateCode());
+                if (adapterView == mainLanguageSpinner) {
+                    Preferences.putMainLanguageCode(language.getGoogleTranslateCode());
+                } else if (adapterView == secondaryLanguageSpinner) {
+                    Preferences.putSecondaryLanguageCode(language.getGoogleTranslateCode());
+                } else {
+                    Log.w(TAG, "unknown spinner view");
+                }
             }
 
             @Override

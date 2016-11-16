@@ -146,8 +146,8 @@ public class CardListActivity extends BaseActivity {
             backLanguage.setSelectedLanguage(card.getBackLanguageCode());
         } else {
             // default to main/secondary language settings
-            frontLanguage.setSelectedLanguage(Preferences.getMainLanguage(this));
-            backLanguage.setSelectedLanguage(Preferences.getSecondaryLanguage(this));
+            frontLanguage.setSelectedLanguage(Preferences.getMainLanguageCode(this));
+            backLanguage.setSelectedLanguage(Preferences.getSecondaryLanguageCode(this));
         }
         builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);

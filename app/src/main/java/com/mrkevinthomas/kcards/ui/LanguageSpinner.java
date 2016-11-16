@@ -1,8 +1,10 @@
 package com.mrkevinthomas.kcards.ui;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.mrkevinthomas.kcards.models.Language;
@@ -10,6 +12,7 @@ import com.mrkevinthomas.kcards.models.Language;
 import java.util.ArrayList;
 
 public class LanguageSpinner extends AppCompatSpinner {
+    private static final String TAG = "LanguageSpinner";
 
     public LanguageSpinner(Context context) {
         this(context, null);
@@ -35,14 +38,22 @@ public class LanguageSpinner extends AppCompatSpinner {
         setAdapter(arrayAdapter);
     }
 
-    public void setSelectedLanguage(String selectedLanguageCode) {
+    public void setSelectedLanguage(@Nullable String selectedLanguageCode) {
+        if (selectedLanguageCode == null) {
+            // use default language
+            selectedLanguageCode = Language.DEFAULT.getGoogleTranslateCode();
+        }
+
         int i = 0;
         for (Language language : Language.languages()) {
             if (language.getGoogleTranslateCode().equals(selectedLanguageCode)) {
                 setSelection(i);
+                return;
             }
             i++;
         }
+
+        Log.w(TAG, "could not find language code in list of supported languages");
     }
 
     public Language getSelectedLanguage() {
