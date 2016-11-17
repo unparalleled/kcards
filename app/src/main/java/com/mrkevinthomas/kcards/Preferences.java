@@ -20,10 +20,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Preferences {
     private static final String TAG = "kcards";
 
-    private static final String KEY_MAIN_LANGUAGE = "key_main_language";
-    private static final String KEY_SECONDARY_LANGUAGE = "key_secondary_language";
+    private static final String KEY_MAIN_LANGUAGE = "main_language";
+    private static final String KEY_SECONDARY_LANGUAGE = "secondary_language";
 
-    private static final String KEY_FOLLOWING_DECKS = "key_following_decks";
+    private static final String KEY_FOLLOWING_DECKS = "following_decks";
 
     private static final SharedPreferences preferences = ThisApp.get().getSharedPreferences(TAG, MODE_PRIVATE);
 
