@@ -73,6 +73,7 @@
                 android:layout_alignBottom="@id/deck_description"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:paddingLeft="8dp">
 
                 <TextView
