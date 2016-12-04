@@ -1,7 +1,6 @@
 package com.mrkevinthomas.kcards;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,7 +62,7 @@ public class SettingsActivity extends BaseActivity {
                 } else if (adapterView == secondaryLanguageSpinner) {
                     Preferences.putSecondaryLanguageCode(language.getGoogleTranslateCode());
                 } else {
-                    Log.w(TAG, "unknown spinner view");
+                    Logger.w(TAG, "unknown spinner view");
                 }
             }
 

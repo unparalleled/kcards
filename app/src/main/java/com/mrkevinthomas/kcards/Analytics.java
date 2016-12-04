@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -58,7 +57,7 @@ public class Analytics {
 
     private static void logEvent(@NonNull String name, @Nullable Bundle params) {
         firebaseAnalytics.logEvent(name, params);
-        Log.v(TAG, "event: " + name + "; params: " + params);
+        Logger.v(TAG, "event: " + name + "; params: " + params);
     }
 
     private static Bundle paramsForDeck(Deck deck) {

@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +25,7 @@ import com.google.gson.Gson;
 import com.mrkevinthomas.kcards.Analytics;
 import com.mrkevinthomas.kcards.BaseActivity;
 import com.mrkevinthomas.kcards.FirebaseDb;
+import com.mrkevinthomas.kcards.Logger;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.ThisApp;
 import com.mrkevinthomas.kcards.models.Card;
@@ -88,11 +88,11 @@ public class DeckListActivity extends BaseActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Logger.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     ThisApp.get().setFirebaseUser(user);
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Logger.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -100,13 +100,13 @@ public class DeckListActivity extends BaseActivity {
         firebaseAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
+                Logger.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
 
                 // If sign in fails, display a message to the user. If sign in succeeds
                 // the auth state listener will be notified and logic to handle the
                 // signed in user can be handled in the listener.
                 if (!task.isSuccessful()) {
-                    Log.w(TAG, "signInAnonymously", task.getException());
+                    Logger.w(TAG, "signInAnonymously", task.getException());
                 }
             }
         });
@@ -154,7 +154,7 @@ public class DeckListActivity extends BaseActivity {
             }
         } catch (IOException e) {
             // this should be extremely rare, but not the end of the world if it happens
-            Log.e(TAG, "failed to load examples json file", e);
+            Logger.e(TAG, "failed to load examples json file", e);
             Analytics.logLoadFileFailed(EXAMPLES_FILE);
         }
     }

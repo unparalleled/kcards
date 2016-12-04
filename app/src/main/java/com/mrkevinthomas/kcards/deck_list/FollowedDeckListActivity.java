@@ -1,7 +1,6 @@
 package com.mrkevinthomas.kcards.deck_list;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -11,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.mrkevinthomas.kcards.FirebaseDb;
+import com.mrkevinthomas.kcards.Logger;
 import com.mrkevinthomas.kcards.Preferences;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Deck;
@@ -70,7 +70,7 @@ public class FollowedDeckListActivity extends DeckListActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                Logger.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 onDeckLoadedOrFailed();
             }
         });
