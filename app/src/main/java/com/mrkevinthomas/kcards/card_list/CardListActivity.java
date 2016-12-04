@@ -132,6 +132,7 @@ public class CardListActivity extends BaseActivity {
             builder.setNeutralButton(R.string.delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Analytics.logDeleteCardEvent(card);
                     cardListAdapter.removeCard(card);
                     card.delete();
                     FirebaseDb.updateDeck(deck);

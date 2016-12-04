@@ -201,6 +201,7 @@ public class DeckListActivity extends BaseActivity {
                     if (!deck.getCards().isEmpty()) {
                         showDeleteDialog(deck);
                     } else {
+                        Analytics.logDeleteDeckEvent(deck);
                         deckListAdapter.removeDeck(deck);
                         deck.delete();
                     }
@@ -227,6 +228,7 @@ public class DeckListActivity extends BaseActivity {
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Analytics.logDeleteDeckEvent(deck);
                 deckListAdapter.removeDeck(deck);
                 deck.delete();
             }

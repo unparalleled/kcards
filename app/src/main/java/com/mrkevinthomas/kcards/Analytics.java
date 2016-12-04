@@ -21,12 +21,17 @@ public class Analytics {
 
     private static final String EVENT_ADD_DECK = "add_deck";
     private static final String EVENT_EDIT_DECK = "edit_deck";
+    private static final String EVENT_DELETE_DECK = "delete_deck";
+
     private static final String ARG_DECK_KEY = "deck_key";
+    private static final String ARG_DECK_SIZE = "deck_size";
     private static final String ARG_DECK_NAME = "deck_name";
     private static final String ARG_DECK_DESCRIPTION = "deck_description";
 
     private static final String EVENT_ADD_CARD = "add_card";
     private static final String EVENT_EDIT_CARD = "edit_card";
+    private static final String EVENT_DELETE_CARD = "delete_card";
+
     private static final String ARG_CARD_FRONT_TEXT = "front_text";
     private static final String ARG_CARD_BACK_TEXT = "back_text";
     private static final String ARG_CARD_FRONT_LANGUAGE = "front_language";
@@ -56,6 +61,24 @@ public class Analytics {
         Log.v(TAG, "event: " + name + "; params: " + params);
     }
 
+    private static Bundle paramsForDeck(Deck deck) {
+        Bundle params = new Bundle();
+        params.putString(ARG_DECK_KEY, String.valueOf(deck.getFirebaseKey())); // converts null Object to "null"
+        params.putString(ARG_DECK_SIZE, String.valueOf(deck.size()));
+        params.putString(ARG_DECK_NAME, deck.getName());
+        params.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
+        return params;
+    }
+
+    private static Bundle paramsForCard(Card card) {
+        Bundle params = new Bundle();
+        params.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
+        params.putString(ARG_CARD_BACK_TEXT, card.getBackText());
+        params.putString(ARG_CARD_FRONT_LANGUAGE, card.getFrontLanguageCode());
+        params.putString(ARG_CARD_BACK_LANGUAGE, card.getBackLanguageCode());
+        return params;
+    }
+
     public static void logLoadFileFailed(String fileName) {
         Bundle params = new Bundle();
         params.putString(ARG_FILE_NAME, fileName);
@@ -63,35 +86,27 @@ public class Analytics {
     }
 
     public static void logAddDeckEvent(Deck deck) {
-        Bundle params = new Bundle();
-        params.putString(ARG_DECK_NAME, deck.getName());
-        params.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        logEvent(EVENT_ADD_DECK, params);
+        logEvent(EVENT_ADD_DECK, paramsForDeck(deck));
     }
 
     public static void logEditDeckEvent(Deck deck) {
-        Bundle params = new Bundle();
-        params.putString(ARG_DECK_NAME, deck.getName());
-        params.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        logEvent(EVENT_EDIT_DECK, params);
+        logEvent(EVENT_EDIT_DECK, paramsForDeck(deck));
+    }
+
+    public static void logDeleteDeckEvent(Deck deck) {
+        logEvent(EVENT_DELETE_DECK, paramsForDeck(deck));
     }
 
     public static void logAddCardEvent(Card card) {
-        Bundle params = new Bundle();
-        params.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
-        params.putString(ARG_CARD_BACK_TEXT, card.getBackText());
-        params.putString(ARG_CARD_FRONT_LANGUAGE, card.getFrontLanguageCode());
-        params.putString(ARG_CARD_BACK_LANGUAGE, card.getBackLanguageCode());
-        logEvent(EVENT_ADD_CARD, params);
+        logEvent(EVENT_ADD_CARD, paramsForCard(card));
     }
 
     public static void logEditCardEvent(Card card) {
-        Bundle params = new Bundle();
-        params.putString(ARG_CARD_FRONT_TEXT, card.getFrontText());
-        params.putString(ARG_CARD_BACK_TEXT, card.getBackText());
-        params.putString(ARG_CARD_FRONT_LANGUAGE, card.getFrontLanguageCode());
-        params.putString(ARG_CARD_BACK_LANGUAGE, card.getBackLanguageCode());
-        logEvent(EVENT_EDIT_CARD, params);
+        logEvent(EVENT_EDIT_CARD, paramsForCard(card));
+    }
+
+    public static void logDeleteCardEvent(Card card) {
+        logEvent(EVENT_DELETE_CARD, paramsForCard(card));
     }
 
     public static void logOptionsItemSelectedEvent(MenuItem item) {
@@ -117,19 +132,11 @@ public class Analytics {
     }
 
     public static void logDeckFollowed(Deck deck) {
-        Bundle params = new Bundle();
-        params.putString(ARG_DECK_KEY, deck.getFirebaseKey());
-        params.putString(ARG_DECK_NAME, deck.getName());
-        params.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        logEvent(EVENT_DECK_FOLLOWED, params);
+        logEvent(EVENT_DECK_FOLLOWED, paramsForDeck(deck));
     }
 
     public static void logDeckUnfollowed(Deck deck) {
-        Bundle params = new Bundle();
-        params.putString(ARG_DECK_KEY, deck.getFirebaseKey());
-        params.putString(ARG_DECK_NAME, deck.getName());
-        params.putString(ARG_DECK_DESCRIPTION, deck.getDescription());
-        logEvent(EVENT_DECK_UNFOLLOWED, params);
+        logEvent(EVENT_DECK_UNFOLLOWED, paramsForDeck(deck));
     }
 
 }
