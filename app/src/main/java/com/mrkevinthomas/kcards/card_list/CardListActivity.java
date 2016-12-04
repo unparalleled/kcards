@@ -153,9 +153,11 @@ public class CardListActivity extends BaseActivity {
         builder.setNegativeButton(R.string.cancel, null);
         builder.setCancelable(true);
 
-        // show keyboard by default
         AlertDialog alertDialog = builder.create();
-        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        if (card == null) {
+            // show keyboard by default for new cards
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
         alertDialog.show();
     }
 
