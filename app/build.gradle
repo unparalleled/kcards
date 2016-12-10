@@ -6,17 +6,17 @@ def dbflow_version = "3.1.1"
 // or dbflow_version = "develop-SNAPSHOT" for grabbing latest dependency in your project on the develop branch
 // or 10-digit short-hash of a specific commit. (Useful for bugs fixed in develop, but not in a release yet)
 
-def support_library_version = "24.2.1"
+def support_library_version = "25.0.1"
 def firebase_version = "9.4.0"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "com.mrkevinthomas.kcards"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
