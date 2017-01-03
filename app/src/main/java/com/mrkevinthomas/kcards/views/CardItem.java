@@ -1,4 +1,4 @@
-package com.mrkevinthomas.kcards.ui;
+package com.mrkevinthomas.kcards.views;
 
 import android.content.Context;
 import android.content.DialogInterface;

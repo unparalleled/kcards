@@ -24,7 +24,7 @@ import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.card_swipe.CardSwipeActivity;
 import com.mrkevinthomas.kcards.models.Card;
 import com.mrkevinthomas.kcards.models.Deck;
-import com.mrkevinthomas.kcards.ui.LanguageSpinner;
+import com.mrkevinthomas.kcards.views.LanguageSpinner;
 
 public class CardListActivity extends BaseActivity {
 

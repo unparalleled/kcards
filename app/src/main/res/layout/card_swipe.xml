@@ -7,14 +7,14 @@
 
     <!-- the next two cards are for the material effect of a stack of cards -->
 
-    <com.mrkevinthomas.kcards.ui.CardItem
+    <com.mrkevinthomas.kcards.views.CardItem
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:translationX="4dp"
         android:translationY="8dp"
         app:cardElevation="2dp"/>
 
-    <com.mrkevinthomas.kcards.ui.CardItem
+    <com.mrkevinthomas.kcards.views.CardItem
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:translationX="2dp"

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.models.Deck;
-import com.mrkevinthomas.kcards.ui.CardItem;
+import com.mrkevinthomas.kcards.views.CardItem;
 
 import java.util.ArrayList;
 

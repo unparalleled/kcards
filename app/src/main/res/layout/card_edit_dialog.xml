@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.mrkevinthomas.kcards.ui.LanguageSpinner
+    <com.mrkevinthomas.kcards.views.LanguageSpinner
         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/card_front_language"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginRight="12dp"
         android:hint="@string/card_front_input_hint"/>
 
-    <com.mrkevinthomas.kcards.ui.LanguageSpinner
+    <com.mrkevinthomas.kcards.views.LanguageSpinner
         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/card_back_language"
         android:layout_width="wrap_content"

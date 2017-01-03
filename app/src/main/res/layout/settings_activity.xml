@@ -20,7 +20,7 @@
             android:text="@string/main_language"
             android:textSize="20sp"/>
 
-        <com.mrkevinthomas.kcards.ui.LanguageSpinner
+        <com.mrkevinthomas.kcards.views.LanguageSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_main_language"
             android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             android:text="@string/secondary_language"
             android:textSize="20sp"/>
 
-        <com.mrkevinthomas.kcards.ui.LanguageSpinner
+        <com.mrkevinthomas.kcards.views.LanguageSpinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/settings_secondary_language"
             android:layout_width="wrap_content"

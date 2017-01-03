@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.mrkevinthomas.kcards.models.Language;
-import com.mrkevinthomas.kcards.ui.LanguageSpinner;
+import com.mrkevinthomas.kcards.views.LanguageSpinner;
 
 public class SettingsActivity extends BaseActivity {
     private static final String TAG = "SettingsActivity";
