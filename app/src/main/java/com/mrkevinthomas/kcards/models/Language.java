@@ -28,7 +28,7 @@ public class Language {
                 return language;
             }
         }
-        return languages[0]; // default to first language in the list
+        return DEFAULT;
     }
 
     // use this as a unique key for a Language
