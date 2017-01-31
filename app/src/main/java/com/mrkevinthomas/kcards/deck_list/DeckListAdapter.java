@@ -33,6 +33,9 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
     }
 
     public void setDeckList(@NonNull List<Deck> deckList) {
+        // default to sorting by last updated
+        Collections.sort(deckList, Deck.UPDATED_COMPARATOR);
+
         this.deckList = deckList;
         notifyDataSetChanged();
     }

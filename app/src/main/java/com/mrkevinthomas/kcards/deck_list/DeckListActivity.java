@@ -39,7 +39,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class DeckListActivity extends BaseActivity {
@@ -128,8 +127,6 @@ public class DeckListActivity extends BaseActivity {
                         // called when query returns on UI thread
                         List<Deck> decks = tResult.toListClose();
                         if (decks != null && !decks.isEmpty()) {
-                            // default to sorting by last updated
-                            Collections.sort(decks, Deck.UPDATED_COMPARATOR);
                             deckListAdapter.setDeckList(decks);
                         } else {
                             loadExampleDecksFromFile();
