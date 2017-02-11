@@ -14,10 +14,10 @@
         android:title="@string/shuffle"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_share_unshare"
+        android:id="@+id/action_public_private"
         android:icon="@drawable/ic_cloud_upload_white_48dp"
         android:orderInCategory="100"
-        android:title="@string/share"
+        android:title="@string/make_public"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_save"
