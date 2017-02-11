@@ -23,18 +23,25 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
     private CardSwipeActivity cardSwipeActivity;
     private Deck deck;
     private boolean isSwapped;
+    private boolean isHidden;
 
     private List<Card> cards = new ArrayList<>();
 
-    public CardSwipeAdapter(@NonNull CardSwipeActivity cardSwipeActivity, @NonNull Deck deck, boolean isSwapped) {
+    public CardSwipeAdapter(@NonNull CardSwipeActivity cardSwipeActivity, @NonNull Deck deck, boolean isSwapped, boolean isHidden) {
         this.cardSwipeActivity = cardSwipeActivity;
         this.deck = deck;
         this.isSwapped = isSwapped;
+        this.isHidden = isHidden;
         chooseCardsToShow();
     }
 
     public void setSwapped(boolean swapped) {
         isSwapped = swapped;
+        notifyDataSetChanged();
+    }
+
+    public void setHidden(boolean hidden) {
+        isHidden = hidden;
         notifyDataSetChanged();
     }
 
@@ -95,7 +102,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     @Override
     public boolean isHidden() {
-        return true;
+        return isHidden;
     }
 
     @Override

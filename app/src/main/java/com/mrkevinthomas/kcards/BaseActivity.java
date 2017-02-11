@@ -22,7 +22,7 @@ import com.mrkevinthomas.kcards.deck_list.DeckListActivity;
 import com.mrkevinthomas.kcards.deck_list.FollowedDeckListActivity;
 import com.mrkevinthomas.kcards.deck_list.SharedDeckListActivity;
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String ARG_DECK = "arg_deck";
     public static final String ARG_POSITION = "arg_position";
