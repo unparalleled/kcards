@@ -12,7 +12,6 @@ public class FirebaseDb {
 
     public static void updateDeck(Deck deck) {
         if (deck.isSyncedWithFirebase()) {
-            deck.setUpdatedTimeMs(System.currentTimeMillis()); // updated modified timestamp
             // update previous deck object using firebase key
             DatabaseReference databaseReference = database.getReference(DECK_KEY + "/" + deck.getFirebaseKey());
             databaseReference.setValue(deck);

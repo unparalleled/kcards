@@ -100,7 +100,7 @@ public class CardListActivity extends BaseActivity {
                         Card newCard = new Card(deck.getId(), frontText, backText, frontLanguageCode, backLanguageCode);
                         cardListAdapter.addCard(newCard);
                         newCard.save();
-                        FirebaseDb.updateDeck(deck);
+                        deck.save(); // update deck when updating cards
 
                         // show another dialog for continuing card creation
                         new Handler().postDelayed(new Runnable() {
@@ -116,9 +116,9 @@ public class CardListActivity extends BaseActivity {
                         card.setBackText(backText);
                         card.setFrontLanguageCode(frontLanguageCode);
                         card.setBackLanguageCode(backLanguageCode);
-                        card.save();
                         cardListAdapter.notifyDataSetChanged();
-                        FirebaseDb.updateDeck(deck);
+                        card.save();
+                        deck.save(); // update deck when updating cards
 
                         Analytics.logEditCardEvent(card);
                     }
@@ -135,7 +135,7 @@ public class CardListActivity extends BaseActivity {
                     Analytics.logDeleteCardEvent(card);
                     cardListAdapter.removeCard(card);
                     card.delete();
-                    FirebaseDb.updateDeck(deck);
+                    deck.save(); // update deck when updating cards
                 }
             });
             frontInput.setText(card.getFrontText());

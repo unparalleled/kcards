@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.Exclude;
+import com.mrkevinthomas.kcards.FirebaseDb;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -59,7 +60,15 @@ public class Deck extends BaseDbModel implements Parcelable {
 
     List<Card> cards;
 
-    @OneToMany(methods = {OneToMany.Method.ALL}, variableName = "cards")
+    /**
+     * Gets the cards in the deck.
+     * Cards are loaded when the deck is loaded from the db.
+     * Cards are deleted when the deck is deleted from the db.
+     * Cards are NOT saved when the deck is saved, and must be saved independently for performance reasons.
+     *
+     * @return All the cards in the deck
+     */
+    @OneToMany(methods = {OneToMany.Method.LOAD, OneToMany.Method.DELETE}, variableName = "cards")
     public List<Card> getCards() {
         if (cards == null || cards.isEmpty()) {
             cards = SQLite.select()
@@ -115,6 +124,12 @@ public class Deck extends BaseDbModel implements Parcelable {
 
     public int size() {
         return cards != null ? cards.size() : 0;
+    }
+
+    @Override
+    public void save() {
+        super.save();
+        FirebaseDb.updateDeck(this);
     }
 
     // force firebase to serialize/deserialize these fields

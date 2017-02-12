@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.mrkevinthomas.kcards.Analytics;
 import com.mrkevinthomas.kcards.BaseActivity;
-import com.mrkevinthomas.kcards.FirebaseDb;
 import com.mrkevinthomas.kcards.Logger;
 import com.mrkevinthomas.kcards.R;
 import com.mrkevinthomas.kcards.ThisApp;
@@ -179,9 +178,8 @@ public class DeckListActivity extends BaseActivity {
                     } else {
                         deck.setName(name);
                         deck.setDescription(description);
-                        deck.save();
                         deckListAdapter.notifyDataSetChanged();
-                        FirebaseDb.updateDeck(deck);
+                        deck.save(); // update deck when updating cards
 
                         Analytics.logEditDeckEvent(deck);
                     }
