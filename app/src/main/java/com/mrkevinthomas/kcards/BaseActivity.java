@@ -157,8 +157,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 startActivity(new Intent(this, SharedDeckListActivity.class));
             } else if (id == R.id.nav_followed) {
                 startActivity(new Intent(this, FollowedDeckListActivity.class));
-            } else if (id == R.id.nav_dictionary) {
-                // TODO
             }
         }
 
