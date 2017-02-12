@@ -132,6 +132,12 @@ public class Deck extends BaseDbModel implements Parcelable {
         FirebaseDb.updateDeck(this);
     }
 
+    @Override
+    public void delete() {
+        super.delete();
+        FirebaseDb.removeDeck(this);
+    }
+
     // force firebase to serialize/deserialize these fields
     public long getCreatedTimeMs() {
         return createdTimeMs;

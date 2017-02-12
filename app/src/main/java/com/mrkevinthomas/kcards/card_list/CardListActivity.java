@@ -207,7 +207,7 @@ public class CardListActivity extends BaseActivity {
 
     private void handlePublishUnpublishActionClicked() {
         if (!deck.isSyncedWithFirebase()) {
-            FirebaseDb.createNewDeck(deck);
+            FirebaseDb.addNewDeck(deck);
             publicPrivateMenuItem.setIcon(R.drawable.ic_cloud_done_white_48dp);
             publicPrivateMenuItem.setTitle(R.string.make_private);
             Toast.makeText(this, R.string.deck_is_public, Toast.LENGTH_SHORT).show();
@@ -218,7 +218,10 @@ public class CardListActivity extends BaseActivity {
             builder.setPositiveButton(R.string.make_private, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    FirebaseDb.deleteDeck(deck);
+                    FirebaseDb.removeDeck(deck);
+                    deck.setFirebaseKey(null);
+                    deck.save();
+
                     publicPrivateMenuItem.setIcon(R.drawable.ic_cloud_upload_white_48dp);
                     publicPrivateMenuItem.setTitle(R.string.make_public);
                     Toast.makeText(CardListActivity.this, R.string.deck_is_private, Toast.LENGTH_SHORT).show();

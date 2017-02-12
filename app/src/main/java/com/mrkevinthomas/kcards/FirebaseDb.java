@@ -18,7 +18,7 @@ public class FirebaseDb {
         }
     }
 
-    public static void createNewDeck(Deck deck) {
+    public static void addNewDeck(Deck deck) {
         // push new deck object
         DatabaseReference databaseReference = database.getReference(DECK_KEY).push();
         databaseReference.setValue(deck);
@@ -28,13 +28,12 @@ public class FirebaseDb {
         deck.save();
     }
 
-    public static void deleteDeck(Deck deck) {
-        // remove deck object using firebase key
-        DatabaseReference databaseReference = database.getReference(DECK_KEY + "/" + deck.getFirebaseKey());
-        databaseReference.removeValue();
-
-        deck.setFirebaseKey(null);
-        deck.save();
+    public static void removeDeck(Deck deck) {
+        if (deck.isSyncedWithFirebase()) {
+            // remove deck object using firebase key
+            DatabaseReference databaseReference = database.getReference(DECK_KEY + "/" + deck.getFirebaseKey());
+            databaseReference.removeValue();
+        }
     }
 
 }
