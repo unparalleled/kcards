@@ -51,7 +51,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
     }
 
     public void chooseCardsToShow() {
-        final int CARD_LIST_SIZE = Math.min(3, deck.size());
+        final int CARD_LIST_SIZE = 3;
         final double DEFAULT_WEIGHT = 10;
         final Random RANDOM = new Random();
 
@@ -70,7 +70,7 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
         while (cards.size() < CARD_LIST_SIZE) {
             double value = RANDOM.nextDouble() * total;
             Card chosen = map.ceilingEntry(value).getValue();
-            if (!cards.contains(chosen)) {
+            if (!cards.contains(chosen) || cards.containsAll(deck.getCards())) {
                 cards.add(chosen);
             }
         }
