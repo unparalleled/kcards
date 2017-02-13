@@ -101,19 +101,19 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                 });
             } else {
                 holder.deckActionIcon.setImageResource(Preferences.isFollowingDeck(deck.getFirebaseKey()) ?
-                        R.drawable.ic_playlist_add_check_black_48dp : R.drawable.ic_playlist_add_black_48dp);
+                        R.drawable.ic_star_black_48dp : R.drawable.ic_star_border_black_48dp);
                 holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (Preferences.isFollowingDeck(deck.getFirebaseKey())) {
-                            Toast.makeText(deckListActivity, R.string.deck_unfollowed, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(deckListActivity, R.string.favorites_removed, Toast.LENGTH_SHORT).show();
                             Preferences.unfollowDeck(deck.getFirebaseKey());
-                            holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_black_48dp);
+                            holder.deckActionIcon.setImageResource(R.drawable.ic_star_border_black_48dp);
                             Analytics.logDeckUnfollowed(deck);
                         } else {
-                            Toast.makeText(deckListActivity, R.string.deck_followed, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(deckListActivity, R.string.favorites_added, Toast.LENGTH_SHORT).show();
                             Preferences.followDeck(deck.getFirebaseKey());
-                            holder.deckActionIcon.setImageResource(R.drawable.ic_playlist_add_check_black_48dp);
+                            holder.deckActionIcon.setImageResource(R.drawable.ic_star_black_48dp);
                             Analytics.logDeckFollowed(deck);
                         }
                     }

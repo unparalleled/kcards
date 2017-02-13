@@ -19,8 +19,8 @@ import com.mrkevinthomas.kcards.models.Deck;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SharedDeckListActivity extends DeckListActivity {
-    private static final String TAG = "SharedDeckListActivity";
+public class PublicDeckListActivity extends DeckListActivity {
+    private static final String TAG = "PublicDeckListActivity";
 
     private static final int MAX_DECKS = 50;
 
@@ -30,14 +30,14 @@ public class SharedDeckListActivity extends DeckListActivity {
     private static final String SORT_BY_DESCRIPTION = "description";
 
     protected int getNavItemId() {
-        return R.id.nav_shared;
+        return R.id.nav_public;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fab.setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.shared);
+        getSupportActionBar().setTitle(R.string.public_string);
         deckListAdapter.setReadOnly(true);
     }
 

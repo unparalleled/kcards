@@ -9,8 +9,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
     <string name="dictionary">Dictionary</string>
-    <string name="shared">Shared</string>
-    <string name="followed">Followed</string>
+    <string name="public_string">Public</string>
+    <string name="favorites">Favorites</string>
 
     <!-- action items -->
     <string name="settings">Settings</string>
@@ -80,9 +80,9 @@
     <string name="deck_is_private">Deck is now private!</string>
     <string name="deck_make_private_message">This will remove the deck from the public deck list.</string>
 
-    <!-- deck following and unfollowing -->
-    <string name="deck_followed">Deck Followed!</string>
-    <string name="deck_unfollowed">Deck Unfollowed!</string>
+    <!-- deck favorites -->
+    <string name="favorites_added">Added to favorites!</string>
+    <string name="favorites_removed">Removed from favorites!</string>
 
     <!-- text to speech dialog -->
     <string name="text_to_speech_dialog_title">Language Not Supported</string>

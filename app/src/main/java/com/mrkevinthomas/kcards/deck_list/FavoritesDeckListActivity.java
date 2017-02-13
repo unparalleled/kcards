@@ -19,21 +19,21 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FollowedDeckListActivity extends DeckListActivity {
-    private static final String TAG = "FollowDeckListActivity";  // shortened to fit logging tag limit of 23 chars
+public class FavoritesDeckListActivity extends DeckListActivity {
+    private static final String TAG = "FavoritesDeckListActivity";
 
     private AtomicInteger loadCount;
     private ArrayList<Deck> decks = new ArrayList<>();
 
     protected int getNavItemId() {
-        return R.id.nav_followed;
+        return R.id.nav_favorites;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fab.setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.followed);
+        getSupportActionBar().setTitle(R.string.favorites);
         deckListAdapter.setReadOnly(true);
     }
 

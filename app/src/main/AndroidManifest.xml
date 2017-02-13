@@ -28,13 +28,13 @@
         </activity>
 
         <activity
-            android:name=".deck_list.SharedDeckListActivity"
+            android:name=".deck_list.PublicDeckListActivity"
             android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".deck_list.FollowedDeckListActivity"
+            android:name=".deck_list.FavoritesDeckListActivity"
             android:parentActivityName=".deck_list.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
