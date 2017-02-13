@@ -13,7 +13,9 @@ import com.mrkevinthomas.kcards.models.Deck;
 import com.mrkevinthomas.kcards.views.CardItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
@@ -27,6 +29,8 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     private List<Card> cards = new ArrayList<>();
 
+    private Map<Long, CardItem> activeViews = new HashMap<>();
+
     public CardSwipeAdapter(@NonNull CardSwipeActivity cardSwipeActivity, @NonNull Deck deck, boolean isSwapped, boolean isHidden) {
         this.cardSwipeActivity = cardSwipeActivity;
         this.deck = deck;
@@ -37,15 +41,22 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     public void setSwapped(boolean swapped) {
         isSwapped = swapped;
+        for (CardItem cardItem : activeViews.values()) {
+            cardItem.setupCardText();
+        }
         notifyDataSetChanged();
     }
 
     public void setHidden(boolean hidden) {
         isHidden = hidden;
+        for (CardItem cardItem : activeViews.values()) {
+            cardItem.setupCardAnswerCover();
+        }
         notifyDataSetChanged();
     }
 
     public void removeFirst() {
+        activeViews.remove(cards.get(0).getId());
         cards.remove(0);
         notifyDataSetChanged();
     }
@@ -95,8 +106,23 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CardItem cardItem = (CardItem) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        cardItem.setupViews(cards.get(position), this);
+        Card card = cards.get(position);
+
+        CardItem cardItem;
+        if (activeViews.get(card.getId()) != null) {
+            cardItem = activeViews.get(card.getId());
+        } else {
+            if (convertView != null) {
+                cardItem = (CardItem) convertView;
+                cardItem.setupViews(card, this);
+            } else {
+                cardItem = (CardItem) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+                cardItem.findViews();
+                cardItem.setupViews(card, this);
+            }
+            activeViews.put(card.getId(), cardItem);
+        }
+
         return cardItem;
     }
 

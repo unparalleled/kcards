@@ -63,6 +63,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardItem.Delegate 
     public Object instantiateItem(ViewGroup container, int position) {
         CardItem cardItem = (CardItem) LayoutInflater.from(container.getContext()).inflate(R.layout.card_item, container, false);
 
+        cardItem.findViews();
         cardItem.setupViews(deck.getCards().get(position), this);
 
         container.addView(cardItem, 0);

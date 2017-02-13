@@ -69,7 +69,7 @@ public class CardSwipeActivity extends CardViewActivity {
     protected void handleShowHideActionClicked() {
         super.handleShowHideActionClicked();
         swipeFlingAdapterView.removeAllViewsInLayout(); // workaround for https://github.com/Diolor/Swipecards/issues/29
-        cardSwipeAdapter.setHidden(isSwapped);
+        cardSwipeAdapter.setHidden(isHidden);
     }
 
     public SwipeFlingAdapterView getSwipeFlingAdapterView() {

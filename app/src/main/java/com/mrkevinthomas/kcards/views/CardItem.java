@@ -67,10 +67,7 @@ public class CardItem extends FrameLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.card_item_view, this, true);
     }
 
-    public void setupViews(@NonNull Card card, @NonNull Delegate delegate) {
-        this.card = card;
-        this.delegate = delegate;
-
+    public void findViews() {
         topTextView = (TextView) findViewById(R.id.card_top_text);
         topTextHolder = findViewById(R.id.card_top_holder);
         bottomTextView = (TextView) findViewById(R.id.card_bottom_text);
@@ -80,6 +77,11 @@ public class CardItem extends FrameLayout {
         incorrectFab = (FloatingActionButton) findViewById(R.id.fab_wrong);
         webView = (WebView) findViewById(R.id.web_view);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+    }
+
+    public void setupViews(@NonNull Card card, @NonNull Delegate delegate) {
+        this.card = card;
+        this.delegate = delegate;
 
         setupCardText();
         setupCardAnswerCover();
