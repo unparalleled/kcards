@@ -73,14 +73,15 @@
                 android:layout_alignBottom="@id/deck_description"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:paddingLeft="8dp">
+                android:layout_marginLeft="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless">
 
                 <TextView
                     android:id="@+id/deck_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -92,6 +93,7 @@
                     android:layout_height="48dp"
                     android:layout_above="@id/deck_count"
                     android:layout_alignParentRight="@id/deck_count"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_playlist_play_black_48dp"/>
             </RelativeLayout>
 
