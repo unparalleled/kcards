@@ -79,7 +79,7 @@ public class CardItem extends FrameLayout {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
     }
 
-    public void setupViews(@NonNull Card card, @NonNull Delegate delegate) {
+    public void fillViews(@NonNull Card card, @NonNull Delegate delegate) {
         this.card = card;
         this.delegate = delegate;
 

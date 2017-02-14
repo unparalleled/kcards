@@ -114,11 +114,11 @@ public class CardSwipeAdapter extends BaseAdapter implements CardItem.Delegate {
         } else {
             if (convertView != null) {
                 cardItem = (CardItem) convertView;
-                cardItem.setupViews(card, this);
+                cardItem.fillViews(card, this);
             } else {
                 cardItem = (CardItem) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
                 cardItem.findViews();
-                cardItem.setupViews(card, this);
+                cardItem.fillViews(card, this);
             }
             activeViews.put(card.getId(), cardItem);
         }
