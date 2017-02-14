@@ -74,6 +74,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
     public void onBindViewHolder(final DeckViewHolder holder, int position) {
         if (position < deckList.size()) {
             final Deck deck = deckList.get(position);
+
             holder.deckName.setText(deck.getName());
             holder.deckDescription.setText(deck.getDescription());
             holder.deckCount.setText(
@@ -135,6 +136,8 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
 
             String updatedDate = Utils.getDateString(deck.getUpdatedTimeMs());
             holder.deckUpdated.setText(deckListActivity.getString(R.string.updated_at, updatedDate));
+
+            holder.publicIcon.setVisibility(deck.isSyncedWithFirebase() ? View.VISIBLE : View.GONE);
 
             holder.itemView.setVisibility(View.VISIBLE);
         } else {

@@ -66,6 +66,15 @@
                 android:textSize="10sp"
                 tools:text="Updated 10/12/16"/>
 
+            <ImageView
+                android:id="@+id/deck_public_icon"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignBottom="@id/deck_updated"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@id/deck_updated"
+                android:src="@drawable/ic_folder_shared_black_48dp"/>
+
             <RelativeLayout
                 android:id="@+id/deck_count_holder"
                 android:layout_width="wrap_content"

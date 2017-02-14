@@ -15,6 +15,7 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
     public final ImageView deckActionIcon;
     public final TextView deckCreated;
     public final TextView deckUpdated;
+    public final View publicIcon;
 
     public DeckViewHolder(View itemView) {
         super(itemView);
@@ -25,5 +26,6 @@ public class DeckViewHolder extends RecyclerView.ViewHolder {
         deckActionIcon = (ImageView) itemView.findViewById(R.id.deck_action_icon);
         deckCreated = (TextView) itemView.findViewById(R.id.deck_created);
         deckUpdated = (TextView) itemView.findViewById(R.id.deck_updated);
+        publicIcon = itemView.findViewById(R.id.deck_public_icon);
     }
 }
