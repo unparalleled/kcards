@@ -49,6 +49,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:alpha="0.5"
                     android:padding="2dp"
                     android:src="@drawable/ic_volume_up_black_48dp"/>
             </LinearLayout>
@@ -81,6 +82,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:alpha="0.5"
                         android:padding="2dp"
                         android:src="@drawable/ic_volume_up_black_48dp"/>
                 </LinearLayout>

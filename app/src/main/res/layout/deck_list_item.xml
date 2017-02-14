@@ -73,6 +73,7 @@
                 android:layout_alignBottom="@id/deck_updated"
                 android:layout_marginRight="4dp"
                 android:layout_toLeftOf="@id/deck_updated"
+                android:alpha="0.5"
                 android:src="@drawable/ic_public_black_48dp"/>
 
             <RelativeLayout
@@ -103,6 +104,7 @@
                     android:layout_above="@id/deck_count"
                     android:layout_alignParentRight="@id/deck_count"
                     android:layout_centerHorizontal="true"
+                    android:alpha="0.5"
                     android:src="@drawable/ic_playlist_play_black_48dp"/>
             </RelativeLayout>
 
