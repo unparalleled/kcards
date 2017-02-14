@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_folder_black_48dp"
+            android:icon="@drawable/ic_weekend_black_48dp"
             android:title="@string/home"/>
         <item
             android:id="@+id/nav_public"
-            android:icon="@drawable/ic_folder_shared_black_48dp"
+            android:icon="@drawable/ic_group_black_48dp"
             android:title="@string/public_string"/>
         <item
             android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_folder_special_black_48dp"
+            android:icon="@drawable/ic_favorite_black_48dp"
             android:title="@string/favorites"/>
         <!-- TODO trello.com/c/eV2b4Gru
         <item
