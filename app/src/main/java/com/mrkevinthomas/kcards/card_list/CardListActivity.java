@@ -188,14 +188,14 @@ public class CardListActivity extends BaseActivity {
             intent.putExtra(BaseActivity.ARG_DECK, deck);
             startActivityForResult(intent, BaseActivity.REQUEST_DECK);
             return true;
+        } else if (item.getItemId() == R.id.action_save) {
+            saveDeckToDeckList();
+            return true;
         } else if (item.getItemId() == R.id.action_shuffle) {
             cardListAdapter.shuffle();
             return true;
         } else if (item.getItemId() == R.id.action_public_private) {
             handlePublishUnpublishActionClicked();
-            return true;
-        } else if (item.getItemId() == R.id.action_save) {
-            saveDeckToDeckList();
             return true;
         } else if (item.getItemId() == R.id.action_reset_progress) {
             showResetProgressDialog();
@@ -234,6 +234,8 @@ public class CardListActivity extends BaseActivity {
     }
 
     private void saveDeckToDeckList() {
+        // clear fb key before saving
+        deck.setFirebaseKey(null);
         deck.save(); // auto generate deck id
         for (Card card : deck.getCards()) {
             card.setDeckId(deck.getId());

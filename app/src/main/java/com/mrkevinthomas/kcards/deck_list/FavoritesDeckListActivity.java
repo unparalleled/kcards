@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FavoritesDeckListActivity extends DeckListActivity {
     private static final String TAG = "FavoritesDeckListActivity";
 
+    private ArrayList<Deck> decks;
     private AtomicInteger loadCount;
-    private ArrayList<Deck> decks = new ArrayList<>();
 
     protected int getNavItemId() {
         return R.id.nav_favorites;
@@ -43,8 +43,11 @@ public class FavoritesDeckListActivity extends DeckListActivity {
         if (keySet.isEmpty()) {
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+
+        deckListAdapter.clear();
+        decks = new ArrayList<>();
         loadCount = new AtomicInteger(keySet.size());
+        progressBar.setVisibility(View.VISIBLE);
 
         for (String key : keySet) {
             retrieveDeckFromFirebaseDb(key);
