@@ -137,7 +137,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
             String updatedDate = Utils.getDateString(deck.getUpdatedTimeMs());
             holder.deckUpdated.setText(deckListActivity.getString(R.string.updated_at, updatedDate));
 
-            holder.publicIcon.setVisibility(deck.isSyncedWithFirebase() ? View.VISIBLE : View.GONE);
+            holder.publicIcon.setVisibility(!isReadOnly && deck.isSyncedWithFirebase() ? View.VISIBLE : View.GONE);
 
             holder.itemView.setVisibility(View.VISIBLE);
         } else {

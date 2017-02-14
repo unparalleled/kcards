@@ -73,7 +73,7 @@
                 android:layout_alignBottom="@id/deck_updated"
                 android:layout_marginRight="4dp"
                 android:layout_toLeftOf="@id/deck_updated"
-                android:src="@drawable/ic_folder_shared_black_48dp"/>
+                android:src="@drawable/ic_public_black_48dp"/>
 
             <RelativeLayout
                 android:id="@+id/deck_count_holder"
