@@ -1,5 +1,5 @@
 # Kcards
-Korean flash cards
+Language flash cards
 
 This app was originally developed for learning Korean, but now supports the following languages:
 * Chinese
