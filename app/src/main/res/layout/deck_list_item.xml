@@ -6,6 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- the next two cards are for the material effect of a deck of cards -->
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/main_card"
+        android:layout_alignLeft="@+id/main_card"
+        android:layout_alignRight="@+id/main_card"
+        android:layout_alignTop="@+id/main_card"
+        android:translationX="10dp"
+        android:translationY="10dp"
+        app:cardElevation="2dp"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/main_card"
+        android:layout_alignLeft="@+id/main_card"
+        android:layout_alignRight="@+id/main_card"
+        android:layout_alignTop="@+id/main_card"
+        android:translationX="5dp"
+        android:translationY="5dp"
+        app:cardElevation="4dp"/>
+
     <android.support.v7.widget.CardView
         android:id="@+id/main_card"
         android:layout_width="match_parent"
@@ -110,29 +133,5 @@
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
-    <!-- the next two cards are for the material effect of a deck of cards -->
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/main_card"
-        android:layout_alignLeft="@id/main_card"
-        android:layout_alignRight="@id/main_card"
-        android:layout_alignTop="@id/main_card"
-        android:translationX="5dp"
-        android:translationY="5dp"
-        app:cardElevation="4dp"/>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/main_card"
-        android:layout_alignLeft="@id/main_card"
-        android:layout_alignRight="@id/main_card"
-        android:layout_alignTop="@id/main_card"
-        android:translationX="10dp"
-        android:translationY="10dp"
-        app:cardElevation="2dp"/>
 
 </RelativeLayout>
