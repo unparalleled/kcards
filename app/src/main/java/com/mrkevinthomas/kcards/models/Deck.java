@@ -20,14 +20,14 @@ public class Deck extends BaseDbModel implements Parcelable {
     public static final Comparator<Deck> UPDATED_COMPARATOR = new Comparator<Deck>() {
         @Override
         public int compare(Deck deck1, Deck deck2) {
-            return (int) (deck2.getUpdatedTimeMs() - deck1.getUpdatedTimeMs());
+            return Long.valueOf(deck2.getUpdatedTimeMs()).compareTo(deck1.getUpdatedTimeMs());
         }
     };
 
     public static final Comparator<Deck> CREATED_COMPARATOR = new Comparator<Deck>() {
         @Override
         public int compare(Deck deck1, Deck deck2) {
-            return (int) (deck2.getCreatedTimeMs() - deck1.getCreatedTimeMs());
+            return Long.valueOf(deck2.getCreatedTimeMs()).compareTo(deck1.getCreatedTimeMs());
         }
     };
 
