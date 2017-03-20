@@ -75,6 +75,11 @@
     <string name="secondary_language">Secondary Language</string>
     <!-- e.g. App Version: 1.0 (1) -->
     <string name="app_version_text">App Version: %1$s (%2$s)</string>
+    <!-- e.g. Login ID: Fwa0Fp7kbchQw8WfwN79j4Yn8bd2 -->
+    <string name="settings_login_id">Login ID: %1$s</string>
+    <!-- e.g. 9 more for debug -->
+    <string name="settings_debug_clicks">%1$d more for debug</string>
+    <string name="settings_debug_set">Now debug mode!</string>
 
     <!-- deck public/private -->
     <string name="deck_is_public">Deck is now public!</string>

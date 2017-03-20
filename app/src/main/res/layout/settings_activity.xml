@@ -1,62 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="12dp">
+        android:animateLayoutChanges="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/main_language"
+                android:textSize="20sp"/>
+
+            <com.mrkevinthomas.kcards.views.LanguageSpinner
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:id="@+id/settings_main_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/secondary_language"
+                android:textSize="20sp"/>
+
+            <com.mrkevinthomas.kcards.views.LanguageSpinner
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:id="@+id/settings_secondary_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/settings_app_version"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/main_language"
-            android:textSize="20sp"/>
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="16sp"
+            tools:text="App Version: 1.0 (1)"/>
 
-        <com.mrkevinthomas.kcards.views.LanguageSpinner
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-            android:id="@+id/settings_main_language"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/settings_debug_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"/>
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/settings_login_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/settings_login_id"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="12dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/secondary_language"
-            android:textSize="20sp"/>
-
-        <com.mrkevinthomas.kcards.views.LanguageSpinner
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-            android:id="@+id/settings_secondary_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/settings_app_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textSize="16sp"
-        tools:text="App Version: 1.0 (1)"/>
-
-</LinearLayout>
+</ScrollView>

@@ -25,6 +25,8 @@ public class Preferences {
 
     private static final String KEY_FOLLOWING_DECKS = "following_decks";
 
+    private static final String KEY_DEBUG_MODE = "debug_mode";
+
     private static final SharedPreferences preferences = ThisApp.get().getSharedPreferences(TAG, MODE_PRIVATE);
 
     public static void putMainLanguageCode(String languageCode) {
@@ -66,6 +68,14 @@ public class Preferences {
     public static Set<String> getFollowedKeySet() {
         // create copy to ensure consistency, see `getStringSet`
         return new HashSet<>(preferences.getStringSet(KEY_FOLLOWING_DECKS, new HashSet<String>()));
+    }
+
+    public static boolean isDebugMode() {
+        return preferences.getBoolean(KEY_DEBUG_MODE, false);
+    }
+
+    public static void setDebugMode() {
+        preferences.edit().putBoolean(KEY_DEBUG_MODE, true).apply();
     }
 
 }

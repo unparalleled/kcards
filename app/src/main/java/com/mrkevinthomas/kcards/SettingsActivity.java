@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mrkevinthomas.kcards.models.Language;
 import com.mrkevinthomas.kcards.views.LanguageSpinner;
@@ -15,6 +16,9 @@ public class SettingsActivity extends BaseActivity {
     private TextView appVersionTextView;
     private LanguageSpinner mainLanguageSpinner;
     private LanguageSpinner secondaryLanguageSpinner;
+
+    private View debugLayout;
+    private TextView loginIdText;
 
     protected boolean shouldShowUpButton() {
         return true;
@@ -43,6 +47,8 @@ public class SettingsActivity extends BaseActivity {
 
         secondaryLanguageSpinner.setSelectedLanguage(Preferences.getSecondaryLanguageCode(this));
         setupLanguageSpinnerListener(secondaryLanguageSpinner);
+
+        setupDebugView();
     }
 
     @Override
@@ -71,6 +77,44 @@ public class SettingsActivity extends BaseActivity {
                 // no worries
             }
         });
+    }
+
+    private void setupDebugView() {
+        if (Preferences.isDebugMode()) {
+            debugLayout = findViewById(R.id.settings_debug_layout);
+            debugLayout.setVisibility(View.VISIBLE);
+
+            loginIdText = (TextView) findViewById(R.id.settings_login_id);
+            String loginId = ThisApp.get().getFirebaseUser() != null ? ThisApp.get().getFirebaseUser().getUid() : null;
+            loginIdText.setText(getString(R.string.settings_login_id, loginId));
+
+            appVersionTextView.setOnClickListener(null); // clear listener in case it was previously set
+        } else {
+            appVersionTextView.setOnClickListener(new View.OnClickListener() {
+                private static final int COUNT_NEEDED = 10;
+                private int count;
+                private Toast toaster;
+
+                @Override
+                public void onClick(View v) {
+                    if (toaster == null) {
+                        toaster = Toast.makeText(getApplication(), "", Toast.LENGTH_LONG);
+                    }
+
+                    count++;
+                    if (count >= COUNT_NEEDED) {
+                        Preferences.setDebugMode();
+                        setupDebugView();
+                        toaster.setText(R.string.settings_debug_set);
+                        toaster.show();
+                    } else {
+                        String countString = getString(R.string.settings_debug_clicks, COUNT_NEEDED - count);
+                        toaster.setText(countString);
+                        toaster.show();
+                    }
+                }
+            });
+        }
     }
 
 }
