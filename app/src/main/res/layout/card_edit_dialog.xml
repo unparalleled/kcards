@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.mrkevinthomas.kcards.views.LanguageSpinner
-        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-        android:id="@+id/card_front_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:spinnerMode="dropdown"/>
-
-    <EditText
-        android:id="@+id/card_front_input"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:hint="@string/card_front_input_hint"/>
+        android:orientation="vertical">
 
-    <com.mrkevinthomas.kcards.views.LanguageSpinner
-        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-        android:id="@+id/card_back_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:spinnerMode="dropdown"/>
+        <com.mrkevinthomas.kcards.views.LanguageSpinner
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/card_front_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:spinnerMode="dropdown"/>
 
-    <EditText
-        android:id="@+id/card_back_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:hint="@string/card_back_input_hint"/>
+        <EditText
+            android:id="@+id/card_front_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:hint="@string/card_front_input_hint"/>
 
-</LinearLayout>
+        <com.mrkevinthomas.kcards.views.LanguageSpinner
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/card_back_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:spinnerMode="dropdown"/>
+
+        <EditText
+            android:id="@+id/card_back_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:hint="@string/card_back_input_hint"/>
+
+    </LinearLayout>
+</ScrollView>
