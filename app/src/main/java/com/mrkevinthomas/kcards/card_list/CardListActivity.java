@@ -184,9 +184,7 @@ public class CardListActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_practice) {
-            Intent intent = new Intent(this, CardSwipeActivity.class);
-            intent.putExtra(BaseActivity.ARG_DECK, deck);
-            startActivityForResult(intent, BaseActivity.REQUEST_DECK);
+            CardSwipeActivity.launchActivity(this, deck);
             return true;
         } else if (item.getItemId() == R.id.action_save) {
             saveDeckToDeckList();

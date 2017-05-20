@@ -95,9 +95,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                 holder.deckCountHolder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(deckListActivity, CardSwipeActivity.class);
-                        intent.putExtra(BaseActivity.ARG_DECK, deck);
-                        deckListActivity.startActivity(intent);
+                        CardSwipeActivity.launchActivity(deckListActivity, deck);
                     }
                 });
             } else {

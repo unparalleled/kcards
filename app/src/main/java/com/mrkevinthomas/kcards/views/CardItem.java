@@ -166,7 +166,7 @@ public class CardItem extends FrameLayout {
                 card.incrementCorrect();
                 correctFab.setVisibility(View.GONE);
                 incorrectFab.setVisibility(View.GONE);
-                ThisApp.get().showToast(R.layout.toast_correct);
+                ThisApp.get().showToastView(R.layout.toast_correct);
                 delegate.onCorrect();
             }
         });
@@ -177,7 +177,7 @@ public class CardItem extends FrameLayout {
                 card.incrementIncorrect();
                 correctFab.setVisibility(View.GONE);
                 incorrectFab.setVisibility(View.GONE);
-                ThisApp.get().showToast(R.layout.toast_incorrect);
+                ThisApp.get().showToastView(R.layout.toast_incorrect);
                 delegate.onIncorrect();
             }
         });

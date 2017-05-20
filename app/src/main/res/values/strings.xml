@@ -60,6 +60,7 @@
     <string name="deck_reset_progress">This will reset progress for all cards in this deck.</string>
 
     <!-- toasts -->
+    <string name="no_cards_to_practice">Add cards to practice deck</string>
     <string name="deck_must_have_name">Deck must have a name</string>
     <string name="card_must_have_front">Card must have a front</string>
     <string name="deck_saved">Deck Saved</string>

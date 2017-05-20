@@ -52,7 +52,7 @@ public class ThisApp extends Application {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void showToast(int layoutId) {
+    public void showToastView(int layoutId) {
         toaster.setView(LayoutInflater.from(getContext()).inflate(layoutId, null));
         toaster.setDuration(Toast.LENGTH_SHORT);
         toaster.show();
