@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- disable collection of the Android advertising ID -->
+        <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" />
+
         <activity
             android:name=".deck_list.DeckListActivity"
             android:label="@string/app_name"
